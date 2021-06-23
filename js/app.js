@@ -26,7 +26,6 @@ let cardsPlayed
 
 const dayToggle = document.querySelector("#day-toggle")
 const playerHandEl = document.querySelector('.player-hand')
-const computerHandEl = document.querySelector('.computer-hand')
 const feildEl = document.querySelector('.feild')
 const deckEl = document.querySelector('#deck')
 //drawer
@@ -41,18 +40,20 @@ deckEl.addEventListener('click', deckClickHandler)
 /*----- functions -----*/
 
 function feildClickHandler(){
-    console.log(event.target.id)
+    let idAsInt = parseInt(event.target.id.split('').pop())
+    if (isNaN(idAsInt)) return;
+    console.log(idAsInt)
 }
 
 function playCardHandler(){
-    console.log(event.target.id)
+    let idAsInt = parseInt(event.target.id.split('').pop())
+    if (isNaN(idAsInt)) return;
+    console.log(idAsInt)
 }
 
 function deckClickHandler(){
     console.log('deck clicked!')
 }
-
-
 
 // night mode toggle
 function setTheme(theme) {
