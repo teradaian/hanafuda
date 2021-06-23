@@ -5,13 +5,20 @@ import deck from './deck.js'
 let isWinner
 let turn
 
-let playerHand
-let computerHand
-let playerScore
-let computerScore
-let playerScorePile
-let computerScorePile
-// object? 
+const player = {
+        name: 'player',
+        hand: [],
+        score: null,
+        scorePile: []
+}
+
+const computer = {
+        name: 'computer',
+        hand: [],
+        score: null,
+        scorePile: []
+}
+
 let cardsPlayed
 
 
@@ -20,7 +27,7 @@ let cardsPlayed
 const dayToggle = document.querySelector("#day-toggle")
 const playerHandEl = document.querySelector('.player-hand')
 const computerHandEl = document.querySelector('.computer-hand')
-const feildEl = document.querySelector('.field')
+const feildEl = document.querySelector('.feild')
 const deckEl = document.querySelector('#deck')
 //drawer
 

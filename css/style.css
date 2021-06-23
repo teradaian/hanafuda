@@ -13,34 +13,30 @@
 
 .theme-night {
     --background: #333456;
+    --background-image: linear-gradient(to right top, #333456, #3a3b5e, #414266, #484a6f, #4f5177, #5f5b82, #6f648d, #806e98, #9e7ca6, #bb8bb1, #d89abb, #f4abc4);
     --field-bg: #595B83;
     --border-radius: 50px;
     --box-shadow: inset 40px -40px 72px #55577e, inset -40px 40px 72px #5d5f88;
     --computer-hand-radius: 20px;
-    --computer-hand-bg: #060930;
-    --computer-hand-bs: inset 13px -13px 26px #05082b, inset -13px 13px 26px #070a35;
-    --player-hand-bg: #F4ABC4;
-    --player-hand-bs: inset 13px -13px 26px #d998ae, inset -13px 13px 26px #ffbeda;
     --player-hand-radius: 20px;
     --color: #FFF;
     --font-family: 'Sawarabi Mincho', sans-serif;
 }
 
-.player-hand {
-    background: var(--player-hand-bg);
-    box-shadow: var(--player-hand-bs);
-    border-radius: var(--player-hand-radius);
-}
 
-.computer-hand {
-    background: var(--computer-hand-bg);
-    box-shadow: var(--computer-hand-bs);
-    border-radius: var(--computer-hand-radius);
+html {
+    box-sizing: border-box
+  }
+  
+*, 
+*::before, 
+*::after { 
+    box-sizing: inherit;
 }
-
 
 body {
     background: var(--background);
+    background-image: var(--background-image);
     color: var(--color);
     flex-direction: column;
     font-family: var(--font-family);
@@ -57,6 +53,26 @@ section.field {
 div {
     height: 150px;
     width: 90px;
+}
+
+.player-hand {
+    border-radius: var(--player-hand-radius);
+}
+
+.player-hand > div:hover {
+    cursor: pointer;
+}
+
+.feild > div:hover {
+    cursor: pointer;
+}
+
+#deck:hover {
+    cursor: pointer;
+}
+
+.computer-hand {
+    border-radius: var(--computer-hand-radius);
 }
 
 #day-toggle {
