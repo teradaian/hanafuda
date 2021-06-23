@@ -23,7 +23,6 @@
     --font-family: 'Sawarabi Mincho', sans-serif;
 }
 
-
 html {
     box-sizing: border-box
   }
@@ -80,4 +79,10 @@ div {
 
 .computer-hand {
     border-radius: var(--computer-hand-radius);
+}
+
+.row-2 {
+    width: 100%;
+    height: 100%;
+    justify-content: space-around;
 }
