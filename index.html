@@ -12,10 +12,10 @@
     <script defer type="module" src="js/app.js"></script>
     <title>Hanafuda</title>
 </head>
-<body class="flex">
-    <h1>Hanafuda</h1>
-    <button id='day-toggle'>Night Mode</button>
-    <div class="computer-hand flex border-2 border-white-600 items-center gap-4 w-11/12 px-8 overflow-hidden ">
+<body>
+    <main class="grid-container">
+    
+    <div class="computer-hand col-start-1 col-end-5 flex border-2 border-white-600 items-center gap-4 w-11/12 px-8 overflow-hidden ">
         <div id="c0" class="border-2 border-indigo-600 my-1 px-1 w-1/10 overflow-hidden">1</div>
         <div id="c1" class="border-2 border-indigo-600 my-1 px-1 w-1/10 overflow-hidden">2</div>
         <div id="c2" class="border-2 border-indigo-600 my-1 px-1 w-1/10 overflow-hidden">3</div>
@@ -25,8 +25,9 @@
         <div id="c6" class="border-2 border-indigo-600 my-1 px-1 w-1/10 overflow-hidden">7</div>
         <div id="c7" class="border-2 border-indigo-600 my-1 px-1 w-1/10 overflow-hidden">8</div>
     </div>
+    <button id="day-toggle" class="inline"> Night Mode</button>
 
-    <main class="flex pr-2 justify-between">
+    <div class="flex pr-2 col-start-1 col-end-6 justify-between">
         <div id="deck" class="relative m-8 justify-center border-2 border-indigo-200"> Deck </div>
         <section class="feild grid grid-cols-4 grid-rows-2 w-2/3 justify-around gap-3 m-5 p-4">
             <div id="f0" class="border-2 border-indigo-600">1</div>
@@ -38,8 +39,9 @@
             <div id="f6" class="border-2 border-indigo-600">7</div>
             <div id="f7" class="border-2 border-indigo-600">8</div>
         </section>
-    </main>
-    <div class="player-hand flex border-2 border-white-600 items-center justify-end gap-4 self-end w-11/12 px-8 overflow-hidden ">
+    </div>
+
+    <div class="player-hand col-start-6 col-end-2 flex border-2 border-white-600 items-center justify-end gap-4 self-end w-11/12 px-8 overflow-hidden ">
         <div id="p0" class="border-2 border-indigo-600 my-1 px-1 w-1/8 overflow-hidden">1</div>
         <div id="p1" class="border-2 border-indigo-600 my-1 px-1 w-1/8 overflow-hidden">2</div>
         <div id="p2" class="border-2 border-indigo-600 my-1 px-1 w-1/8 overflow-hidden">3</div>
@@ -49,5 +51,7 @@
         <div id="p6" class="border-2 border-indigo-600 my-1 px-1 w-1/8 overflow-hidden">7</div>
         <div id="p7" class="border-2 border-indigo-600 my-1 px-1 w-1/8 overflow-hidden">8</div>
     </div>
+
+</main>
 </body>
 </html>

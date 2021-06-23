@@ -44,6 +44,13 @@ body {
     height: 100vh;
 }
 
+main {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 section.field {
     border-radius: var(--field-radius);
     background: var(--field-bg);
@@ -73,8 +80,4 @@ div {
 
 .computer-hand {
     border-radius: var(--computer-hand-radius);
-}
-
-#day-toggle {
-    display: inline;
 }
