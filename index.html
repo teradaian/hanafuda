@@ -1,14 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="theme-day">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Sawarabi+Mincho&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script defer src="js/app.js"></script>
     <title>Hanafuda</title>
 </head>
-<body>
-    
+<body class="flex">
+    <h1>Hanafuda</h1>
+    <button id='day-toggle'>Night Mode</button>
+    <div class="computer-hand flex border-2 border-white-600 items-center gap-4 w-11/12 px-8 overflow-hidden ">
+        <div id="c0" class="border-2 border-indigo-600 my-1 px-1 w-1/10 overflow-hidden">1</div>
+        <div id="c1" class="border-2 border-indigo-600 my-1 px-1 w-1/10 overflow-hidden">2</div>
+        <div id="c2" class="border-2 border-indigo-600 my-1 px-1 w-1/10 overflow-hidden">3</div>
+        <div id="c3" class="border-2 border-indigo-600 my-1 px-1 w-1/10 overflow-hidden">4</div>
+        <div id="c4" class="border-2 border-indigo-600 my-1 px-1 w-1/10 overflow-hidden">5</div>
+        <div id="c5" class="border-2 border-indigo-600 my-1 px-1 w-1/10 overflow-hidden">6</div>
+        <div id="c6" class="border-2 border-indigo-600 my-1 px-1 w-1/10 overflow-hidden">7</div>
+        <div id="c7" class="border-2 border-indigo-600 my-1 px-1 w-1/10 overflow-hidden">8</div>
+    </div>
+
+    <main class="flex pr-2 justify-between">
+        <div id="deck" class="relative m-8 border-2 border-indigo-200"> Deck </div>
+        <section class="field grid grid-cols-4 grid-rows-2 w-2/3 justify-around gap-3 m-5 p-4">
+            <div id="f0" class="border-2 border-indigo-600">1</div>
+            <div id="f1" class="border-2 border-indigo-600">2</div>
+            <div id="f2" class="border-2 border-indigo-600">3</div>
+            <div id="f3" class="border-2 border-indigo-600">4</div>
+            <div id="f4" class="border-2 border-indigo-600">5</div>
+            <div id="f5" class="border-2 border-indigo-600">6</div>
+            <div id="f6" class="border-2 border-indigo-600">7</div>
+            <div id="f7" class="border-2 border-indigo-600">8</div>
+        </section>
+    </main>
+    <div class="player-hand flex border-2 border-white-600 items-center justify-end gap-4 self-end w-11/12 px-8 overflow-hidden ">
+        <div id="p0" class="border-2 border-indigo-600 my-1 px-1 w-1/8 overflow-hidden">1</div>
+        <div id="p1" class="border-2 border-indigo-600 my-1 px-1 w-1/8 overflow-hidden">2</div>
+        <div id="p2" class="border-2 border-indigo-600 my-1 px-1 w-1/8 overflow-hidden">3</div>
+        <div id="p3" class="border-2 border-indigo-600 my-1 px-1 w-1/8 overflow-hidden">4</div>
+        <div id="p4" class="border-2 border-indigo-600 my-1 px-1 w-1/8 overflow-hidden">5</div>
+        <div id="p5" class="border-2 border-indigo-600 my-1 px-1 w-1/8 overflow-hidden">6</div>
+        <div id="p6" class="border-2 border-indigo-600 my-1 px-1 w-1/8 overflow-hidden">7</div>
+        <div id="p7" class="border-2 border-indigo-600 my-1 px-1 w-1/8 overflow-hidden">8</div>
+    </div>
 </body>
 </html>
