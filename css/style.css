@@ -64,14 +64,20 @@ main {
 }
 
 #deck {
+    height: 16rem;
+    width:10rem;
+    margin: 10rem 0 1rem 6rem;
+    text-align: center;
     grid-area: deck;
 }
 
 .feild {
-    grid-area: feild;
+    align-items: center;
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-area: feild;
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
     width: 80%;
 }
 
@@ -123,7 +129,7 @@ div {
 
 @media only screen and (min-width: 768px) {
     body {
-      color:whitesmoke
+      color:black;
     }
   }
 
