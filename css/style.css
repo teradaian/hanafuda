@@ -56,7 +56,7 @@ main {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
     "title title title toggle"
-    "feild feild feild feild"
+    "feild field field field"
     "deck player player player"
     "deck player player player"
 }
@@ -76,10 +76,10 @@ main {
     grid-area: deck;
 }
 
-.feild {
+.field {
     align-items: center;
     display: grid;
-    grid-area: feild;
+    grid-area: field;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: 1fr 1fr;
     justify-items: center;
@@ -188,7 +188,7 @@ div {
         grid-template-columns: repeat(5, minmax(0, 1fr));
         grid-template-areas:
         "comp comp comp comp toggle"
-        "deck feild feild feild feild"
+        "deck field field field field"
         "drawer player player player player"
     }
 
@@ -202,16 +202,6 @@ div {
         min-height: 100vh;
     }
     
-    main {
-        min-height: 100vh;
-        display: grid;
-        grid-template-rows: 1fr 2fr 1fr;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        grid-template-areas:
-        "comp comp comp comp toggle"
-        "deck feild feild feild feild"
-        "drawer player player player player"
-    }
     
     .computer-hand {
         display: flex;
@@ -226,10 +216,10 @@ div {
         grid-area: deck;
     }
     
-    .feild {
+    .field {
         align-items: center;
         display: grid;
-        grid-area: feild;
+        grid-area: field;
         grid-template-columns: repeat(4, minmax(0, 1fr));
         grid-template-rows: 1fr 1fr;
         justify-items: center;

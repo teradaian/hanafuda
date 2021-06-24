@@ -4,7 +4,7 @@ import Deck from './deck.js'
 
 let isWinner
 let turn
-let feild
+let field
 
 const player = {
         name: 'player',
@@ -26,7 +26,7 @@ let cardsPlayed;
 
 const dayToggle = document.querySelector("#day-toggle")
 const playerHandEl = document.querySelector('.player-hand')
-const feildEl = document.querySelector('.feild')
+const fieldEl = document.querySelector('.field')
 const deckEl = document.querySelector('#deck')
 const drawerOpen = document.querySelector("#open-drawer")
 const scoreDrawer = document.querySelector('#score-drawer')
@@ -36,7 +36,7 @@ const drawerClose = document.querySelector('.close-btn')
 
 dayToggle.addEventListener('click', toggleTheme)
 playerHandEl.addEventListener('click', playCardHandler)
-feildEl.addEventListener('click', feildClickHandler)
+fieldEl.addEventListener('click', fieldClickHandler)
 deckEl.addEventListener('click', deckClickHandler)
 drawerOpen.addEventListener('click', openDrawer)
 drawerClose.addEventListener('click', closeDrawer)
@@ -51,22 +51,22 @@ function init(){
     deck.shuffle()
     player.hand = deck.dealPlayerHand()
     computer.hand = deck.dealComputerHand()
-    feild = deck.dealFeild()
+    field = deck.dealFeild()
     console.log(player.hand, 'hand')
     console.log(computer.hand, 'comp')
-    console.log(feild, 'feild')
+    console.log(field, 'feild')
 }
 
-function feildClickHandler(){
+function fieldClickHandler(){
     let idAsInt = parseInt(event.target.id.split('').pop())
     if (isNaN(idAsInt)) return;
     renderFeild()
-    console.log(feild[idAsInt])
+    console.log(field[idAsInt])
 }
 
 function renderFeild(){
-    feild.forEach((i, idx) => {
-        feildEl.children[idx].innerHTML = `<img src="../assets/tiles/${feild[idx]}.jpeg" >`
+    field.forEach((i, idx) => {
+        fieldEl.children[idx].innerHTML = `<img src="../assets/tiles/${field[idx]}.jpeg" >`
     })
 }
 
@@ -89,7 +89,7 @@ function deckClickHandler(){
 
 // drawer
 function openDrawer() {
-    scoreDrawer.style.width = "250px";
+    scoreDrawer.style.width = "400px";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
     openDrawer.className = 'close-btn'
   }
