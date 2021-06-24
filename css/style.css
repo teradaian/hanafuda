@@ -97,6 +97,8 @@ main {
 }
 
 .drawer {
+    display: flex;
+    flex-wrap: wrap;
     background-color: #111;
     grid-area: drawer;
     height: 100%;

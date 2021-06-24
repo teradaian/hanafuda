@@ -33,7 +33,7 @@ class Deck {
         return this;
       }
 
-    dealFeild(){
+    dealField(){
         let feild = this.deck.splice(this.deck.length -8, 8)
         return feild;
     }

@@ -5,10 +5,14 @@ import Deck from './deck.js'
 let isWinner
 let turn
 let field
+let deck
+
 
 const player = {
         name: 'player',
         hand: [],
+        selectedCard: null,
+        selectedCardIdx: null,
         score: null,
         scorePile: []
 }
@@ -20,8 +24,6 @@ const computer = {
         scorePile: []
 }
 
-let cardsPlayed;
-
 /*----- cached element references -----*/ 
 
 const dayToggle = document.querySelector("#day-toggle")
@@ -31,11 +33,12 @@ const deckEl = document.querySelector('#deck')
 const drawerOpen = document.querySelector("#open-drawer")
 const scoreDrawer = document.querySelector('#score-drawer')
 const drawerClose = document.querySelector('.close-btn')
+const scorePileEl = document.querySelector('.drawer')
 
 /*----- event listeners -----*/ 
 
 dayToggle.addEventListener('click', toggleTheme)
-playerHandEl.addEventListener('click', playCardHandler)
+playerHandEl.addEventListener('click', selectCardHandler)
 fieldEl.addEventListener('click', fieldClickHandler)
 deckEl.addEventListener('click', deckClickHandler)
 drawerOpen.addEventListener('click', openDrawer)
@@ -46,45 +49,86 @@ drawerClose.addEventListener('click', closeDrawer)
 init()
 
 function init(){
-    let deck = new Deck()
+    deck = new Deck()
     deck.reset()
     deck.shuffle()
     player.hand = deck.dealPlayerHand()
     computer.hand = deck.dealComputerHand()
-    field = deck.dealFeild()
-    console.log(player.hand, 'hand')
-    console.log(computer.hand, 'comp')
-    console.log(field, 'feild')
+    field = deck.dealField()
+    turn = 1;
+    render()
+}
+
+function render(){
+    renderField();
+    renderPlayerHand();
 }
 
 function fieldClickHandler(){
     let idAsInt = parseInt(event.target.id.split('').pop())
     if (isNaN(idAsInt)) return;
-    renderFeild()
-    console.log(field[idAsInt])
+
+    let fieldSelection = checkSuite(field[idAsInt])
+
+    if(player.selectedCard=== fieldSelection){
+    score(idAsInt)
+
+    render();
 }
 
-function renderFeild(){
+function score(idAsInt){
+        let wonCard = field.splice(idAsInt, 1)
+        let playerCard = player.hand.splice(player.selectedCardIdx, 1)
+        player.scorePile.push(wonCard)
+        player.scorePile.push(playerCard)
+        renderScorePile()
+    }
+}
+
+function selectCardHandler(){
+    if (turn !== 1) return;
+    let idAsInt = parseInt(event.target.id.split('').pop())
+    if (isNaN(idAsInt)) return;
+
+    player.selectedCardIdx= idAsInt
+    player.selectedCard = checkSuite(player.hand[idAsInt])
+    renderPlayerHand();
+}
+
+
+function checkSuite(string){
+    return string.slice(0, string.length -1);
+}
+
+function renderField(){
     field.forEach((i, idx) => {
-        fieldEl.children[idx].innerHTML = `<img src="../assets/tiles/${field[idx]}.jpeg" >`
+        fieldEl.children[idx].innerHTML = `<img id="f${idx}" src="../assets/tiles/${field[idx]}.jpeg" >`
+    })
+}
+
+function renderScorePile(){
+    scorePileEl.innerHTML = ""
+    player.scorePile.forEach(i => {
+        let scoredTile = document.createElement('div')
+        scoredTile.classList.add('scored-tile')
+        scoredTile.innerHTML = `<img src="../assets/tiles/${i}.jpeg">`
+        scorePileEl.appendChild(scoredTile);
     })
 }
 
 function renderPlayerHand(){
     player.hand.forEach((i, idx) => {
-        playerHandEl.children[idx].innerHTML = `<img src="../assets/tiles/${player.hand[idx]}.jpeg" >`
+        playerHandEl.children[idx].innerHTML = `<img id="h${idx}" src="../assets/tiles/${player.hand[idx]}.jpeg" >`
     })
 }
 
-function playCardHandler(){
-    let idAsInt = parseInt(event.target.id.split('').pop())
-    if (isNaN(idAsInt)) return;
-    renderPlayerHand()
-    console.log(player.hand[idAsInt])
-}
-
 function deckClickHandler(){
-    console.log('deck clicked')
+    if (!deck.deck.length) return;
+
+    console.log(deck.deck)
+    let cardOffTopDeck = deck.deck.pop();
+    field.push(cardOffTopDeck);
+    renderField();
 }
 
 // drawer
@@ -123,4 +167,8 @@ function toggleTheme() {
 
 function renderThemeUI() {
     console.log('working!')
+}
+
+function incrementTurn(){
+    turn *= -1;
 }
