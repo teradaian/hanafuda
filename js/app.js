@@ -4,6 +4,7 @@ import Deck from './deck.js'
 
 let isWinner
 let turn
+let feild
 
 const player = {
         name: 'player',
@@ -42,21 +43,48 @@ drawerClose.addEventListener('click', closeDrawer)
 
 /*----- functions -----*/
 
+init()
+
+function init(){
+    let deck = new Deck()
+    deck.reset()
+    deck.shuffle()
+    player.hand = deck.dealPlayerHand()
+    computer.hand = deck.dealComputerHand()
+    feild = deck.dealFeild()
+    console.log(player.hand, 'hand')
+    console.log(computer.hand, 'comp')
+    console.log(feild, 'feild')
+}
+
 function feildClickHandler(){
     let idAsInt = parseInt(event.target.id.split('').pop())
     if (isNaN(idAsInt)) return;
-    console.log(idAsInt)
+    renderFeild()
+    console.log(feild[idAsInt])
+}
+
+function renderFeild(){
+    feild.forEach((i, idx) => {
+        feildEl.children[idx].innerHTML = `<img src="../assets/tiles/${feild[idx]}.jpeg" >`
+    })
+}
+
+function renderPlayerHand(){
+    player.hand.forEach((i, idx) => {
+        playerHandEl.children[idx].innerHTML = `<img src="../assets/tiles/${player.hand[idx]}.jpeg" >`
+    })
 }
 
 function playCardHandler(){
     let idAsInt = parseInt(event.target.id.split('').pop())
     if (isNaN(idAsInt)) return;
-    console.log(idAsInt)
+    renderPlayerHand()
+    console.log(player.hand[idAsInt])
 }
 
 function deckClickHandler(){
-    let deck = new Deck()
-    console.log(deck.deck)
+    console.log('deck clicked')
 }
 
 // drawer

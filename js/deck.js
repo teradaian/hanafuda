@@ -1,9 +1,6 @@
 class Deck {
     constructor() {
       this.deck = [];
-      this.reset();
-      this.shuffle();
-      this.deal();
     }
     
     reset(){
@@ -38,29 +35,26 @@ class Deck {
 
     dealFeild(){
         let feild = this.deck.splice(this.deck.length -8, 8)
-        console.log(feild)
         return feild;
     }
 
     dealPlayerHand() {
         let playerHand = this.deck.splice(this.deck.length -8, 8)
-        console.log(playerHand)
         return playerHand;
     }
 
     dealComputerHand(){
         let computerHand = this.deck.splice(this.deck.length -8, 8)
-        console.log(computerHand)
         return computerHand;
     }
 
     deal(){
-        this.dealFeild()
-        this.dealPlayerHand()
-        this.dealComputerHand()
+        this.reset()
+        this.shuffle()
     }
 }
 
 const deck1 = new Deck();
-console.log(deck1.deck)
+
+export default Deck;
 
