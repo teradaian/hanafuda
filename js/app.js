@@ -19,8 +19,7 @@ const computer = {
         scorePile: []
 }
 
-let cardsPlayed
-
+let cardsPlayed;
 
 /*----- cached element references -----*/ 
 
@@ -28,7 +27,9 @@ const dayToggle = document.querySelector("#day-toggle")
 const playerHandEl = document.querySelector('.player-hand')
 const feildEl = document.querySelector('.feild')
 const deckEl = document.querySelector('#deck')
-//drawer
+const drawerOpen = document.querySelector("#open-drawer")
+const scoreDrawer = document.querySelector('#score-drawer')
+const drawerClose = document.querySelector('.close-btn')
 
 /*----- event listeners -----*/ 
 
@@ -36,6 +37,8 @@ dayToggle.addEventListener('click', toggleTheme)
 playerHandEl.addEventListener('click', playCardHandler)
 feildEl.addEventListener('click', feildClickHandler)
 deckEl.addEventListener('click', deckClickHandler)
+drawerOpen.addEventListener('click', openDrawer)
+drawerClose.addEventListener('click', closeDrawer)
 
 /*----- functions -----*/
 
@@ -53,6 +56,18 @@ function playCardHandler(){
 
 function deckClickHandler(){
     console.log('deck clicked!')
+}
+
+// drawer
+function openDrawer() {
+    scoreDrawer.style.width = "250px";
+    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    openDrawer.className = 'close-btn'
+  }
+  
+function closeDrawer() {
+    scoreDrawer.style.width = "0";
+    document.body.style.backgroundColor = "white";
 }
 
 // night mode toggle

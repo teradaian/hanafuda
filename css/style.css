@@ -50,23 +50,28 @@ body {
 
 main {
     min-height: 100vh;
+    justify-items: center;
     display: grid;
-    grid-template-rows: 1fr 2fr 1fr;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-rows: 30px 2fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas:
-    "comp comp comp comp toggle"
-    "deck feild feild feild feild"
-    "drawer player player player player"
+    "title title title toggle"
+    "feild feild feild feild"
+    "deck player player player"
+    "deck player player player"
 }
 
-.computer-hand {
-    grid-area: comp;
+.title-header {
+    grid-area: title;
+}
+
+#day-toggle {
+    grid-area: toggle;
 }
 
 #deck {
-    height: 16rem;
-    width:10rem;
-    margin: 10rem 0 1rem 6rem;
+    height: 10rem;
+    width: 7rem;
     text-align: center;
     grid-area: deck;
 }
@@ -78,15 +83,61 @@ main {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: 1fr 1fr;
     justify-items: center;
-    width: 80%;
-}
-
-.drawer {
-    grid-area: drawer;
+    width: 90%;
 }
 
 .player-hand {
+    align-items: center;
+    display:grid;
     grid-area: player;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 80%;
+    justify-items: center;
+}
+
+.drawer {
+    background-color: #111;
+    grid-area: drawer;
+    height: 100%;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 15px;
+    position: fixed;
+    top: 0;
+    transition: 0.5s;
+    width: 0;
+    z-index: 1;
+}
+
+.drawer a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.drawer a:hover {
+    color: #f1f1f1;
+}
+
+.drawer.closebtn {
+    font-size: 36px;
+    margin-left: 50px;
+    position: absolute;
+    right: 25px;
+    top: 0;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+
+.computer-hand {
+    display: none;
 }
 
 section.field {
@@ -96,8 +147,8 @@ section.field {
 }
 
 div {
-    height: 150px;
-    width: 90px;
+    height: 70%;
+    width: 70%;
 }
 
 .player-hand {
@@ -116,16 +167,11 @@ div {
     cursor: pointer;
 }
 
-.computer-hand {
-    border-radius: var(--computer-hand-radius);
-}
-
 .row-2 {
     width: 100%;
     height: 100%;
     justify-content: space-around;
 }
-
 
 @media only screen and (min-width: 768px) {
     body {
@@ -145,5 +191,96 @@ div {
         "deck feild feild feild feild"
         "drawer player player player player"
     }
+
+    body {
+        background: var(--background);
+        background-image: var(--background-image);
+        color: var(--color);
+        flex-direction: column;
+        font-family: var(--font-family);
+        margin: 0;
+        min-height: 100vh;
+    }
+    
+    main {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: 1fr 2fr 1fr;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        grid-template-areas:
+        "comp comp comp comp toggle"
+        "deck feild feild feild feild"
+        "drawer player player player player"
+    }
+    
+    .computer-hand {
+        display: flex;
+        grid-area: comp;
+    }
+    
+    #deck {
+        height: 16rem;
+        width:10rem;
+        margin: 10rem 0 1rem 6rem;
+        text-align: center;
+        grid-area: deck;
+    }
+    
+    .feild {
+        align-items: center;
+        display: grid;
+        grid-area: feild;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-rows: 1fr 1fr;
+        justify-items: center;
+        width: 80%;
+    }
+    
+    .drawer {
+        grid-area: drawer;
+    }
+    
+    .player-hand {
+        display: flex;
+        grid-area: player;
+    }
+    
+    section.field {
+        border-radius: var(--field-radius);
+        background: var(--field-bg);
+        box-shadow: var(--field-box-shadow);
+    }
+    
+    div {
+        height: 150px;
+        width: 90px;
+    }
+
+    .player-hand {
+        border-radius: var(--player-hand-radius);
+    }
+    
+    .player-hand > div:hover {
+        cursor: pointer;
+    }
+    
+    .feild > div:hover {
+        cursor: pointer;
+    }
+    
+    #deck:hover {
+        cursor: pointer;
+    }
+    
+    .computer-hand {
+        border-radius: var(--computer-hand-radius);
+    }
+    
+    .row-2 {
+        width: 100%;
+        height: 100%;
+        justify-content: space-around;
+    }
+
 
   }
