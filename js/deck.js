@@ -59,9 +59,8 @@ class Deck {
         this.dealPlayerHand()
         this.dealComputerHand()
     }
-
 }
 
 const deck1 = new Deck();
-
 console.log(deck1.deck)
+

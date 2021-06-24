@@ -1,4 +1,4 @@
-import deck from './deck.js'
+import Deck from './deck.js'
 
 /*----- app's state (variables) -----*/ 
 
@@ -55,7 +55,8 @@ function playCardHandler(){
 }
 
 function deckClickHandler(){
-    console.log('deck clicked!')
+    let deck = new Deck()
+    console.log(deck.deck)
 }
 
 // drawer
