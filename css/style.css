@@ -2,8 +2,23 @@
     outline: 0 !important;
   }
 
+html {
+    box-sizing: border-box
+}
+  
+*, 
+*::before, 
+*::after { 
+    box-sizing: inherit;
+}
+
+:root {
+      font-size: 62.5%
+}
+/* theme repository */
 .theme-day {
     --background: #FFE2E2;
+    --background-image: linear-gradient(to right top, #333456, #5e4f6e, #876c85, #ad8d9e, #d1b0b9, #e1c0c6, #f0d1d4, #ffe2e2, #ffe2e2, #ffe2e2, #ffe2e2, #ffe2e2);
     --field-bg: #F6F6F6;
     --border-radius: 50px;
     --field-box-shadow: inset 40px -40px 72px #ececec, inset -40px 40px 72px #ffffff;
@@ -13,8 +28,7 @@
 
 .theme-night {
     --background: #333456;
-    --background-image: linear-gradient(to right top, #333456, #3a3b5e, #414266, #484a6f, #4f5177, #5f5b82, #6f648d, #806e98, #9e7ca6, #bb8bb1, #d89abb, #f4abc4);
-    --field-bg: #595B83;
+    --background-image: linear-gradient(to right top, #333456, #333456, #333456, #333456, #333456, #484161, #5b4e6c, #6e5c77, #967e91, #bba3ae, #decbcf, #fff4f4);    --field-bg: #595B83;
     --border-radius: 50px;
     --box-shadow: inset 40px -40px 72px #55577e, inset -40px 40px 72px #5d5f88;
     --computer-hand-radius: 20px;
@@ -22,16 +36,7 @@
     --color: #FFF;
     --font-family: 'Sawarabi Mincho', sans-serif;
 }
-
-html {
-    box-sizing: border-box
-  }
-  
-*, 
-*::before, 
-*::after { 
-    box-sizing: inherit;
-}
+/* /theme repository */
 
 body {
     background: var(--background);
@@ -40,14 +45,42 @@ body {
     flex-direction: column;
     font-family: var(--font-family);
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 main {
-    height: 100vh;
+    min-height: 100vh;
     display: grid;
     grid-template-rows: 1fr 2fr 1fr;
     grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-areas:
+    "comp comp comp comp toggle"
+    "deck feild feild feild feild"
+    "drawer player player player player"
+}
+
+.computer-hand {
+    grid-area: comp;
+}
+
+#deck {
+    grid-area: deck;
+}
+
+.feild {
+    grid-area: feild;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: 80%;
+}
+
+.drawer {
+    grid-area: drawer;
+}
+
+.player-hand {
+    grid-area: player;
 }
 
 section.field {
@@ -86,3 +119,25 @@ div {
     height: 100%;
     justify-content: space-around;
 }
+
+
+@media only screen and (min-width: 768px) {
+    body {
+      color:whitesmoke
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    
+    main {
+        height: 100vh;
+        display: grid;
+        grid-template-rows: 1fr 2fr 1fr;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        grid-template-areas:
+        "comp comp comp comp toggle"
+        "deck feild feild feild feild"
+        "drawer player player player player"
+    }
+
+  }
