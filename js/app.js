@@ -101,6 +101,14 @@ function checkSuite(string){
 }
 
 function renderField(){
+    fieldEl.innerHTML = ""
+    field.forEach((i, idx) => {
+        let fieldTile = document.createElement('div')
+        fieldTile.classList.add('field-tile')
+        fieldTile.innerHTML = `<img id='f${idx}' src="../assets/tiles/${i}.jpeg">`
+        fieldEl.appendChild(fieldTile);
+    })
+
     field.forEach((i, idx) => {
         fieldEl.children[idx].innerHTML = `<img id="f${idx}" src="../assets/tiles/${field[idx]}.jpeg" >`
     })
@@ -117,8 +125,12 @@ function renderScorePile(){
 }
 
 function renderPlayerHand(){
+    playerHandEl.innerHTML = ""
     player.hand.forEach((i, idx) => {
-        playerHandEl.children[idx].innerHTML = `<img id="h${idx}" src="../assets/tiles/${player.hand[idx]}.jpeg" >`
+        let handTile = document.createElement('div')
+        handTile.classList.add('hand-tile')
+        handTile.innerHTML = `<img id='p${idx}' src="../assets/tiles/${i}.jpeg">`
+        playerHandEl.appendChild(handTile);
     })
 }
 
