@@ -54,6 +54,11 @@ header {
     display: flex;
 }
 
+img { 
+    width: 100%; 
+    height: auto; 
+}
+
 .core-display {
     display: flex;
     padding: 1vh;
@@ -69,18 +74,21 @@ header {
 }
 
 #deck {
-    height: 10rem;
-    width: 7rem;
-    text-align: center;
+    width: 12vw;
+    height: 16vw;
+    border: 1px solid lightgrey;
+    background-color: rgba(218, 218, 218, 0.933);
 }
 
 section.field {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
+    flex-direction:column;
     justify-content: space-around;
     justify-items: center;
-    width: 90%;
+    width: 100%;
+    padding: 2rem;
     border-radius: var(--field-radius);
     background: var(--field-bg);
     box-shadow: var(--field-box-shadow);
