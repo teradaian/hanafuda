@@ -65,7 +65,7 @@ function render(){
 }
 
 function fieldClickHandler(){
-    let idAsInt = parseInt(event.target.id.split('').pop())
+    let idAsInt = extractIndexFromId(event.target.id);
     if (isNaN(idAsInt)) return;
 
     let fieldSelection = checkSuite(field[idAsInt])
@@ -87,14 +87,21 @@ function score(idAsInt){
 
 function selectCardHandler(){
     if (turn !== 1) return;
-    let idAsInt = parseInt(event.target.id.split('').pop())
+    let idAsInt = extractIndexFromId(event.target.id);
     if (isNaN(idAsInt)) return;
-
     player.selectedCardIdx= idAsInt
     player.selectedCard = checkSuite(player.hand[idAsInt])
+    console.log(player.selectedCard, 'selected')
+    console.log(field)
     renderPlayerHand();
 }
 
+function extractIndexFromId(evtId){
+    let indexNum = evtId.split('').filter(i => /\d/.test(i)).join('')
+    return indexNum;
+}
+
+// parseInt(event.target.id.split('').pop())
 
 function checkSuite(string){
     return string.slice(0, string.length -1);
@@ -107,10 +114,6 @@ function renderField(){
         fieldTile.classList.add('field-tile')
         fieldTile.innerHTML = `<img id='f${idx}' src="../assets/tiles/${i}.jpeg">`
         fieldEl.appendChild(fieldTile);
-    })
-
-    field.forEach((i, idx) => {
-        fieldEl.children[idx].innerHTML = `<img id="f${idx}" src="../assets/tiles/${field[idx]}.jpeg" >`
     })
 }
 

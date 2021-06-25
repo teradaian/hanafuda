@@ -83,7 +83,11 @@ main {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-rows: 1fr 1fr;
     justify-items: center;
-    width: 90%;
+    width: 100%;
+}
+
+.field div {
+    width:95%;
 }
 
 .player-hand {
@@ -94,6 +98,10 @@ main {
     grid-template-rows: 1fr 1fr;
     height: 80%;
     justify-items: center;
+}
+
+.player-hand div {
+    width:95%;
 }
 
 .drawer {
@@ -218,16 +226,6 @@ div {
         grid-area: deck;
     }
     
-    .field {
-        align-items: center;
-        display: grid;
-        grid-area: field;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        grid-template-rows: 1fr 1fr;
-        justify-items: center;
-        width: 80%;
-    }
-    
     .drawer {
         grid-area: drawer;
     }
@@ -241,6 +239,14 @@ div {
         border-radius: var(--field-radius);
         background: var(--field-bg);
         box-shadow: var(--field-box-shadow);
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        grid-area: field;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-rows: 1fr 1fr;
+        justify-items: center;
+        width: 80%;
     }
     
     div {
