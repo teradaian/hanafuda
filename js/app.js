@@ -26,23 +26,25 @@ const computer = {
 
 /*----- cached element references -----*/ 
 
-const dayToggle = document.querySelector("#day-toggle")
-const playerHandEl = document.querySelector('.player-hand')
-const fieldEl = document.querySelector('.field')
-const deckEl = document.querySelector('#deck')
-const drawerOpen = document.querySelector("#open-drawer")
-const scoreDrawer = document.querySelector('#score-drawer')
-const drawerClose = document.querySelector('.close-btn')
-const scorePileEl = document.querySelector('.drawer')
+const computerHandEl    = document.querySelector('.computer-hand')
+const dayNightToggle    = document.querySelector("#day-toggle")
+const deckEl            = document.querySelector('#deck')
+const drawerClose       = document.querySelector('.close-btn')
+const drawerOpen        = document.querySelector("#open-drawer")
+const fieldEl           = document.querySelector('.field')
+const playerHandEl      = document.querySelector('.player-hand')
+const scoreDrawer       = document.querySelector('#score-drawer')
+const scorePileEl       = document.querySelector('.drawer')
 
 /*----- event listeners -----*/ 
 
-dayToggle.addEventListener('click', toggleTheme)
-playerHandEl.addEventListener('click', selectCardHandler)
-fieldEl.addEventListener('click', fieldClickHandler)
+
+dayNightToggle.addEventListener('click', toggleTheme)
 deckEl.addEventListener('click', deckClickHandler)
-drawerOpen.addEventListener('click', openDrawer)
 drawerClose.addEventListener('click', closeDrawer)
+drawerOpen.addEventListener('click', openDrawer)
+fieldEl.addEventListener('click', fieldClickHandler)
+playerHandEl.addEventListener('click', selectCardHandler)
 
 /*----- functions -----*/
 
@@ -62,6 +64,7 @@ function init(){
 function render(){
     renderField();
     renderPlayerHand();
+    renderComputerHand();
 }
 
 function fieldClickHandler(){
@@ -71,18 +74,19 @@ function fieldClickHandler(){
     let fieldSelection = checkSuite(field[idAsInt])
 
     if(player.selectedCard=== fieldSelection){
-    score(idAsInt)
+    moveMatchingPair(idAsInt)
 
     render();
 }
+}
 
-function score(idAsInt){
-        let wonCard = field.splice(idAsInt, 1)
-        let playerCard = player.hand.splice(player.selectedCardIdx, 1)
-        player.scorePile.push(wonCard)
-        player.scorePile.push(playerCard)
-        renderScorePile()
-    }
+function moveMatchingPair(idAsInt){
+    let fieldTile = field.splice(idAsInt, 1)
+    let playerTile = player.hand.splice(player.selectedCardIdx, 1)
+    player.scorePile.push(fieldTile)
+    player.scorePile.push(playerTile)
+
+    renderScorePile()
 }
 
 function selectCardHandler(){
@@ -91,8 +95,7 @@ function selectCardHandler(){
     if (isNaN(idAsInt)) return;
     player.selectedCardIdx= idAsInt
     player.selectedCard = checkSuite(player.hand[idAsInt])
-    console.log(player.selectedCard, 'selected')
-    console.log(field)
+
     renderPlayerHand();
 }
 
@@ -100,8 +103,6 @@ function extractIndexFromId(evtId){
     let indexNum = evtId.split('').filter(i => /\d/.test(i)).join('')
     return parseInt(indexNum);
 }
-
-// parseInt(event.target.id.split('').pop())
 
 function checkSuite(string){
     return string.slice(0, string.length -1);
@@ -137,6 +138,16 @@ function renderPlayerHand(){
     })
 }
 
+function renderComputerHand(){
+    computerHandEl.innerHTML = ""
+    computer.hand.forEach((i, idx) => {
+        let compTile = document.createElement('div')
+        compTile.classList.add('hand-tile')
+        compTile.innerHTML = `<img id='p${idx}' src="../assets/tiles/${i}.jpeg">`
+        computerHandEl.appendChild(compTile);
+    })
+}
+
 function deckClickHandler(){
     if (!deck.deck.length) return;
 
@@ -144,6 +155,11 @@ function deckClickHandler(){
     let cardOffTopDeck = deck.deck.pop();
     field.push(cardOffTopDeck);
     renderField();
+    incrementTurn()
+}
+
+function incrementTurn(){
+    turn *= -1;
 }
 
 // drawer
@@ -182,8 +198,4 @@ function toggleTheme() {
 
 function renderThemeUI() {
     console.log('working!')
-}
-
-function incrementTurn(){
-    turn *= -1;
 }
