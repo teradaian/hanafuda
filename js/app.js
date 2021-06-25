@@ -162,6 +162,21 @@ function incrementTurn(){
     turn *= -1;
 }
 
+// computer logic
+
+// async function computerTurn(){
+//     let result = await computerThinking()
+//     let play = computerPlay(result)
+//     flip deck;
+// }
+
+// function computerThinking(){
+//     let timeoutLength = Math.floor(Math.random() * 5000)
+//     setTimeout(() => {
+//         console.log('done', timeoutLength)
+//       }, timeoutLength);
+// }
+
 // drawer
 function openDrawer() {
     scoreDrawer.style.width = "400px";
