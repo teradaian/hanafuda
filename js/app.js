@@ -98,7 +98,7 @@ function selectCardHandler(){
 
 function extractIndexFromId(evtId){
     let indexNum = evtId.split('').filter(i => /\d/.test(i)).join('')
-    return indexNum;
+    return parseInt(indexNum);
 }
 
 // parseInt(event.target.id.split('').pop())
