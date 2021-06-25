@@ -212,5 +212,8 @@ function toggleTheme() {
 })();
 
 function renderThemeUI() {
-    console.log('working!')
+    localStorage.getItem('theme') === 'theme-day' ?
+    dayNightToggle.className = "btn btn-dark"
+    :
+    dayNightToggle.className = "btn btn-light"
 }
