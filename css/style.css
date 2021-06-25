@@ -51,6 +51,7 @@ body {
 
 header {
     display: flex;
+    margin-bottom: 3rem;
 }
 
 img {
@@ -117,41 +118,20 @@ section.computer-hand {
     flex-flow:row nowrap;
 }
 
-.drawer {
+.offcanvas-body {
+    background-image: url('../assets/sets-and-scoring/sets-light.jpg');
+    background-size: cover;
+    background-color: var(--background);
     display: flex;
-    flex-wrap: wrap;
-    background-color: #111;
-    grid-area: drawer;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#sets-overlay {
+    width: auto;
     height: 100%;
-    left: 0;
-    overflow-x: hidden;
-    padding-top: 15px;
-    position: fixed;
-    top: 0;
-    transition: 0.5s;
-    width: 0;
-    z-index: 1;
-}
-
-.drawer a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-}
-
-.drawer a:hover {
-    color: #f1f1f1;
-}
-
-.drawer.closebtn {
-    font-size: 36px;
-    margin-left: 50px;
-    position: absolute;
-    right: 25px;
-    top: 0;
+    border: none;
 }
 
 .player-hand {

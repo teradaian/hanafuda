@@ -29,11 +29,8 @@ const computer = {
 const computerHandEl    = document.querySelector('.computer-hand')
 const dayNightToggle    = document.querySelector("#day-toggle")
 const deckEl            = document.querySelector('#deck')
-const drawerClose       = document.querySelector('.close-btn')
-const drawerOpen        = document.querySelector("#open-drawer")
 const fieldEl           = document.querySelector('.field')
 const playerHandEl      = document.querySelector('.player-hand')
-const scoreDrawer       = document.querySelector('#score-drawer')
 const scorePileEl       = document.querySelector('.drawer')
 
 /*----- event listeners -----*/ 
@@ -41,8 +38,6 @@ const scorePileEl       = document.querySelector('.drawer')
 
 dayNightToggle.addEventListener('click', toggleTheme)
 deckEl.addEventListener('click', deckClickHandler)
-drawerClose.addEventListener('click', closeDrawer)
-drawerOpen.addEventListener('click', openDrawer)
 fieldEl.addEventListener('click', fieldClickHandler)
 playerHandEl.addEventListener('click', selectCardHandler)
 
@@ -176,18 +171,6 @@ function incrementTurn(){
 //         console.log('done', timeoutLength)
 //       }, timeoutLength);
 // }
-
-// drawer
-function openDrawer() {
-    scoreDrawer.style.width = "400px";
-    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-    openDrawer.className = 'close-btn'
-  }
-  
-function closeDrawer() {
-    scoreDrawer.style.width = "0";
-    document.body.style.backgroundColor = "white";
-}
 
 // night mode toggle
 function setTheme(theme) {
