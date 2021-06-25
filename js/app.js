@@ -138,7 +138,7 @@ function renderComputerHand(){
     computer.hand.forEach((i, idx) => {
         let compTile = document.createElement('div')
         compTile.classList.add('hand-tile')
-        compTile.innerHTML = `<img id='p${idx}' src="../assets/tiles/${i}.jpeg">`
+        compTile.innerHTML = `<img id='p${idx}' src="../assets/tiles/back.jpeg">`
         computerHandEl.appendChild(compTile);
     })
 }

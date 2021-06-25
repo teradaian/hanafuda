@@ -19,8 +19,8 @@
             <div class="container-fluid"></div>
               <a class="navbar-brand title-header">Hanafuda</a>
               <div class="btn-group">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                Rules and Settings
+                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Rules and Settings
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <button id="day-toggle" class="w-100">
@@ -43,9 +43,7 @@
 
     <div class="core-display">
         <div class= "deck-container">
-            <div id="deck"> 
-                Deck
-            </div>
+              <img id="deck" src="../assets/tiles/back.jpeg">
         </div>
         <div class="field-container">
             <section class="field"></section>
@@ -53,6 +51,17 @@
     </div>
 
     <section class="player-hand"></section>
+
+    <button 
+        class="btn btn-dark" 
+        type="button" 
+        id="score-pile-btn"
+        data-bs-toggle="offcanvas" 
+        data-bs-target="#offcanvasBottom" 
+        aria-controls="offcanvasBottom"> 
+        Score Pile
+    </button>
+
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
@@ -86,6 +95,12 @@
             </button>
           </div>
         </div>
+    </div>
+
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+      <div class="offcanvas-body drawer">
+        
+      </div>
     </div>
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
