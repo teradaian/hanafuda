@@ -47,16 +47,18 @@ body {
     font-family: var(--font-family);
     height: 100vh;
     margin: 0;
-    width: 100vh;
 }
 
 header {
     display: flex;
 }
 
-img { 
-    width: 100%; 
-    height: auto; 
+img {
+    width: 80px;
+    height: auto;
+    border: 1px solid lightgrey;
+    margin: 5px;
+    object-fit: contain;
 }
 
 .core-display {
@@ -73,6 +75,11 @@ img {
     border-radius: 5px;
 }
 
+.deck-container {
+    display: flex;
+    flex-direction: column;
+}
+
 #deck {
     width: 12vw;
     height: 16vw;
@@ -80,34 +87,34 @@ img {
     background-color: rgba(218, 218, 218, 0.933);
 }
 
+.field-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
 section.field {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    flex-direction:column;
+    flex-direction: row;
     justify-content: space-around;
     justify-items: center;
-    width: 100%;
-    padding: 2rem;
     border-radius: var(--field-radius);
     background: var(--field-bg);
     box-shadow: var(--field-box-shadow);
 }
 
-.field div {
-    width: 25%;
-}
 
-section.player-hand {
+section.player-hand,
+section.computer-hand {
     align-items: center;
     justify-content: center;
     display: flex;
-    height: 100%;
-    width: 90%;
-}
-
-.player-hand div {
-    width:90%
+    flex-flow:row nowrap;
 }
 
 .drawer {
@@ -145,10 +152,6 @@ section.player-hand {
     position: absolute;
     right: 25px;
     top: 0;
-}
-
-section.computer-hand {
-    display: none;
 }
 
 .player-hand {
@@ -190,7 +193,13 @@ section.computer-hand {
         margin: 0;
         min-height: 100vh;
     }
-    
+
+    img { 
+        max-width: 100%; 
+        height: auto;
+        border: 1px solid lightgrey;
+        margin: 5px;
+    }
     
     .computer-hand {
         display: flex;
@@ -224,7 +233,6 @@ section.computer-hand {
         grid-area: field;
         justify-items: center;
     }
-
 
     .player-hand {
         border-radius: var(--player-hand-radius);

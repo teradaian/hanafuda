@@ -72,7 +72,7 @@ function fieldClickHandler(){
     if (isNaN(idAsInt)) return;
 
     let fieldSelection = checkSuite(field[idAsInt])
-
+    console.log(fieldSelection)
     if(player.selectedCard=== fieldSelection){
     moveMatchingPair(idAsInt)
 
@@ -95,7 +95,7 @@ function selectCardHandler(){
     if (isNaN(idAsInt)) return;
     player.selectedCardIdx= idAsInt
     player.selectedCard = checkSuite(player.hand[idAsInt])
-
+    console.log(player.selectedCard)
     renderPlayerHand();
 }
 
