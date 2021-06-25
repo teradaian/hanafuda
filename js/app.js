@@ -196,7 +196,7 @@ function toggleTheme() {
 
 function renderThemeUI() {
     localStorage.getItem('theme') === 'theme-day' ?
-    dayNightToggle.className = "btn btn-dark w-50"
+    dayNightToggle.className = "btn btn-dark w-100"
     :
-    dayNightToggle.className = "btn btn-light w-50"
+    dayNightToggle.className = "btn btn-light w-100"
 }
