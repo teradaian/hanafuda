@@ -96,10 +96,8 @@ function playTopTileFromDeck(){
     if (!deck.deck.length) return renderEmptyDeck()
 
     topDeckTile = deck.deck.pop()
-    console.log(topDeckTile)
     matchHighestValueTile()
     renderField()
-    // incrementTurn()
 }
 
 function deckClickHandler() {
@@ -120,7 +118,7 @@ function matchHighestValueTile(){
     } else if ( player.selectedCard !== null ) {
         testPlayerTile()
     } else {
-        test(computer.selectedCard)
+        testComputerTile()
     }
 }
 
@@ -129,12 +127,8 @@ function testPlayerTile(){
     capturePair(tileID)
 }
 
-function findIndexOfHighestMatch(tile){
-    let tileSuit = checkSuit(tile)
-    let i = field.filter(tileName => tileName.toLowerCase().includes(tileSuit.toLowerCase())).sort()
-
-    let indexOfHighestMatch = field.findIndex(name => name === i[0])
-    return indexOfHighestMatch;
+function testComputerTile(){
+    console.log('not built yet')
 }
 
 function testDeckTile(){
@@ -142,10 +136,19 @@ function testDeckTile(){
 
     if (tileID === -1) {
         field.push(topDeckTile)
+        incrementTurn();
     } else {
         field.push(topDeckTile)
         setTimeout(()=> captureMatchInField(tileID), 500)
     }
+}
+
+function findIndexOfHighestMatch(tile){
+    let tileSuit = checkSuit(tile)
+    let i = field.filter(tileName => tileName.toLowerCase().includes(tileSuit.toLowerCase())).sort()
+
+    let indexOfHighestMatch = field.findIndex(name => name === i[0])
+    return indexOfHighestMatch;
 }
 
 function extractIndexFromId(evtId){
@@ -170,11 +173,13 @@ function captureMatchInField(idAsInt){
             resetSelections()
             renderScorePile()
             render()
+            incrementTurn()
         } else {
             computer.scorePile.push(fieldTileMatch.join(''))
             computer.scorePile.push(playedFieldTile)
             resetSelections()
             render()
+            incrementTurn()
         }
     }, 800)
 }
