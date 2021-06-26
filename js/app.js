@@ -38,7 +38,7 @@ const scorePileEl       = document.querySelector('.drawer')
 
 dayNightToggle.addEventListener('click', toggleTheme)
 deckEl.addEventListener('click', deckClickHandler)
-fieldEl.addEventListener('click', fieldClickHandler)
+fieldEl.addEventListener('click', fieldTileClickHandler)
 playerHandEl.addEventListener('click', selectCardHandler)
 
 /*----- functions -----*/
@@ -62,37 +62,56 @@ function render(){
     renderComputerHand();
 }
 
-function fieldClickHandler(){
+function fieldTileClickHandler(){
     let idAsInt = extractIndexFromId(event.target.id);
-    if (isNaN(idAsInt)) return;
+    if (isNaN(idAsInt)) {
+        return emptyFieldClickHandler()
+    }
 
-    let fieldSelection = checkSuite(field[idAsInt])
+    let fieldSelection = checkSuit(field[idAsInt])
     
     if(player.selectedCard=== fieldSelection){
     moveMatchingPair(idAsInt)
     }
 }
 
+function emptyFieldClickHandler(){
+    if (!player.selectedCardIdx) return
+    console.log(playerHandEl.children[player.selectedCardIdx])
+    
+    if (!field.filter(i => player.selectedCard === checkSuit(i)).length){
+        field.push(`${player.selectedCard}${player.selectedCardIdx}`)
+        render();
+    }
+}
+
+// if no suit match, push to field
+// if 0 exits, push
+// else if 1 exits, push
+// else push
+
+
 function extractIndexFromId(evtId){
     let indexNum = evtId.split('').filter(i => /\d/.test(i)).join('')
     return parseInt(indexNum);
 }
 
-function checkSuite(string){
+function checkSuit(string){
     return string.slice(0, string.length -1);
 }
-
 
 function moveMatchingPair(idAsInt){
     let fieldTile = field.splice(idAsInt, 1)
     let playerTile = player.hand.splice(player.selectedCardIdx, 1)
+
     renderMatchingPairAnimation(idAsInt)
+
     setTimeout(() =>{
         player.scorePile.push(fieldTile)
         player.scorePile.push(playerTile)
         renderScorePile()
         render()
-    }, 1000)
+    }, 800)
 }
 
 function renderMatchingPairAnimation(fieldTileId){
@@ -105,7 +124,7 @@ function selectCardHandler(){
     let idAsInt = extractIndexFromId(event.target.id);
     if (isNaN(idAsInt)) return;
     player.selectedCardIdx= idAsInt
-    player.selectedCard = checkSuite(player.hand[idAsInt])
+    player.selectedCard = checkSuit(player.hand[idAsInt])
     renderPlayerHand();
     highlightSelectedCard()
 }
