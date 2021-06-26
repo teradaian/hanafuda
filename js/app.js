@@ -72,23 +72,30 @@ function fieldTileClickHandler(){
     let playerSelection = checkSuit(player.selectedCard)
     
     if(playerSelection === fieldSelection){
-    moveMatchingPair(idAsInt)
+    capturePair(idAsInt)
     }
 }
 
 function emptyFieldClickHandler(){
+    if (player.selectedCard === null) return
     if (!field.filter(i => checkSuit(player.selectedCard) === checkSuit(i)).length){
-        console.log(player.selectedCardIdx)
-        field.push(player.hand.splice(player.selectedCardIdx, 1))
+        field.push(player.hand.splice(player.selectedCardIdx, 1).join(''))
         render();
+    } else {
+        matchHighestValueTile()
     }
 }
 
-// if no suit match, push to field
-// if 0 exits, push
-// else if 1 exits, push
-// else push
+function matchHighestValueTile(){
 
+    let suit = checkSuit(player.selectedCard)
+
+    let i = field.filter(tileName => tileName.toLowerCase().includes(suit.toLowerCase())).sort()
+
+    let indexOfHighestMatch = field.findIndex(name => name === i[0])
+    console.log(indexOfHighestMatch, 'highest match')
+    capturePair(indexOfHighestMatch)
+}
 
 function extractIndexFromId(evtId){
     let indexNum = evtId.split('').filter(i => /\d/.test(i)).join('')
@@ -99,7 +106,7 @@ function checkSuit(string){
     return string.slice(0, string.length -1);
 }
 
-function moveMatchingPair(idAsInt){
+function capturePair(idAsInt){
     let fieldTile = field.splice(idAsInt, 1)
     let playerTile = player.hand.splice(player.selectedCardIdx, 1)
 
