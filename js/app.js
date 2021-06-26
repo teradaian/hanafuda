@@ -20,6 +20,8 @@ const player = {
 const computer = {
         name: 'computer',
         hand: [],
+        selectedCard: null,
+        selectedCardIdx: null,
         score: null,
         scorePile: []
 }
@@ -37,7 +39,7 @@ const scorePileEl       = document.querySelector('.drawer')
 
 
 dayNightToggle.addEventListener('click', toggleTheme)
-deckEl.addEventListener('click', deckClickHandler)
+deckEl.addEventListener('click', playTopTileFromDeck)
 fieldEl.addEventListener('click', fieldTileClickHandler)
 playerHandEl.addEventListener('click', selectCardHandler)
 
@@ -52,7 +54,7 @@ function init(){
     player.hand = deck.dealPlayerHand()
     computer.hand = deck.dealComputerHand()
     field = deck.dealField()
-    turn = 1;
+    turn = 1
     render()
 }
 
@@ -64,7 +66,7 @@ function render(){
 
 function fieldTileClickHandler(){
     let idAsInt = extractIndexFromId(event.target.id);
-    if (isNaN(idAsInt)) return emptyFieldClickHandler()
+    if (isNaN(idAsInt)) return emptyFieldPlayHandler()
     if (player.selectedCard === null) return
 
     let fieldSelection = checkSuit(field[idAsInt])
@@ -75,9 +77,12 @@ function fieldTileClickHandler(){
     }
 }
 
-function emptyFieldClickHandler(){
-    console.log(player.selectedCard, 'card');
+
+
+
+function emptyFieldPlayHandler(){
     if (player.selectedCard === null) return
+
     if (!field.filter(i => checkSuit(player.selectedCard) === checkSuit(i)).length){
         field.push(player.hand.splice(player.selectedCardIdx, 1).join(''))
         resetPlayerSelection()
@@ -87,18 +92,33 @@ function emptyFieldClickHandler(){
     }
 }
 
+
+function playTopTileFromDeck(){
+    if (!deck.deck.length) return renderEmptyDeck()
+
+    let cardOffTopDeck = deck.deck.pop()
+    console.log(cardOffTopDeck)
+    field.push(cardOffTopDeck)
+    matchHighestValueTile()
+    renderField()
+    incrementTurn()
+}
+
+
 function resetPlayerSelection(){
     player.selectedCard = null;
 }
 
 function matchHighestValueTile(){
-
-    let suit = checkSuit(player.selectedCard)
+    if (turn === 1) {
+        let suit = checkSuit(player.selectedCard)
+    } else {
+        let suit = checkSuit(computer.selectedCard)
+    }
 
     let i = field.filter(tileName => tileName.toLowerCase().includes(suit.toLowerCase())).sort()
 
     let indexOfHighestMatch = field.findIndex(name => name === i[0])
-    console.log(indexOfHighestMatch, 'highest match')
     capturePair(indexOfHighestMatch)
 }
 
@@ -126,6 +146,9 @@ function capturePair(idAsInt){
     }, 800)
 }
 
+
+
+
 function renderMatchingPairAnimation(fieldTileId){
     fieldEl.children[fieldTileId].className = "animate__animated animate__backOutDown"
     playerHandEl.children[player.selectedCardIdx].className = "animate__animated animate__backOutDown"
@@ -138,13 +161,8 @@ function selectCardHandler(){
     player.selectedCardIdx= idAsInt
     player.selectedCard = player.hand[idAsInt]
     renderPlayerHand();
-    highlightSelectedCard()
+    renderSelectedCard()
 }
-
-function highlightSelectedCard(){
-    playerHandEl.children[player.selectedCardIdx].className = "selected hand-tile"
-}
-
 
 function renderField(){
     fieldEl.innerHTML = ""
@@ -187,19 +205,13 @@ function renderComputerHand(){
     })
 }
 
-function deckClickHandler(){
-    if (!deck.deck.length) return;
-
-    console.log(deck.deck)
-    let cardOffTopDeck = deck.deck.pop();
-    field.push(cardOffTopDeck);
-    renderField();
-    incrementTurn()
+function renderSelectedCard(){
+    playerHandEl.children[player.selectedCardIdx].className = "selected hand-tile"
 }
 
-function incrementTurn(){
-    turn *= -1;
-}
+const renderEmptyDeck = () => deckEl.src = ""
+const incrementTurn = () => turn *= -1
+
 
 // computer logic
 
