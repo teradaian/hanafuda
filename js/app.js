@@ -107,7 +107,6 @@ function playTopTileFromDeck(){
 
     topDeckTile = deck.deck.pop()
     matchHighestValueTile()
-    // renderField()
 }
 
 function deckClickHandler() {
@@ -115,8 +114,8 @@ function deckClickHandler() {
 }
 
 function resetSelections(){
-    player.selectedCard = null;
     computer.selectedCard = null;
+    player.selectedCard = null;
     topDeckTile = null;
 }
 
@@ -136,7 +135,9 @@ function testPlayerTile(){
 }
 
 function testComputerTile(){
-    console.log('not built yet')
+    let tileID = findIndexOfHighestMatch(computer.selectedCard)
+    console.log(computer.selectedCardIdx, 'testcomputertile')
+    capturePair(tileID)
 }
 
 function testDeckTile(){
@@ -153,12 +154,6 @@ function testDeckTile(){
         setTimeout(() => renderField(), 1000)
         setTimeout(() => captureMatchInField(tileID), 2000)
     }
-}
-
-function renderTopDeckTileAnimation(){
-    const fieldElArray = Array.from(fieldEl.children)
-    renderField()
-    fieldEl.children[field.length - 1].className = "animate__animated animate__fadeInLeftBig"
 }
 
 function findIndexOfHighestMatch(tile){
@@ -203,19 +198,35 @@ function captureMatchInField(idAsInt){
 }
 
 function capturePair(idAsInt){
+    if (turn === 1) {
 
-    let fieldTile = field.splice(idAsInt, 1)
-    let playerTile = player.hand.splice(player.selectedCardIdx, 1)
+        let fieldTile = field.splice(idAsInt, 1)
+        let playerTile = player.hand.splice(player.selectedCardIdx, 1)
 
-    renderMatchingPairAnimation(idAsInt)
+        renderMatchingPairAnimation(idAsInt)
    
-    setTimeout(() =>{
-        player.scorePile.push(fieldTile)
-        player.scorePile.push(playerTile)
-        resetSelections()
-        renderScorePile()
-        render()
-    }, 800)
+        setTimeout(() =>{
+            player.scorePile.push(fieldTile)
+            player.scorePile.push(playerTile)
+            resetSelections()
+            renderScorePile()
+            render()
+        }, 800)
+    }
+    if (turn === -1) {
+        let fieldTile = field.splice(idAsInt, 1)
+        let computerTile = computer.hand.splice(computer.selectedCardIdx, 1)
+
+        renderMatchingPairAnimation(idAsInt)
+
+        setTimeout(() =>{
+            computer.scorePile.push(fieldTile)
+            computer.scorePile.push(computerTile)
+            console.log(computer.selectedCard)
+            resetSelections()
+            render()
+        }, 800)
+    }
 }
 
 function selectCardHandler(){
@@ -230,12 +241,19 @@ function selectCardHandler(){
     renderSelectedCard()
 }
 
+function renderTopDeckTileAnimation(){
+    const fieldElArray = Array.from(fieldEl.children)
+    renderField()
+    fieldEl.children[field.length - 1].className = "animate__animated animate__fadeInLeftBig"
+}
+
 function renderMatchingPairAnimation(fieldTileId){
     if(turn === 1) {
         fieldEl.children[fieldTileId].className = "animate__animated animate__backOutDown"
         playerHandEl.children[player.selectedCardIdx].className = "animate__animated animate__backOutDown"    
     } else {
         fieldEl.children[fieldTileId].className = "animate__animated animate__backOutUp"
+        console.log(computer.selectedCardIdx, 'selectedid')
         computerHandEl.children[computer.selectedCardIdx].className = "animate__animated animate__backOutUp"
     }
 }
@@ -300,24 +318,51 @@ const renderEmptyDeck = () => deckEl.src = ""
 
 const incrementTurn = () => {
     turn *= -1
-    console.log(turn, 'turn')
+    console.log(turn, 'startofturn')
     if (turn === 1) playerHandEl.addEventListener('click', selectCardHandler)
+    if (turn === -1) computerTurn()
 }
 
-// computer logic
+function computerTurn(){
+    computerSelectRandom()
+    computerPlayHandler()
+    
+}
 
-// async function computerTurn(){
-//     let result = await computerThinking()
-//     let play = computerPlay(result)
-//     flip deck;
-// }
+function computerSelectRandom(){
+    let tileId = generateRandomHandId()
+    computer.selectedCard = computer.hand[tileId]
+    computer.selectedCardIdx = tileId
+    console.log(computer.selectedCardIdx, 'comp idx')
+    console.log(computer)
+}
 
-// function computerThinking(){
-//     let timeoutLength = Math.floor(Math.random() * 5000)
-//     setTimeout(() => {
-//         console.log('done', timeoutLength)
-//       }, timeoutLength);
-// }
+function generateRandomHandId(){
+    return computer.hand.length > 1 ? 
+    Math.floor(Math.random() * computer.hand.length +1)
+    :
+    0
+}
+
+function computerPlayHandler(){
+    if (!field.filter(tile => checkSuit(computer.selectedCard) === checkSuit(tile)).length){
+        field.push(computer.hand.splice(computer.selectedCardIdx, 1).join(''))
+        computer.selectedCard = null;
+        render()
+    } else {
+        matchHighestValueTile()
+    }
+    setTimeout(()=> playTopTileFromDeck(), 1000)
+}
+
+function computerPickBestTileFromHand(){
+        let suitMatches = computer.hand.filter((i, idx) => {
+            return findIndexOfHighestMatch(i) !== -1
+        })
+        console.log(suitMatches.sort());
+}
+
+
 
 
 // night mode toggle
@@ -351,4 +396,4 @@ function renderThemeUI() {
 
 // test!
 const title = document.querySelector('#deck')
-title.addEventListener('click', incrementTurn)
+title.addEventListener('click', computerPickBestTileFromHand)
