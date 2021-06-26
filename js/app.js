@@ -1,4 +1,5 @@
 import Deck from './deck.js'
+import { yakuSets, tilesValues } from './scoring.js'
 
 /*----- app's state (variables) -----*/ 
 
@@ -347,7 +348,6 @@ function renderThemeUI() {
     :
     dayNightToggle.className = "btn btn-light w-100"
 }
-
 
 // test!
 const title = document.querySelector('#deck')

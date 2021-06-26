@@ -6,7 +6,7 @@
 
 // then array of arrays of 20, 10, 5pt values
 
-const yakuSets = [
+export const yakuSets = [
     ["Cherry0", "Grass0", "Chrysanthemum0"], 
     ["Pine0", "Plum0", "Cherry0"],
     ["Pine1", "Plum1", 'Cherry1'],
@@ -18,8 +18,11 @@ const yakuSets = [
 ]
 
 const hikariBrights = ["Pawlownia0", "Willow0", "Grass0", "Cherry0", "Pine0"]
-
 const taneAnimals = ["Plum0", "Wisteria0", "Iris0", "Peony0", "Clover0", "Grass1", "Chrysanthemum0", "Maple0", "Willow1"]
-
 const tanzakuRibbons = ["Pine1", "Plum1", "Cherry1", "Wisteria1", "Iris1", "Peony1", "Clover1", "Chrysanthemum1", "Maple1", "Willow2"]
-
+// duplicate
+export const tilesValues = [
+    ["Pawlownia0", "Willow0", "Grass0", "Cherry0", "Pine0"], 
+    ["Plum0", "Wisteria0", "Iris0", "Peony0", "Clover0", "Grass1", "Chrysanthemum0", "Maple0", "Willow1"],
+    ["Pine1", "Plum1", "Cherry1", "Wisteria1", "Iris1", "Peony1", "Clover1", "Chrysanthemum1", "Maple1", "Willow2"]
+]
