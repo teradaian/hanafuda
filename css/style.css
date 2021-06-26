@@ -124,6 +124,7 @@ img {
     border-radius: var(--field-radius);
     background: var(--field-bg);
     box-shadow: var(--field-box-shadow);
+    padding: 2rem;
 }
 
 .player-hand,

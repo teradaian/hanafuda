@@ -106,7 +106,7 @@ function playTopTileFromDeck(){
 
     topDeckTile = deck.deck.pop()
     matchHighestValueTile()
-    renderField()
+    // renderField()
 }
 
 function deckClickHandler() {
@@ -121,7 +121,6 @@ function resetSelections(){
 
 function matchHighestValueTile(){
     if (player.selectedCard === null && computer.selectedCard === null) {
-        console.log(topDeckTile, 'topDeck')
         testDeckTile()
     } else if ( player.selectedCard !== null ) {
         testPlayerTile()
@@ -144,11 +143,21 @@ function testDeckTile(){
 
     if (tileID === -1) {
         field.push(topDeckTile)
-        incrementTurn();
+        renderTopDeckTileAnimation()
+        setTimeout(() => renderField(), 1000)
+        incrementTurn()
     } else {
         field.push(topDeckTile)
-        setTimeout(()=> captureMatchInField(tileID), 500)
+        renderTopDeckTileAnimation()
+        setTimeout(() => renderField(), 1000)
+        setTimeout(() => captureMatchInField(tileID), 2000)
     }
+}
+
+function renderTopDeckTileAnimation(){
+    const fieldElArray = Array.from(fieldEl.children)
+    renderField()
+    fieldEl.children[field.length - 1].className = "animate__animated animate__fadeInLeftBig"
 }
 
 function findIndexOfHighestMatch(tile){
@@ -232,7 +241,6 @@ function renderMatchingPairAnimation(fieldTileId){
 
 function renderMatchOnDrawAnimation(fieldTileId){
     const fieldElArray = Array.from(fieldEl.children)
-    // convert to iterable for compatability
     if( turn === 1) {
         fieldEl.children[fieldTileId].className = "animate__animated animate__backOutDown"
         fieldEl.children[fieldElArray.length -1].className = "animate__animated animate__backOutDown"    
@@ -309,6 +317,7 @@ const incrementTurn = () => {
 //         console.log('done', timeoutLength)
 //       }, timeoutLength);
 // }
+
 
 // night mode toggle
 function setTheme(theme) {
