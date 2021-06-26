@@ -57,6 +57,7 @@ function init(){
     field = deck.dealField()
     turn = 1
     render()
+    console.log(turn, 'init turn')
 }
 
 function render(){
@@ -122,10 +123,14 @@ function resetSelections(){
 function matchHighestValueTile(){
     if (player.selectedCard === null && computer.selectedCard === null) {
         testDeckTile()
-    } else if ( player.selectedCard !== null ) {
+    } else if ( turn === 1 ) {
         testPlayerTile()
-    } else {
+    } else if ( turn === -1) {
         testComputerTile()
+    } else {
+        console.log(player.selectedCard)
+        console.log(computer.selectedCard)
+        console.log('err!')
     }
 }
 
@@ -146,8 +151,11 @@ function testDeckTile(){
     if (tileID === -1) {
         field.push(topDeckTile)
         renderTopDeckTileAnimation()
-        setTimeout(() => renderField(), 1000)
-        incrementTurn()
+        setTimeout(() => {
+            renderField()
+            incrementTurn()
+        }, 1000)
+        
     } else {
         field.push(topDeckTile)
         renderTopDeckTileAnimation()
@@ -181,21 +189,27 @@ function captureMatchInField(idAsInt){
 
     setTimeout(() =>{
         if (turn === 1) {
+            console.log('pushed to player')
             player.scorePile.push(fieldTileMatch.join(''))
             player.scorePile.push(playedFieldTile)
             resetSelections()
             renderScorePile()
             render()
             incrementTurn()
-        } else {
+            console.log(player, 'player')
+        } 
+        if (turn === -1) {
+            console.log('pushed to computer!')
             computer.scorePile.push(fieldTileMatch.join(''))
             computer.scorePile.push(playedFieldTile)
             resetSelections()
             render()
             incrementTurn()
+            console.log(computer, 'computer')
         }
     }, 800)
 }
+           
 
 function capturePair(idAsInt){
     if (turn === 1) {
@@ -206,8 +220,8 @@ function capturePair(idAsInt){
         renderMatchingPairAnimation(idAsInt)
    
         setTimeout(() =>{
-            player.scorePile.push(fieldTile)
-            player.scorePile.push(playerTile)
+            player.scorePile.push(fieldTile.join(''))
+            player.scorePile.push(playerTile.join(''))
             resetSelections()
             renderScorePile()
             render()
@@ -220,8 +234,8 @@ function capturePair(idAsInt){
         renderMatchingPairAnimation(idAsInt)
 
         setTimeout(() =>{
-            computer.scorePile.push(fieldTile)
-            computer.scorePile.push(computerTile)
+            computer.scorePile.push(fieldTile.join(''))
+            computer.scorePile.push(computerTile.join(''))
             console.log(computer.selectedCard)
             resetSelections()
             render()
@@ -319,14 +333,15 @@ const renderEmptyDeck = () => deckEl.src = ""
 const incrementTurn = () => {
     turn *= -1
     console.log(turn, 'startofturn')
-    if (turn === 1) playerHandEl.addEventListener('click', selectCardHandler)
-    if (turn === -1) computerTurn()
+    if (turn === 1) return playerHandEl.addEventListener('click', selectCardHandler)
+    if (turn === -1) return computerTurn()
 }
 
 function computerTurn(){
     computerSelectRandom()
     computerPlayHandler()
-    
+    setTimeout(()=> playTopTileFromDeck(), 2000)
+    return
 }
 
 function computerSelectRandom(){
@@ -339,7 +354,7 @@ function computerSelectRandom(){
 
 function generateRandomHandId(){
     return computer.hand.length > 1 ? 
-    Math.floor(Math.random() * computer.hand.length +1)
+    Math.floor(Math.random() * computer.hand.length)
     :
     0
 }
@@ -352,15 +367,15 @@ function computerPlayHandler(){
     } else {
         matchHighestValueTile()
     }
-    setTimeout(()=> playTopTileFromDeck(), 1000)
+   
 }
 
-function computerPickBestTileFromHand(){
-        let suitMatches = computer.hand.filter((i, idx) => {
-            return findIndexOfHighestMatch(i) !== -1
-        })
-        console.log(suitMatches.sort());
-}
+// function computerPickBestTileFromHand(){
+//         let suitMatches = computer.hand.filter((i, idx) => {
+//             return findIndexOfHighestMatch(i) !== -1
+//         })
+//         console.log(suitMatches.sort());
+// }
 
 
 
@@ -393,7 +408,3 @@ function renderThemeUI() {
     :
     dayNightToggle.className = "btn btn-light w-100"
 }
-
-// test!
-const title = document.querySelector('#deck')
-title.addEventListener('click', computerPickBestTileFromHand)
