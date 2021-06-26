@@ -34,6 +34,7 @@ const fieldEl           = document.querySelector('.field')
 const playerHandEl      = document.querySelector('.player-hand')
 const scorePileEl       = document.querySelector('.drawer')
 
+
 /*----- event listeners -----*/ 
 
 
@@ -65,6 +66,9 @@ function render(){
 
 function fieldTileClickHandler(){
     let idAsInt = extractIndexFromId(event.target.id);
+
+    disableHandSelection()
+
     if (isNaN(idAsInt)) return emptyFieldPlayHandler()
     if (player.selectedCard === null) return
 
@@ -72,14 +76,16 @@ function fieldTileClickHandler(){
     let playerSelection = checkSuit(player.selectedCard)
     
     if(playerSelection === fieldSelection){
-    capturePair(idAsInt)
-    setTimeout(()=> playTopTileFromDeck(), 1000)
+        capturePair(idAsInt)
+        setTimeout(()=> playTopTileFromDeck(), 1000)
     }
 }
 
 
 function emptyFieldPlayHandler(){
     if (player.selectedCard === null) return
+
+    disableHandSelection()
 
     if (!field.filter(tile => checkSuit(player.selectedCard) === checkSuit(tile)).length){
         field.push(player.hand.splice(player.selectedCardIdx, 1).join(''))
@@ -91,6 +97,9 @@ function emptyFieldPlayHandler(){
     setTimeout(()=> playTopTileFromDeck(), 1000)
 }
 
+function disableHandSelection(){
+    playerHandEl.removeEventListener('click', selectCardHandler)
+}
 
 function playTopTileFromDeck(){
     if (!deck.deck.length) return renderEmptyDeck()
@@ -103,7 +112,6 @@ function playTopTileFromDeck(){
 function deckClickHandler() {
     !player.hand.length && playTopTileFromDeck();
 }
-
 
 function resetSelections(){
     player.selectedCard = null;
@@ -200,6 +208,18 @@ function capturePair(idAsInt){
     }, 800)
 }
 
+function selectCardHandler(){
+    if (turn !== 1) return;
+
+    let idAsInt = extractIndexFromId(event.target.id);
+    if (isNaN(idAsInt)) return;
+    
+    player.selectedCardIdx= idAsInt
+    player.selectedCard = player.hand[idAsInt]
+    renderPlayerHand();
+    renderSelectedCard()
+}
+
 function renderMatchingPairAnimation(fieldTileId){
     if(turn === 1) {
         fieldEl.children[fieldTileId].className = "animate__animated animate__backOutDown"
@@ -220,16 +240,6 @@ function renderMatchOnDrawAnimation(fieldTileId){
         fieldEl.children[fieldTileId].className = "animate__animated animate__backOutUp"
         fieldEl.children[fieldElArray.length -1].className = "animate__animated animate__backOutUp"
     }
-}
-
-function selectCardHandler(){
-    if (turn !== 1) return;
-    let idAsInt = extractIndexFromId(event.target.id);
-    if (isNaN(idAsInt)) return;
-    player.selectedCardIdx= idAsInt
-    player.selectedCard = player.hand[idAsInt]
-    renderPlayerHand();
-    renderSelectedCard()
 }
 
 function renderField(){
@@ -280,9 +290,9 @@ function renderSelectedCard(){
 const renderEmptyDeck = () => deckEl.src = ""
 
 const incrementTurn = () => {
-    console.log(turn, 'before')
     turn *= -1
-    console.log(turn, 'after')
+    console.log(turn, 'turn')
+    if (turn === 1) playerHandEl.addEventListener('click', selectCardHandler)
 }
 
 // computer logic
@@ -328,3 +338,8 @@ function renderThemeUI() {
     :
     dayNightToggle.className = "btn btn-light w-100"
 }
+
+
+// test!
+const title = document.querySelector('#deck')
+title.addEventListener('click', incrementTurn)
