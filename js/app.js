@@ -14,7 +14,6 @@ const player = {
         hand: [],
         selectedCard: null,
         selectedCardIdx: null,
-        score: null,
         scorePile: []
 }
 
@@ -23,7 +22,6 @@ const computer = {
         hand: [],
         selectedCard: null,
         selectedCardIdx: null,
-        score: null,
         scorePile: []
 }
 
@@ -40,7 +38,7 @@ const scorePileEl       = document.querySelector('.drawer')
 
 
 dayNightToggle.addEventListener('click', toggleTheme)
-deckEl.addEventListener('click', playTopTileFromDeck)
+deckEl.addEventListener('click', deckClickHandler)
 fieldEl.addEventListener('click', fieldTileClickHandler)
 playerHandEl.addEventListener('click', selectCardHandler)
 
@@ -75,6 +73,7 @@ function fieldTileClickHandler(){
     
     if(playerSelection === fieldSelection){
     capturePair(idAsInt)
+    setTimeout(()=> playTopTileFromDeck(), 1000)
     }
 }
 
@@ -84,11 +83,12 @@ function emptyFieldPlayHandler(){
 
     if (!field.filter(tile => checkSuit(player.selectedCard) === checkSuit(tile)).length){
         field.push(player.hand.splice(player.selectedCardIdx, 1).join(''))
-        resetSelections()
+        player.selectedCard = null;
         render()
     } else {
         matchHighestValueTile()
     }
+    setTimeout(()=> playTopTileFromDeck(), 1000)
 }
 
 
@@ -99,8 +99,13 @@ function playTopTileFromDeck(){
     console.log(topDeckTile)
     matchHighestValueTile()
     renderField()
-    incrementTurn()
+    // incrementTurn()
 }
+
+function deckClickHandler() {
+    !player.hand.length && playTopTileFromDeck();
+}
+
 
 function resetSelections(){
     player.selectedCard = null;
@@ -111,28 +116,35 @@ function resetSelections(){
 function matchHighestValueTile(){
     if (player.selectedCard === null && computer.selectedCard === null) {
         console.log(topDeckTile, 'topDeck')
-        test(topDeckTile)
+        testDeckTile()
     } else if ( player.selectedCard !== null ) {
-        console.log(player.selectedCard, 'player')
-        test(player.selectedCard)
+        testPlayerTile()
     } else {
-        console.log('wrong turn')
         test(computer.selectedCard)
     }
 }
 
-function test(tileName){
-    let tileSuit = checkSuit(tileName)
+function testPlayerTile(){
+    let tileID = findIndexOfHighestMatch(player.selectedCard)
+    capturePair(tileID)
+}
+
+function findIndexOfHighestMatch(tile){
+    let tileSuit = checkSuit(tile)
     let i = field.filter(tileName => tileName.toLowerCase().includes(tileSuit.toLowerCase())).sort()
 
     let indexOfHighestMatch = field.findIndex(name => name === i[0])
-    console.log(indexOfHighestMatch, tileName, 'working!')
+    return indexOfHighestMatch;
+}
 
-    if (indexOfHighestMatch === -1) {
+function testDeckTile(){
+    let tileID = findIndexOfHighestMatch(topDeckTile)
+
+    if (tileID === -1) {
         field.push(topDeckTile)
     } else {
         field.push(topDeckTile)
-        setTimeout(()=> captureMatchInField(indexOfHighestMatch), 500)
+        setTimeout(()=> captureMatchInField(tileID), 500)
     }
 }
 
@@ -155,14 +167,12 @@ function captureMatchInField(idAsInt){
         if (turn === 1) {
             player.scorePile.push(fieldTileMatch.join(''))
             player.scorePile.push(playedFieldTile)
-            console.log(player.scorePile)
             resetSelections()
             renderScorePile()
             render()
         } else {
             computer.scorePile.push(fieldTileMatch.join(''))
             computer.scorePile.push(playedFieldTile)
-            console.log(computer.scorePile)
             resetSelections()
             render()
         }
@@ -186,7 +196,7 @@ function capturePair(idAsInt){
 }
 
 function renderMatchingPairAnimation(fieldTileId){
-    if( turn === 1) {
+    if(turn === 1) {
         fieldEl.children[fieldTileId].className = "animate__animated animate__backOutDown"
         playerHandEl.children[player.selectedCardIdx].className = "animate__animated animate__backOutDown"    
     } else {
@@ -263,6 +273,7 @@ function renderSelectedCard(){
 }
 
 const renderEmptyDeck = () => deckEl.src = ""
+
 const incrementTurn = () => {
     console.log(turn, 'before')
     turn *= -1
