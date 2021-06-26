@@ -63,6 +63,10 @@ img {
     object-fit: contain;
 }
 
+.selected {
+    border-bottom: 2px solid #F4ABC4;
+}
+
 .core-display {
     display: flex;
     padding: 1vh;
@@ -102,7 +106,15 @@ img {
     padding: 2rem;
 }
 
-section.field {
+.player-hand-container {
+    display:flex;
+    width:100%;
+    align-items:center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.field {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -114,11 +126,12 @@ section.field {
     box-shadow: var(--field-box-shadow);
 }
 
-section.player-hand,
-section.computer-hand {
+.player-hand,
+.computer-hand {
     align-items: center;
     justify-content: center;
     display: flex;
+    flex-direction: row;
     flex-flow:row nowrap;
 }
 

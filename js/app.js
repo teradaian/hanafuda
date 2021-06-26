@@ -67,31 +67,10 @@ function fieldClickHandler(){
     if (isNaN(idAsInt)) return;
 
     let fieldSelection = checkSuite(field[idAsInt])
-    console.log(fieldSelection)
+    
     if(player.selectedCard=== fieldSelection){
     moveMatchingPair(idAsInt)
-
-    render();
-}
-}
-
-function moveMatchingPair(idAsInt){
-    let fieldTile = field.splice(idAsInt, 1)
-    let playerTile = player.hand.splice(player.selectedCardIdx, 1)
-    player.scorePile.push(fieldTile)
-    player.scorePile.push(playerTile)
-
-    renderScorePile()
-}
-
-function selectCardHandler(){
-    if (turn !== 1) return;
-    let idAsInt = extractIndexFromId(event.target.id);
-    if (isNaN(idAsInt)) return;
-    player.selectedCardIdx= idAsInt
-    player.selectedCard = checkSuite(player.hand[idAsInt])
-    console.log(player.selectedCard)
-    renderPlayerHand();
+    }
 }
 
 function extractIndexFromId(evtId){
@@ -102,6 +81,39 @@ function extractIndexFromId(evtId){
 function checkSuite(string){
     return string.slice(0, string.length -1);
 }
+
+
+function moveMatchingPair(idAsInt){
+    let fieldTile = field.splice(idAsInt, 1)
+    let playerTile = player.hand.splice(player.selectedCardIdx, 1)
+    renderMatchingPairAnimation(idAsInt)
+    setTimeout(() =>{
+        player.scorePile.push(fieldTile)
+        player.scorePile.push(playerTile)
+        renderScorePile()
+        render()
+    }, 1000)
+}
+
+function renderMatchingPairAnimation(fieldTileId){
+    fieldEl.children[fieldTileId].className = "animate__animated animate__backOutDown"
+    playerHandEl.children[player.selectedCardIdx].className = "animate__animated animate__backOutDown"
+}
+
+function selectCardHandler(){
+    if (turn !== 1) return;
+    let idAsInt = extractIndexFromId(event.target.id);
+    if (isNaN(idAsInt)) return;
+    player.selectedCardIdx= idAsInt
+    player.selectedCard = checkSuite(player.hand[idAsInt])
+    renderPlayerHand();
+    highlightSelectedCard()
+}
+
+function highlightSelectedCard(){
+    playerHandEl.children[player.selectedCardIdx].className = "selected hand-tile"
+}
+
 
 function renderField(){
     fieldEl.innerHTML = ""
@@ -131,6 +143,7 @@ function renderPlayerHand(){
         handTile.innerHTML = `<img id='p${idx}' src="../assets/tiles/${i}.jpeg">`
         playerHandEl.appendChild(handTile);
     })
+
 }
 
 function renderComputerHand(){
