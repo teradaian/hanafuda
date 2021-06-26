@@ -69,18 +69,17 @@ function fieldTileClickHandler(){
     }
 
     let fieldSelection = checkSuit(field[idAsInt])
+    let playerSelection = checkSuit(player.selectedCard)
     
-    if(player.selectedCard=== fieldSelection){
+    if(playerSelection === fieldSelection){
     moveMatchingPair(idAsInt)
     }
 }
 
 function emptyFieldClickHandler(){
-    if (!player.selectedCardIdx) return
-    console.log(playerHandEl.children[player.selectedCardIdx])
-    
-    if (!field.filter(i => player.selectedCard === checkSuit(i)).length){
-        field.push(`${player.selectedCard}${player.selectedCardIdx}`)
+    if (!field.filter(i => checkSuit(player.selectedCard) === checkSuit(i)).length){
+        console.log(player.selectedCardIdx)
+        field.push(player.hand.splice(player.selectedCardIdx, 1))
         render();
     }
 }
@@ -124,7 +123,7 @@ function selectCardHandler(){
     let idAsInt = extractIndexFromId(event.target.id);
     if (isNaN(idAsInt)) return;
     player.selectedCardIdx= idAsInt
-    player.selectedCard = checkSuit(player.hand[idAsInt])
+    player.selectedCard = player.hand[idAsInt]
     renderPlayerHand();
     highlightSelectedCard()
 }
