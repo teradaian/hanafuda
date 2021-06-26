@@ -6,6 +6,7 @@ let isWinner
 let turn
 let field
 let deck
+let topDeckTile
 
 
 const player = {
@@ -78,14 +79,12 @@ function fieldTileClickHandler(){
 }
 
 
-
-
 function emptyFieldPlayHandler(){
     if (player.selectedCard === null) return
 
-    if (!field.filter(i => checkSuit(player.selectedCard) === checkSuit(i)).length){
+    if (!field.filter(tile => checkSuit(player.selectedCard) === checkSuit(tile)).length){
         field.push(player.hand.splice(player.selectedCardIdx, 1).join(''))
-        resetPlayerSelection()
+        resetSelections()
         render()
     } else {
         matchHighestValueTile()
@@ -96,30 +95,45 @@ function emptyFieldPlayHandler(){
 function playTopTileFromDeck(){
     if (!deck.deck.length) return renderEmptyDeck()
 
-    let cardOffTopDeck = deck.deck.pop()
-    console.log(cardOffTopDeck)
-    field.push(cardOffTopDeck)
+    topDeckTile = deck.deck.pop()
+    console.log(topDeckTile)
     matchHighestValueTile()
     renderField()
     incrementTurn()
 }
 
-
-function resetPlayerSelection(){
+function resetSelections(){
     player.selectedCard = null;
+    computer.selectedCard = null;
+    topDeckTile = null;
 }
 
 function matchHighestValueTile(){
-    if (turn === 1) {
-        let suit = checkSuit(player.selectedCard)
+    if (player.selectedCard === null && computer.selectedCard === null) {
+        console.log(topDeckTile, 'topDeck')
+        test(topDeckTile)
+    } else if ( player.selectedCard !== null ) {
+        console.log(player.selectedCard, 'player')
+        test(player.selectedCard)
     } else {
-        let suit = checkSuit(computer.selectedCard)
+        console.log('wrong turn')
+        test(computer.selectedCard)
     }
+}
 
-    let i = field.filter(tileName => tileName.toLowerCase().includes(suit.toLowerCase())).sort()
+function test(tileName){
+    let tileSuit = checkSuit(tileName)
+    let i = field.filter(tileName => tileName.toLowerCase().includes(tileSuit.toLowerCase())).sort()
 
     let indexOfHighestMatch = field.findIndex(name => name === i[0])
-    capturePair(indexOfHighestMatch)
+    console.log(indexOfHighestMatch, tileName, 'working!')
+
+    if (indexOfHighestMatch === -1) {
+        field.push(topDeckTile)
+    } else {
+        field.push(topDeckTile)
+        setTimeout(()=> captureMatchInField(indexOfHighestMatch), 500)
+    }
 }
 
 function extractIndexFromId(evtId){
@@ -131,27 +145,66 @@ function checkSuit(string){
     return string.slice(0, string.length -1);
 }
 
+function captureMatchInField(idAsInt){
+    let fieldTileMatch = field.splice(idAsInt, 1)
+    let playedFieldTile = field.pop()
+
+    renderMatchOnDrawAnimation(idAsInt)
+
+    setTimeout(() =>{
+        if (turn === 1) {
+            player.scorePile.push(fieldTileMatch.join(''))
+            player.scorePile.push(playedFieldTile)
+            console.log(player.scorePile)
+            resetSelections()
+            renderScorePile()
+            render()
+        } else {
+            computer.scorePile.push(fieldTileMatch.join(''))
+            computer.scorePile.push(playedFieldTile)
+            console.log(computer.scorePile)
+            resetSelections()
+            render()
+        }
+    }, 800)
+}
+
 function capturePair(idAsInt){
+
     let fieldTile = field.splice(idAsInt, 1)
     let playerTile = player.hand.splice(player.selectedCardIdx, 1)
 
     renderMatchingPairAnimation(idAsInt)
-
+   
     setTimeout(() =>{
         player.scorePile.push(fieldTile)
         player.scorePile.push(playerTile)
-        resetPlayerSelection()
+        resetSelections()
         renderScorePile()
         render()
     }, 800)
 }
 
-
-
-
 function renderMatchingPairAnimation(fieldTileId){
-    fieldEl.children[fieldTileId].className = "animate__animated animate__backOutDown"
-    playerHandEl.children[player.selectedCardIdx].className = "animate__animated animate__backOutDown"
+    if( turn === 1) {
+        fieldEl.children[fieldTileId].className = "animate__animated animate__backOutDown"
+        playerHandEl.children[player.selectedCardIdx].className = "animate__animated animate__backOutDown"    
+    } else {
+        fieldEl.children[fieldTileId].className = "animate__animated animate__backOutUp"
+        computerHandEl.children[computer.selectedCardIdx].className = "animate__animated animate__backOutUp"
+    }
+}
+
+function renderMatchOnDrawAnimation(fieldTileId){
+    const fieldElArray = Array.from(fieldEl.children)
+    // convert to iterable for compatability
+    if( turn === 1) {
+        fieldEl.children[fieldTileId].className = "animate__animated animate__backOutDown"
+        fieldEl.children[fieldElArray.length -1].className = "animate__animated animate__backOutDown"    
+    } else {
+        fieldEl.children[fieldTileId].className = "animate__animated animate__backOutUp"
+        fieldEl.children[fieldElArray.length -1].className = "animate__animated animate__backOutUp"
+    }
 }
 
 function selectCardHandler(){
@@ -210,8 +263,11 @@ function renderSelectedCard(){
 }
 
 const renderEmptyDeck = () => deckEl.src = ""
-const incrementTurn = () => turn *= -1
-
+const incrementTurn = () => {
+    console.log(turn, 'before')
+    turn *= -1
+    console.log(turn, 'after')
+}
 
 // computer logic
 
