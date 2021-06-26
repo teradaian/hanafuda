@@ -64,9 +64,8 @@ function render(){
 
 function fieldTileClickHandler(){
     let idAsInt = extractIndexFromId(event.target.id);
-    if (isNaN(idAsInt)) {
-        return emptyFieldClickHandler()
-    }
+    if (isNaN(idAsInt)) return emptyFieldClickHandler()
+    if (player.selectedCard === null) return
 
     let fieldSelection = checkSuit(field[idAsInt])
     let playerSelection = checkSuit(player.selectedCard)
@@ -77,13 +76,19 @@ function fieldTileClickHandler(){
 }
 
 function emptyFieldClickHandler(){
+    console.log(player.selectedCard, 'card');
     if (player.selectedCard === null) return
     if (!field.filter(i => checkSuit(player.selectedCard) === checkSuit(i)).length){
         field.push(player.hand.splice(player.selectedCardIdx, 1).join(''))
-        render();
+        resetPlayerSelection()
+        render()
     } else {
         matchHighestValueTile()
     }
+}
+
+function resetPlayerSelection(){
+    player.selectedCard = null;
 }
 
 function matchHighestValueTile(){
@@ -115,6 +120,7 @@ function capturePair(idAsInt){
     setTimeout(() =>{
         player.scorePile.push(fieldTile)
         player.scorePile.push(playerTile)
+        resetPlayerSelection()
         renderScorePile()
         render()
     }, 800)
