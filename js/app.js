@@ -23,25 +23,27 @@ const computer = {
         hand: [],
         selectedCard: null,
         selectedCardIdx: null,
-        score:0 ,
+        score: 0 ,
         scorePile: []
 }
 
 /*----- cached element references -----*/ 
 
 const computerHandEl    = document.querySelector('.computer-hand')
-const dayNightToggle    = document.querySelector("#day-toggle")
+const dayNightToggleEl  = document.querySelector("#day-toggle")
 const deckEl            = document.querySelector('#deck')
 const fieldEl           = document.querySelector('.field')
 const playerHandEl      = document.querySelector('.player-hand')
 const scorePileEl       = document.querySelector('.drawer')
-const navbar            = document.querySelector('.navbar')
+const navbarEl          = document.querySelector('.navbar')
+const resetBtnEl        = document.querySelector('.reset-btn')
 /*----- event listeners -----*/ 
 
-dayNightToggle.addEventListener('click', toggleTheme)
+dayNightToggleEl.addEventListener('click', toggleTheme)
 deckEl.addEventListener('click', deckClickHandler)
 fieldEl.addEventListener('click', fieldTileClickHandler)
 playerHandEl.addEventListener('click', selectCardHandler)
+resetBtnEl.addEventListener('click', reset)
 
 /*----- functions -----*/
 
@@ -54,9 +56,8 @@ function init(){
     player.hand = deck.dealPlayerHand()
     computer.hand = deck.dealComputerHand()
     field = deck.dealField()
-    player.score = 0
-    computer.score = 0
     turn = 1
+    isWinner = null
     render()
     console.log(turn, 'init turn')
 }
@@ -379,6 +380,25 @@ function computerPlayHandler(){
    
 }
 
+function reset(){
+    resetPlayers()
+    init()
+}
+
+function resetPlayers(){
+    player.hand = []
+    player.selectedCards = null
+    player.selectedCardIdx = null
+    player.score = 0
+    player.scorePile=[]
+
+    computer.hand = []
+    computer.selectedCard = null
+    computer.selectedCardIdx = null
+    computer.score = 0
+    computer.scorePile = []
+}
+
 // scoring
 
 function calculateScore(){
@@ -446,11 +466,11 @@ function toggleTheme() {
 
 function renderThemeUI() {
     if (localStorage.getItem('theme') === 'theme-day') {
-        navbar.className = "navbar w-100 navbar-light bg-light"
-        dayNightToggle.className = "btn btn-dark w-100"
+        navbarEl.className = "navbar w-100 navbar-light bg-light"
+        dayNightToggleEl.className = "btn btn-dark w-100"
     } else {
-        navbar.className = "navbar w-100 navbar-dark bg-dark"
-        dayNightToggle.className = "btn btn-light w-100"
+        navbarEl.className = "navbar w-100 navbar-dark bg-dark"
+        dayNightToggleEl.className = "btn btn-light w-100"
     }
     renderThemeImages()
 }
