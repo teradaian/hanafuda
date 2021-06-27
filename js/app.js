@@ -9,7 +9,6 @@ let field
 let deck
 let topDeckTile
 
-
 const player = {
         name: 'player',
         hand: [],
@@ -34,7 +33,6 @@ const deckEl            = document.querySelector('#deck')
 const fieldEl           = document.querySelector('.field')
 const playerHandEl      = document.querySelector('.player-hand')
 const scorePileEl       = document.querySelector('.drawer')
-
 
 /*----- event listeners -----*/ 
 
@@ -82,7 +80,6 @@ function fieldTileClickHandler(){
         setTimeout(()=> playTopTileFromDeck(), 1000)
     }
 }
-
 
 function emptyFieldPlayHandler(){
     if (player.selectedCard === null) return
@@ -203,7 +200,6 @@ function captureMatchInField(idAsInt){
     }, 800)
 }
            
-
 function capturePair(idAsInt){
     if (turn === 1) {
 
@@ -215,6 +211,7 @@ function capturePair(idAsInt){
         setTimeout(() =>{
             player.scorePile.push(fieldTile.join(''))
             player.scorePile.push(playerTile.join(''))
+            player.scorePile = filterScoringTiles(player.scorePile, tilesValues)
             resetSelections()
             renderScorePile()
             render()
@@ -377,6 +374,14 @@ function computerPlayHandler(){
 //         console.log(suitMatches.sort());
 // }
 
+function scoreTiles(){
+
+}
+
+function filterScoringTiles(scorePileArray, arrayOfValues){
+    let allScoreTiles = arrayOfValues.flat();
+    return scorePileArray.filter(i => allScoreTiles.includes(i))   
+}
 
 
 
