@@ -215,7 +215,7 @@ function capturePair(idAsInt){
         setTimeout(() =>{
             player.scorePile.push(fieldTile.join(''))
             player.scorePile.push(playerTile.join(''))
-            player.scorePile = filterScoringTiles(player.scorePile, tilesValues)
+            player.scorePile = filterScoringTiles(player.scorePile, tilesValues).sort()
             resetSelections()
             renderScorePile()
             render()
@@ -384,9 +384,11 @@ function calculateScore(){
     scoreYakus(computer.scorePile, yakuSets, computer)
     console.log(player.score)
     console.log(computer.score)
+    // win banner, featuring attained combos? use includes vs includes.length and then map through divs?
 }
 
 function scoreTiles(scorePileArray, arrayOfValues, owner){
+    renderYakuSets()
     let total = 0;
     let scoredPoints = arrayOfValues.map((i, idx) => {
       return scorePileArray.filter(i => arrayOfValues[idx].includes(i)).length
@@ -460,4 +462,30 @@ function renderThemeImages(){
   </div>`
   carousel.appendChild(carouselCards)
 }
+
+function renderYakuSets(){
+    let setsOfYakuScored = yakuSets.filter(yaku => yaku.every(tile => player.scorePile.includes(tile)))
+
+    let scoreModal = document.querySelector(".modal-body")
+    scoreModal.innerHTML = ""
+    let yakuTileSets = document.createElement('div')
+
+    !setsOfYakuScored.length ?
+        yakuTileSets.innerText = "No Yaku Scored"
+    :
+        setsOfYakuScored.forEach(i => {
+            yakuTileSets.innerHTML = `<img src="../assets/tiles/${i}.jpeg">`
+            scoreModal.appendChild(yakuTileSets)
+        })
+
+
+    
+
+
+
+}
+
+
+   
+
 

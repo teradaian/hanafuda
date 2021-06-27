@@ -19,6 +19,11 @@
         <nav class="navbar w-100 navbar-light bg-light">
             <div class="container-fluid"></div>
               <a class="navbar-brand title-header">Hanafuda</a>
+
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#scoreModal">
+                Score
+              </button>
+
               <div class="btn-group">
                 <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Rules and Settings
@@ -39,7 +44,21 @@
         </nav>
     </header>
 
-   
+<!-- Modal -->
+<div class="modal fade" id="scoreModal" tabindex="-1" aria-labelledby="scoreModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" id="score-modal">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="btn-modal" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
     <section class="computer-hand"></section>
 
     <div class="core-display">
@@ -99,6 +118,8 @@
         <img id="sets-overlay" src="assets/sets-and-scoring/sets-overlay-light.png">
     </div>
     </div>
+
+  
     
     <script 
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" 

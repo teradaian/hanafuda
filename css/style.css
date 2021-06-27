@@ -29,6 +29,7 @@ html {
 
 .theme-night {
     --background: #333456;
+    --accent: #595B83;
     --background-image: linear-gradient(to right top, #333456, #333456, #333456, #333456, #333456, #484161, #5b4e6c, #6e5c77, #967e91, #bba3ae, #decbcf, #fff4f4);    --field-bg: #595B83;
     --border-radius: 50px;
     --box-shadow: inset 40px -40px 72px #55577e, inset -40px 40px 72px #5d5f88;
@@ -146,6 +147,19 @@ img {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+}
+
+#score-modal {
+    background-image: var(--background-image-canvas)
+}
+
+.modal button {
+    background: var(--background);
+    color: var(--color)
+}
+
+.modal-footer {
+    background:var(--accent)
 }
 
 #sets-overlay {
