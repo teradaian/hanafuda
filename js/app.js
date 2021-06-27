@@ -29,6 +29,7 @@ const computer = {
 
 /*----- cached element references -----*/ 
 
+
 const computerHandEl    = document.querySelector('.computer-hand')
 const dayNightToggle    = document.querySelector("#day-toggle")
 const deckEl            = document.querySelector('#deck')
@@ -37,7 +38,6 @@ const playerHandEl      = document.querySelector('.player-hand')
 const scorePileEl       = document.querySelector('.drawer')
 
 /*----- event listeners -----*/ 
-
 
 dayNightToggle.addEventListener('click', toggleTheme)
 deckEl.addEventListener('click', deckClickHandler)
@@ -477,12 +477,6 @@ function renderYakuSets(){
             yakuTileSets.innerHTML = `<img src="../assets/tiles/${i}.jpeg">`
             scoreModal.appendChild(yakuTileSets)
         })
-
-
-    
-
-
-
 }
 
 
