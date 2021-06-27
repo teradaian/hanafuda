@@ -468,10 +468,10 @@ function toggleTheme() {
 function renderThemeUI() {
     if (localStorage.getItem('theme') === 'theme-day') {
         navbarEl.className = "navbar w-100 navbar-light bg-light"
-        dayNightToggleEl.className = "btn btn-dark w-100"
+        dayNightToggleEl.className = "btn btn-light w-100"
     } else {
         navbarEl.className = "navbar w-100 navbar-dark bg-dark"
-        dayNightToggleEl.className = "btn btn-light w-100"
+        dayNightToggleEl.className = "btn btn-dark w-100"
     }
     renderThemeImages()
 }
