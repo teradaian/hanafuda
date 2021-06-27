@@ -407,4 +407,23 @@ function renderThemeUI() {
     dayNightToggle.className = "btn btn-dark w-100"
     :
     dayNightToggle.className = "btn btn-light w-100"
+
+    renderThemeImages()
 }
+
+function renderThemeImages(){
+    let carousel = document.querySelector(".carousel-inner")
+    carousel.innerHTML = ""
+    let carouselCards = document.createElement('div')
+    carouselCards.innerHTML =  `<div class="carousel-item active">
+    <img src="./assets/rules/rule1-${localStorage.getItem('theme')}.jpg" id="rule1" class="d-block w-100" alt="ruleset one">
+  </div>
+  <div class="carousel-item">
+    <img src="./assets/rules/rule2-${localStorage.getItem('theme')}.jpg" id='rule2' class="d-block w-100" alt="ruleset two">
+  </div>
+  <div class="carousel-item">
+    <img src="./assets/rules/rule3-${localStorage.getItem('theme')}.jpg" id='rule3' class="d-block w-100" alt="ruleset three">
+  </div>`
+  carousel.appendChild(carouselCards)
+}
+

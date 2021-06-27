@@ -24,6 +24,7 @@ html {
     --field-box-shadow: inset 40px -40px 72px #ececec, inset -40px 40px 72px #ffffff;
     --color: #000;
     --font-family: 'Kaushan Script', cursive, sans-serif;
+    --background-image-canvas: url('../assets/sets-and-scoring/sets-light.jpg');
 }
 
 .theme-night {
@@ -35,6 +36,7 @@ html {
     --player-hand-radius: 20px;
     --color: #FFF;
     --font-family: 'Sawarabi Mincho', sans-serif;
+    --background-image-canvas: url('../assets/sets-and-scoring/sets-dark.jpg');
 }
 /* /theme repository */
 
@@ -137,7 +139,7 @@ img {
 }
 
 .offcanvas-body {
-    background-image: url('../assets/sets-and-scoring/sets-light.jpg');
+    background-image: var(--background-image-canvas);
     background-size: cover;
     background-color: var(--background);
     display: flex;
