@@ -58,7 +58,9 @@ function init(){
     field = deck.dealField()
     turn = 1
     isWinner = null
+    deckEl.src = "../assets/tiles/back.jpeg"
     render()
+    renderScorePile()
     console.log(turn, 'init turn')
 }
 
@@ -106,14 +108,13 @@ function disableHandSelection(){
 
 function playTopTileFromDeck(){
     if (!deck.deck.length) return renderEmptyDeck()
-
+    deckEl.removeEventListener('click', deckClickHandler)
     topDeckTile = deck.deck.pop()
     testDeckTile()
 }
 
 function deckClickHandler() {
     !player.hand.length && playTopTileFromDeck();
-    deckEl.removeEventListener('click', deckClickHandler)
 }
 
 function resetSelections(){
