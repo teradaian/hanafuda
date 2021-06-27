@@ -29,14 +29,13 @@ const computer = {
 
 /*----- cached element references -----*/ 
 
-
 const computerHandEl    = document.querySelector('.computer-hand')
 const dayNightToggle    = document.querySelector("#day-toggle")
 const deckEl            = document.querySelector('#deck')
 const fieldEl           = document.querySelector('.field')
 const playerHandEl      = document.querySelector('.player-hand')
 const scorePileEl       = document.querySelector('.drawer')
-
+const navbar            = document.querySelector('.navbar')
 /*----- event listeners -----*/ 
 
 dayNightToggle.addEventListener('click', toggleTheme)
@@ -446,11 +445,13 @@ function toggleTheme() {
 })();
 
 function renderThemeUI() {
-    localStorage.getItem('theme') === 'theme-day' ?
-    dayNightToggle.className = "btn btn-dark w-100"
-    :
-    dayNightToggle.className = "btn btn-light w-100"
-
+    if (localStorage.getItem('theme') === 'theme-day') {
+        navbar.className = "navbar w-100 navbar-light bg-light"
+        dayNightToggle.className = "btn btn-dark w-100"
+    } else {
+        navbar.className = "navbar w-100 navbar-dark bg-dark"
+        dayNightToggle.className = "btn btn-light w-100"
+    }
     renderThemeImages()
 }
 

@@ -18,6 +18,7 @@ html {
 /* theme repository */
 .theme-day {
     --background: #FFE2E2;
+    --selected-border: 2px solid #333456;
     --background-image: linear-gradient(to right top, #333456, #5e4f6e, #876c85, #ad8d9e, #d1b0b9, #e1c0c6, #f0d1d4, #ffe2e2, #ffe2e2, #ffe2e2, #ffe2e2, #ffe2e2);
     --field-bg: #F6F6F6;
     --border-radius: 50px;
@@ -30,6 +31,7 @@ html {
 .theme-night {
     --background: #333456;
     --accent: #595B83;
+    --selected-border: 2px solid #F4ABC4;
     --background-image: linear-gradient(to right top, #333456, #333456, #333456, #333456, #333456, #484161, #5b4e6c, #6e5c77, #967e91, #bba3ae, #decbcf, #fff4f4);    --field-bg: #595B83;
     --border-radius: 50px;
     --box-shadow: inset 40px -40px 72px #55577e, inset -40px 40px 72px #5d5f88;
@@ -58,6 +60,10 @@ header {
     margin-bottom: 3rem;
 }
 
+nav {
+    background: var(--background)
+}
+
 img {
     width: 80px;
     height: auto;
@@ -67,7 +73,7 @@ img {
 }
 
 .selected {
-    border-bottom: 2px solid #F4ABC4;
+    border-bottom: var(--selected-border)
 }
 
 .core-display {
@@ -151,6 +157,11 @@ img {
 
 #score-modal {
     background-image: var(--background-image-canvas)
+}
+
+#nav-title {
+    margin-left: 2rem;
+    margin-top:.4rem;
 }
 
 .modal button {
