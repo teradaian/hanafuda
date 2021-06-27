@@ -367,23 +367,33 @@ function computerPlayHandler(){
    
 }
 
-// function computerPickBestTileFromHand(){
-//         let suitMatches = computer.hand.filter((i, idx) => {
-//             return findIndexOfHighestMatch(i) !== -1
-//         })
-//         console.log(suitMatches.sort());
-// }
+// scoring
 
-function scoreTiles(){
-
-}
+function scoreTiles(scorePileArray, arrayOfValues, owner){
+    let total = 0;
+    let scoredPoints = arrayOfValues.map((i, idx) => {
+      return scorePileArray.filter(i => arrayOfValues[idx].includes(i)).length
+    })
+    if(scoredPoints.every(val => val > 0)) {
+        total += scoredPoints[0] * 20
+        total += scoredPoints[1] * 10
+        total += scoredPoints[2] * 5
+        return total;
+    } else {
+      
+    }
+  }
+  
 
 function filterScoringTiles(scorePileArray, arrayOfValues){
     let allScoreTiles = arrayOfValues.flat();
     return scorePileArray.filter(i => allScoreTiles.includes(i))   
 }
 
-
+function scoreYakus(scorePileArray, yakuArr, owner){
+    let numOfYakuScored = yakuArr.filter(yaku => yaku.every(tile => scorePileArray.includes(tile))).length;
+    return numOfYakuScored > 0 ? owner.score = numOfYakuScored * 50 : 0
+}
 
 // night mode toggle
 function setTheme(theme) {
