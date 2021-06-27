@@ -14,6 +14,7 @@ const player = {
         hand: [],
         selectedCard: null,
         selectedCardIdx: null,
+        score: 0,
         scorePile: []
 }
 
@@ -22,6 +23,7 @@ const computer = {
         hand: [],
         selectedCard: null,
         selectedCardIdx: null,
+        score:0 ,
         scorePile: []
 }
 
@@ -53,6 +55,8 @@ function init(){
     player.hand = deck.dealPlayerHand()
     computer.hand = deck.dealComputerHand()
     field = deck.dealField()
+    player.score = 0
+    computer.score = 0
     turn = 1
     render()
     console.log(turn, 'init turn')
@@ -321,6 +325,8 @@ const renderEmptyDeck = () => deckEl.src = ""
 
 const incrementTurn = () => {
     resetSelections()
+    if (!deck.deck.length) return calculateScore();
+
     turn *= -1
     console.log(turn, 'startofturn')
     if (turn === 1) return playerHandEl.addEventListener('click', selectCardHandler)
@@ -369,6 +375,17 @@ function computerPlayHandler(){
 
 // scoring
 
+function calculateScore(){
+    scoreTiles(player.scorePile, tilesValues, player)
+    scoreYakus(player.scorePile, yakuSets, player)
+
+    filterScoringTiles(computer.scorePile, tilesValues)
+    scoreTiles(computer.scorePile, tilesValues, computer)
+    scoreYakus(computer.scorePile, yakuSets, computer)
+    console.log(player.score)
+    console.log(computer.score)
+}
+
 function scoreTiles(scorePileArray, arrayOfValues, owner){
     let total = 0;
     let scoredPoints = arrayOfValues.map((i, idx) => {
@@ -378,14 +395,14 @@ function scoreTiles(scorePileArray, arrayOfValues, owner){
         total += scoredPoints[0] * 20
         total += scoredPoints[1] * 10
         total += scoredPoints[2] * 5
-        return total;
+        return owner.score += total
     } else {
         scoredPoints[0] === 0 ? total : total += scoredPoints[0] * 20
         scoredPoints[1] === 0 ? total : total += scoredPoints[0] * 10
         scoredPoints[2] === 0 ? total : total += scoredPoints[0] * 5
+        return owner.score += total
     }
-  }
-  
+}
 
 function filterScoringTiles(scorePileArray, arrayOfValues){
     let allScoreTiles = arrayOfValues.flat();
@@ -394,7 +411,7 @@ function filterScoringTiles(scorePileArray, arrayOfValues){
 
 function scoreYakus(scorePileArray, yakuArr, owner){
     let numOfYakuScored = yakuArr.filter(yaku => yaku.every(tile => scorePileArray.includes(tile))).length;
-    return numOfYakuScored > 0 ? owner.score = numOfYakuScored * 50 : 0
+    return numOfYakuScored > 0 ? owner.score += numOfYakuScored * 50 : 0
 }
 
 // night mode toggle
