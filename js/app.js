@@ -323,6 +323,7 @@ function renderSelectedCard(){
 const renderEmptyDeck = () => deckEl.src = ""
 
 const incrementTurn = () => {
+    resetSelections()
     turn *= -1
     console.log(turn, 'startofturn')
     if (turn === 1) return playerHandEl.addEventListener('click', selectCardHandler)
