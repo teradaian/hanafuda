@@ -336,6 +336,8 @@ const incrementTurn = () => {
 }
 
 function computerTurn(){
+    if(!computer.hand.length) return setTimeout(() =>playTopTileFromDeck(), 1000)
+
     computerSelectRandom()
     computerPlayHandler()
     setTimeout(()=> playTopTileFromDeck(), 2000)
