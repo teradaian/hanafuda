@@ -107,7 +107,7 @@ function playTopTileFromDeck(){
     if (!deck.deck.length) return renderEmptyDeck()
 
     topDeckTile = deck.deck.pop()
-    matchHighestValueTile()
+    testDeckTile()
 }
 
 function deckClickHandler() {
@@ -121,9 +121,7 @@ function resetSelections(){
 }
 
 function matchHighestValueTile(){
-    if (player.selectedCard === null && computer.selectedCard === null) {
-        testDeckTile()
-    } else if ( turn === 1 ) {
+    if ( turn === 1 ) {
         testPlayerTile()
     } else if ( turn === -1) {
         testComputerTile()
@@ -153,6 +151,8 @@ function testDeckTile(){
         renderTopDeckTileAnimation()
         setTimeout(() => {
             renderField()
+            console.log('incrementTurn')
+            resetSelections()
             incrementTurn()
         }, 1000)
         
@@ -189,24 +189,17 @@ function captureMatchInField(idAsInt){
 
     setTimeout(() =>{
         if (turn === 1) {
-            console.log('pushed to player')
             player.scorePile.push(fieldTileMatch.join(''))
             player.scorePile.push(playedFieldTile)
-            resetSelections()
             renderScorePile()
-            render()
-            incrementTurn()
-            console.log(player, 'player')
         } 
         if (turn === -1) {
-            console.log('pushed to computer!')
             computer.scorePile.push(fieldTileMatch.join(''))
             computer.scorePile.push(playedFieldTile)
-            resetSelections()
-            render()
-            incrementTurn()
-            console.log(computer, 'computer')
         }
+        resetSelections()
+        render()
+        incrementTurn()
     }, 800)
 }
            
@@ -236,7 +229,6 @@ function capturePair(idAsInt){
         setTimeout(() =>{
             computer.scorePile.push(fieldTile.join(''))
             computer.scorePile.push(computerTile.join(''))
-            console.log(computer.selectedCard)
             resetSelections()
             render()
         }, 800)
@@ -334,7 +326,12 @@ const incrementTurn = () => {
     turn *= -1
     console.log(turn, 'startofturn')
     if (turn === 1) return playerHandEl.addEventListener('click', selectCardHandler)
-    if (turn === -1) return computerTurn()
+    if (turn === -1) {
+        setTimeout(()=>{
+        console.log('comp turn started')
+        computerTurn()
+        }, 1000)
+    }
 }
 
 function computerTurn(){
