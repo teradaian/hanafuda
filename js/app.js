@@ -427,8 +427,8 @@ function scoreTiles(scorePileArray, arrayOfValues, owner){
         return owner.score += total
     } else {
         scoredPoints[0] === 0 ? total : total += scoredPoints[0] * 20
-        scoredPoints[1] === 0 ? total : total += scoredPoints[0] * 10
-        scoredPoints[2] === 0 ? total : total += scoredPoints[0] * 5
+        scoredPoints[1] === 0 ? total : total += scoredPoints[1] * 10
+        scoredPoints[2] === 0 ? total : total += scoredPoints[2] * 5
         return owner.score += total
     }
 }
