@@ -113,6 +113,7 @@ function playTopTileFromDeck(){
 
 function deckClickHandler() {
     !player.hand.length && playTopTileFromDeck();
+    deckEl.removeEventListener('click', deckClickHandler)
 }
 
 function resetSelections(){
@@ -325,11 +326,17 @@ const renderEmptyDeck = () => deckEl.src = ""
 
 const incrementTurn = () => {
     resetSelections()
-    if (!deck.deck.length) return calculateScore();
+    if (!deck.deck.length) {
+        renderEmptyDeck()
+        calculateScore()
+    }
 
     turn *= -1
     console.log(turn, 'startofturn')
-    if (turn === 1) return playerHandEl.addEventListener('click', selectCardHandler)
+    if (turn === 1) {
+        playerHandEl.addEventListener('click', selectCardHandler)
+        deckEl.addEventListener('click', deckClickHandler)
+    }
     if (turn === -1) {
         setTimeout(()=>{
         console.log('comp turn started')
@@ -388,7 +395,7 @@ function calculateScore(){
 }
 
 function scoreTiles(scorePileArray, arrayOfValues, owner){
-    renderYakuSets()
+    console.log(yakuSets.filter(yaku => yaku.every(tile => player.scorePile.includes(tile))))
     let total = 0;
     let scoredPoints = arrayOfValues.map((i, idx) => {
       return scorePileArray.filter(i => arrayOfValues[idx].includes(i)).length
@@ -463,21 +470,6 @@ function renderThemeImages(){
   carousel.appendChild(carouselCards)
 }
 
-function renderYakuSets(){
-    let setsOfYakuScored = yakuSets.filter(yaku => yaku.every(tile => player.scorePile.includes(tile)))
-
-    let scoreModal = document.querySelector(".modal-body")
-    scoreModal.innerHTML = ""
-    let yakuTileSets = document.createElement('div')
-
-    !setsOfYakuScored.length ?
-        yakuTileSets.innerText = "No Yaku Scored"
-    :
-        setsOfYakuScored.forEach(i => {
-            yakuTileSets.innerHTML = `<img src="../assets/tiles/${i}.jpeg">`
-            scoreModal.appendChild(yakuTileSets)
-        })
-}
 
 
    

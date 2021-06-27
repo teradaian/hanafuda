@@ -1,11 +1,4 @@
 
-// array of arrays, each array is a winning combo by NAME
-// loop through arrays, check if .every? === ? if so, add 1?
-
-//  that number will be the amount of 50 pts to add to total score
-
-// then array of arrays of 20, 10, 5pt values
-
 export const yakuSets = [
     ["Cherry0", "Grass0", "Chrysanthemum0"], 
     ["Pine0", "Plum0", "Cherry0"],
