@@ -412,7 +412,7 @@ function renderField(){
         marioTheme === false ?
         fieldTile.innerHTML = `<img id='f${idx}' src="../assets/tiles/${i}.jpeg">`
         :
-        fieldTile.innerHTML = `<img id='f${idx}' src="../assets/mario-tiles/${i}.jpg">`
+        fieldTile.innerHTML = `<img id='f${idx}' src="../assets/mario-tiles/${i}.png">`
         fieldEl.appendChild(fieldTile);
     })
 }
@@ -425,7 +425,7 @@ function renderScorePile(){
         marioTheme === false ?
         scoredTile.innerHTML = `<img src="../assets/tiles/${i}.jpeg">`
         :
-        scoredTile.innerHTML = `<img src="../assets/mario-tiles/${i}.jpg">`
+        scoredTile.innerHTML = `<img src="../assets/mario-tiles/${i}.png">`
         scorePileEl.appendChild(scoredTile);
     })
 }
@@ -438,7 +438,7 @@ function renderPlayerHand(){
         marioTheme === false ?
         handTile.innerHTML =  `<img id='p${idx}' src="../assets/tiles/${i}.jpeg">`
         :
-        handTile.innerHTML = `<img id='p${idx}' src="../assets/mario-tiles/${i}.jpg">`
+        handTile.innerHTML = `<img id='p${idx}' src="../assets/mario-tiles/${i}.png">`
         playerHandEl.appendChild(handTile);
     })
 }
@@ -508,7 +508,7 @@ function toggleMario(){
         setTheme('theme-day') 
     : 
         setTheme('theme-night')
-        
+
     marioTheme = false;
     renderThemeUI();
     render()
