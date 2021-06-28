@@ -34,13 +34,20 @@ html {
     --selected-border: 2px solid #F4ABC4;
     --background-image: linear-gradient(to right top, #333456, #333456, #333456, #333456, #333456, #484161, #5b4e6c, #6e5c77, #967e91, #bba3ae, #decbcf, #fff4f4);    --field-bg: #595B83;
     --border-radius: 50px;
-    --box-shadow: inset 40px -40px 72px #55577e, inset -40px 40px 72px #5d5f88;
-    --computer-hand-radius: 20px;
-    --player-hand-radius: 20px;
+    --field-box-shadow: inset 40px -40px 72px #55577e, inset -40px 40px 72px #5d5f88;
     --color: #FFF;
     --font-family: 'Sawarabi Mincho', sans-serif;
     --background-image-canvas: url('../assets/sets-and-scoring/sets-dark.jpg');
 }
+
+.theme-mario {
+    --background-image: url('../assets/mario-bg.jpg')
+    --background: #43B047;
+    --color: black;
+    --font-family: 'Bangers', cursive;
+    --selected-border: #E52521;
+}
+
 /* /theme repository */
 
 body {
@@ -208,10 +215,6 @@ img {
     display: flex;
     overflow-y: hidden;
     overflow-x: auto;
-}
-
-.player-hand {
-    border-radius: var(--player-hand-radius);
 }
 
 .player-hand > div:hover {

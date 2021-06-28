@@ -38,6 +38,7 @@ const scorePileEl       = document.querySelector('.drawer')
 const navbarEl          = document.querySelector('.navbar')
 const resetBtnEl        = document.querySelector('.reset-btn')
 const playAgainBtn      = document.querySelector('.play-again-btn')
+const marioToggleEl     = document.querySelector('#mario-toggle')
 
 /*----- event listeners -----*/ 
 
@@ -525,3 +526,4 @@ function renderThemeImages(){
   </div>`
   carousel.appendChild(carouselCards)
 }
+
