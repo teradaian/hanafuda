@@ -48,6 +48,7 @@ fieldEl.addEventListener('click', fieldTileClickHandler)
 playerHandEl.addEventListener('click', selectCardHandler)
 resetBtnEl.addEventListener('click', reset)
 playAgainBtn.addEventListener('click', reset)
+marioToggleEl.addEventListener('click', toggleMario)
 
 /*----- functions -----*/
 
@@ -457,15 +458,10 @@ function setTheme(theme) {
 }
 
 function toggleDayNight() {
-    localStorage.getItem('theme') === 'theme-mario-day' ?
-        setTheme('theme-mario-night')
-    :
-        setTheme('theme-mario-day')
-
-    localStorage.getItem('theme') === 'theme-day' ? 
-        setTheme('theme-night') 
-    : 
-        setTheme('theme-day');
+    if (localStorage.getItem('theme') === 'theme-mario-day') return setTheme('theme-mario-night')
+    if (localStorage.getItem('theme') === 'theme-mario-night') return setTheme('theme-mario-day')
+    if (localStorage.getItem('theme') === 'theme-day') return setTheme ('theme-night')
+    if (localStorage.getItem('theme') === 'theme-night') return setTheme ('theme-day')
     renderThemeUI();
 }
 
