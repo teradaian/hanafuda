@@ -467,6 +467,7 @@ const renderEmptyDeck = () => deckEl.src = ""
 function setTheme(theme) {
     localStorage.setItem('theme', theme);
     document.documentElement.className = theme;
+    renderThemeUI();
 }
 
 function toggleDayNight() {
@@ -474,7 +475,6 @@ function toggleDayNight() {
     if (localStorage.getItem('theme') === 'theme-mario-night') return setTheme('theme-mario-day')
     if (localStorage.getItem('theme') === 'theme-day') return setTheme ('theme-night')
     if (localStorage.getItem('theme') === 'theme-night') return setTheme ('theme-day')
-    renderThemeUI();
 }
 
 function toggleMario(){
@@ -510,19 +510,22 @@ function toggleMario(){
         setTheme('theme-night')
 
     marioTheme = false;
-    renderThemeUI();
-    render()
-})();
+    return render()
+})()
 
 function renderThemeUI() {
-    if (localStorage.getItem('theme') === 'theme-day') {
+    if (localStorage.getItem('theme') === 'theme-day' || localStorage.getItem('theme') === 'theme-mario-day') {
         navbarEl.className = "navbar w-100 navbar-light bg-light"
         dayNightToggleEl.className = "btn btn-light w-100"
-    } else {
+        console.log('day')
+        return renderThemeImages()
+    } 
+    if (localStorage.getItem('theme') === 'theme-night' || localStorage.getItem('theme') === 'theme-mario-night') {
         navbarEl.className = "navbar w-100 navbar-dark bg-dark"
         dayNightToggleEl.className = "btn btn-dark w-100"
-    }
-    renderThemeImages()
+        console.log('night')
+        return renderThemeImages();
+    }    
 }
 
 function renderWinningYaku(){
