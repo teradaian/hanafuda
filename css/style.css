@@ -134,6 +134,7 @@ img {
 
 .player-hand-container img:hover {
     width:80px;
+
 }
 
 .field {
@@ -144,6 +145,10 @@ img {
     justify-content: space-around;
     justify-items: center;
     padding: 2rem;
+}
+
+.field img:hover {
+    filter: brightness(70%)
 }
 
 .player-hand,
@@ -244,6 +249,37 @@ img {
     width: 80px;
 }
   }
+
+  @media only screen and (min-width: 1024px) {
+    
+    .core-display {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .field-container{
+        width: 60%;
+        margin-left: 4rem;
+    }
+
+    .field {
+        width: 100%;
+        padding: 4rem;
+    }
+
+    img {
+        width: 90px;
+    }
+
+    .player-hand-container img:hover{
+        filter: brightness(70%);
+    }
+
+    .field img:hover {
+        filter:brightness(70%);
+    }
+
+}
 
 
 
