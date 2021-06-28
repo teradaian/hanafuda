@@ -61,12 +61,12 @@ function init(){
     field = deck.dealField()
     turn = 1
     isWinner = null
+    playerHandEl.addEventListener('click', selectCardHandler)
     deckEl.src = "../assets/tiles/back.jpeg"
     playAgainBtn.className = "btn btn-danger play-again-btn hidden"
 
     render()
     renderScorePile()
-    console.log(turn, 'init turn')
 }
 
 function render(){
@@ -244,11 +244,11 @@ function capturePair(idAsInt){
 }
 
 function selectCardHandler(){
+    console.log(turn, 'turn handler')
     if (turn !== 1) return;
 
     let idAsInt = extractIndexFromId(event.target.id);
     if (isNaN(idAsInt)) return;
-    console.log(idAsInt, 'card handler')
     player.selectedCardIdx= idAsInt
     player.selectedCard = player.hand[idAsInt]
     renderPlayerHand();
@@ -344,7 +344,6 @@ const incrementTurn = () => {
     }
     if (turn === -1) {
         setTimeout(()=>{
-        console.log('comp turn started')
         computerTurn()
         }, 1000)
     }
