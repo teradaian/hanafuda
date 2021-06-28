@@ -409,7 +409,10 @@ function renderField(){
     field.forEach((i, idx) => {
         let fieldTile = document.createElement('div')
         fieldTile.classList.add('field-tile')
+        marioTheme === false ?
         fieldTile.innerHTML = `<img id='f${idx}' src="../assets/tiles/${i}.jpeg">`
+        :
+        fieldTile.innerHTML = `<img id='f${idx}' src="../assets/mario-tiles/${i}.jpg">`
         fieldEl.appendChild(fieldTile);
     })
 }
@@ -419,7 +422,10 @@ function renderScorePile(){
     player.scorePile.forEach(i => {
         let scoredTile = document.createElement('div')
         scoredTile.classList.add('scored-tile')
+        marioTheme === false ?
         scoredTile.innerHTML = `<img src="../assets/tiles/${i}.jpeg">`
+        :
+        scoredTile.innerHTML = `<img src="../assets/mario-tiles/${i}.jpg">`
         scorePileEl.appendChild(scoredTile);
     })
 }
@@ -429,7 +435,10 @@ function renderPlayerHand(){
     player.hand.forEach((i, idx) => {
         let handTile = document.createElement('div')
         handTile.classList.add('hand-tile')
-        handTile.innerHTML = `<img id='p${idx}' src="../assets/tiles/${i}.jpeg">`
+        marioTheme === false ?
+        handTile.innerHTML =  `<img id='p${idx}' src="../assets/tiles/${i}.jpeg">`
+        :
+        handTile.innerHTML = `<img id='p${idx}' src="../assets/mario-tiles/${i}.jpg">`
         playerHandEl.appendChild(handTile);
     })
 }
@@ -439,7 +448,10 @@ function renderComputerHand(){
     computer.hand.forEach((i, idx) => {
         let compTile = document.createElement('div')
         compTile.classList.add('hand-tile')
+        marioTheme === false ?
         compTile.innerHTML = `<img id='p${idx}' src="../assets/tiles/back.jpeg">`
+        :
+        compTile.innerHTML = `<img id='p${idx}' src="../assets/mario-tiles/mario-back.jpg">`
         computerHandEl.appendChild(compTile);
     })
 }
@@ -449,7 +461,6 @@ function renderSelectedCard(){
 }
 
 const renderEmptyDeck = () => deckEl.src = ""
-
 
 // ***** Night Theme Handlers ***** //
 
@@ -470,24 +481,29 @@ function toggleMario(){
     if (localStorage.getItem('theme') === 'theme-mario-day') {
         marioTheme = false
         setTheme('theme-day') 
+        return render()
     }
     if (localStorage.getItem('theme') === 'theme-mario-night') {
         marioTheme = false
         setTheme('theme-night')
+        return render()
     }
     if (localStorage.getItem('theme') === 'theme-day') {
         marioTheme = true
         setTheme ('theme-mario-day')
+        return render()
     } 
     if (localStorage.getItem('theme') === 'theme-night') {
         marioTheme = true
         setTheme ('theme-mario-night')
+        return render()
     }
-    render()
+
 }
 
 (function () {
-    if (localStorage.getItem('theme') === 'theme-mario') return setTheme('theme-mario')
+    if (localStorage.getItem('theme') === 'theme-mario-day') return setTheme('theme-mario-day')
+    if (localStorage.getItem('theme') === 'theme-mario-night') return setTheme('theme-mario-night')
 
     localStorage.getItem('theme') === 'theme-day' ? 
         setTheme('theme-day') 

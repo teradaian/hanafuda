@@ -26,6 +26,7 @@ html {
     --color: #000;
     --font-family: 'Kaushan Script', cursive, sans-serif;
     --background-image-canvas: url('../assets/sets-and-scoring/sets-light.jpg');
+    --background-image-deck: url('../assets/tiles/back.jpeg')
 }
 
 .theme-night {
@@ -38,6 +39,7 @@ html {
     --color: #FFF;
     --font-family: 'Sawarabi Mincho', sans-serif;
     --background-image-canvas: url('../assets/sets-and-scoring/sets-dark.jpg');
+    --background-image-deck: url('../assets/tiles/back.jpeg')
 }
 
 .theme-mario-day {
@@ -47,11 +49,13 @@ html {
     --font-family: 'Bangers', cursive;
     --selected-border: #E52521;
     --field-bg: rgba(255, 255, 255, 0.8)
+    --background-image-deck: url('../assets/mario-tiles/mario-deck-back.jpg')
 }
 
 .theme-mario-night {
     --background-image: url('../assets/mario-bg/mario-night-bg.jpg');
     --background: black;
+    --background-image-deck: url('../assets/mario-tiles/mario-deck-back.jpg')
 }
 
 /* /theme repository */
@@ -116,8 +120,11 @@ img {
 }
 
 #deck {
+    content: var(--background-image-deck);
     border: none;
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    height: auto;
+    width: 60px;
 }
 
 .field-container{
@@ -242,6 +249,10 @@ img {
 }
 
 @media only screen and (min-width: 650px) {
+
+    #deck {
+        width: 80px;
+    }
 
     .field img {
         width: 80px;
