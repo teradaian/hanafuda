@@ -55,6 +55,7 @@ html {
 .theme-mario-night {
     --background-image: url('../assets/mario-bg/mario-night-bg.jpg');
     --background: black;
+    --color: white;
     --font-family: 'Bangers', cursive, sans-serif;
     --selected-border: #E52521;
     --field-bg: rgba(255, 255, 255, 0.4);
@@ -92,6 +93,10 @@ img {
     margin: 5px;
     object-fit: contain;
     width: 60px;
+}
+
+button {
+    font-size: 2rem;
 }
 
 .selected {

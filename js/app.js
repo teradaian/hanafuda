@@ -40,6 +40,8 @@ const navbarEl          = document.querySelector('.navbar')
 const resetBtnEl        = document.querySelector('.reset-btn')
 const playAgainBtn      = document.querySelector('.play-again-btn')
 const marioToggleEl     = document.querySelector('#mario-toggle')
+const dropdownBtnEl     = document.querySelector('#dropdownMenuButton1')
+const dropdownBgEl      = document.querySelector('#dropdown')
 
 /*----- event listeners -----*/ 
 
@@ -516,14 +518,16 @@ function toggleMario(){
 function renderThemeUI() {
     if (localStorage.getItem('theme') === 'theme-day' || localStorage.getItem('theme') === 'theme-mario-day') {
         navbarEl.className = "navbar w-100 navbar-light bg-light"
-        dayNightToggleEl.className = "btn btn-light w-100"
-        console.log('day')
+        dayNightToggleEl.className = "btn w-100 btn-lg btn-outline-dark"
+        dropdownBgEl.className = "dropdown-menu"
+        dropdownBtnEl.className = "btn btn-light dropdown-toggle btn-lg"
         return renderThemeImages()
     } 
     if (localStorage.getItem('theme') === 'theme-night' || localStorage.getItem('theme') === 'theme-mario-night') {
         navbarEl.className = "navbar w-100 navbar-dark bg-dark"
-        dayNightToggleEl.className = "btn btn-dark w-100"
-        console.log('night')
+        dayNightToggleEl.className = "btn w-100 btn-lg btn-outline-light"
+        dropdownBgEl.className = "dropdown-menu dropdown-menu-dark"
+        dropdownBtnEl.className = "btn btn-dark dropdown-toggle btn-lg"
         return renderThemeImages();
     }    
 }
