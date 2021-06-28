@@ -37,6 +37,8 @@ const playerHandEl      = document.querySelector('.player-hand')
 const scorePileEl       = document.querySelector('.drawer')
 const navbarEl          = document.querySelector('.navbar')
 const resetBtnEl        = document.querySelector('.reset-btn')
+const playAgainBtn      = document.querySelector('.play-again-btn')
+
 /*----- event listeners -----*/ 
 
 dayNightToggleEl.addEventListener('click', toggleTheme)
@@ -44,6 +46,7 @@ deckEl.addEventListener('click', deckClickHandler)
 fieldEl.addEventListener('click', fieldTileClickHandler)
 playerHandEl.addEventListener('click', selectCardHandler)
 resetBtnEl.addEventListener('click', reset)
+playAgainBtn.addEventListener('click', reset)
 
 /*----- functions -----*/
 
@@ -59,6 +62,8 @@ function init(){
     turn = 1
     isWinner = null
     deckEl.src = "../assets/tiles/back.jpeg"
+    playAgainBtn.className = "btn btn-danger play-again-btn hidden"
+
     render()
     renderScorePile()
     console.log(turn, 'init turn')
@@ -337,6 +342,7 @@ const incrementTurn = () => {
     if (turn === 1) {
         playerHandEl.addEventListener('click', selectCardHandler)
         deckEl.addEventListener('click', deckClickHandler)
+        console.log("select handler fired")
     }
     if (turn === -1) {
         setTimeout(()=>{
@@ -409,7 +415,7 @@ function calculateScore(){
     scoreYakus(computer.scorePile, yakuSets, computer)
 
     if(player.score === computer.score) return console.log('TIEGAME')
-    
+
     player.score > computer.score ? isWinner = 1 : isWinner = -1
 
     handleGameEnd()
@@ -479,7 +485,7 @@ function renderThemeUI() {
 function handleGameEnd(){
     renderEndOfGameDisplay()
     renderWinningYaku()
-    renderRestartBtn()
+    playAgainBtn.className = "btn btn-danger play-again-btn"
 }
 
 function renderWinningYaku(){
@@ -492,13 +498,6 @@ function renderWinningYaku(){
         fieldTile.innerHTML = `<img src="../assets/tiles/${i}.jpeg">`
         fieldEl.appendChild(fieldTile);
     })
-}
-
-function renderRestartBtn(){
-        let restartBtn = document.createElement('button')
-        restartBtn.classList.add('btn', 'btn-danger', 'reset-btn')
-        restartBtn.innerText = `Play Again`
-        fieldEl.appendChild(restartBtn)
 }
 
 function renderEndOfGameDisplay(){
