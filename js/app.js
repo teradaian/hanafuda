@@ -256,7 +256,6 @@ function selectCardHandler(){
 }
 
 function renderTopDeckTileAnimation(){
-    const fieldElArray = Array.from(fieldEl.children)
     renderField()
     fieldEl.children[field.length - 1].className = "animate__animated animate__fadeInLeftBig"
 }
@@ -311,7 +310,6 @@ function renderPlayerHand(){
         handTile.innerHTML = `<img id='p${idx}' src="../assets/tiles/${i}.jpeg">`
         playerHandEl.appendChild(handTile);
     })
-
 }
 
 function renderComputerHand(){
@@ -382,7 +380,6 @@ function computerPlayHandler(){
     } else {
         matchHighestValueTile()
     }
-   
 }
 
 function reset(){
@@ -491,7 +488,7 @@ function handleGameEnd(){
 function renderWinningYaku(){
     let winningYaku = yakuSets.filter(yaku => yaku.every(tile => player.scorePile.includes(tile)))
     console.log(winningYaku)
-    
+
     if (!winningYaku.length) return;
     winningYaku.forEach(tile => field.push(tile))
     field.forEach(yakuArr => {
