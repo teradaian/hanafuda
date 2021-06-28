@@ -116,7 +116,7 @@ img {
     justify-content: center;
     min-width: 400px;
     padding: 2rem;
-    width: 80%;
+    width: 70%;
 }
 
 .player-hand-container {
@@ -124,7 +124,16 @@ img {
     display:flex;
     justify-content: center;
     padding: 2rem;
-    width: 100%;
+    max-width: 100%;
+}
+
+.player-hand-container img,
+.computer-hand-container img {
+    width: 50px;
+}
+
+.player-hand-container img:hover {
+    width:80px;
 }
 
 .field {
@@ -189,6 +198,8 @@ img {
 
 .drawer {
     display: flex;
+    overflow-y: hidden;
+    overflow-x: auto;
 }
 
 .player-hand {
@@ -212,9 +223,39 @@ img {
 }
 
 
-  /* @media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 768px) {
     
-    main {
+    .core-display {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .field-container{
+        width: 70%;
+        margin-left: 4rem;
+    }
+
+    .field {
+        padding: 4rem;
+    }
+
+    .player-hand-container img,
+    .computer-hand-container img {
+    width: 80px;
+}
+  }
+
+
+
+
+
+
+
+
+
+
+
+    /* main {
         height: 100vh;
         display: grid;
         grid-template-rows: 1fr 2fr 1fr;
