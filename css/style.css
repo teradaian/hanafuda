@@ -263,6 +263,8 @@ img {
         border-radius: var(--field-radius);
         background: var(--field-bg);
         box-shadow: var(--field-box-shadow);
+        flex-basis: auto;
+        width:80%;
         align-items: center;
         display: flex;
         flex-wrap: wrap;

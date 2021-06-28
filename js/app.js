@@ -359,8 +359,6 @@ function computerSelectRandom(){
     let tileId = generateRandomHandId()
     computer.selectedCard = computer.hand[tileId]
     computer.selectedCardIdx = tileId
-    console.log(computer.selectedCardIdx, 'comp idx')
-    console.log(computer)
 }
 
 function generateRandomHandId(){
@@ -409,13 +407,15 @@ function calculateScore(){
     filterScoringTiles(computer.scorePile, tilesValues)
     scoreTiles(computer.scorePile, tilesValues, computer)
     scoreYakus(computer.scorePile, yakuSets, computer)
-    console.log(player.score)
-    console.log(computer.score)
-    // win banner, featuring attained combos? use includes vs includes.length and then map through divs?
+
+    if(player.score === computer.score) return console.log('TIEGAME')
+    
+    player.score > computer.score ? isWinner = 1 : isWinner = -1
+
+    handleGameEnd()
 }
 
 function scoreTiles(scorePileArray, arrayOfValues, owner){
-    console.log(yakuSets.filter(yaku => yaku.every(tile => player.scorePile.includes(tile))))
     let total = 0;
     let scoredPoints = arrayOfValues.map((i, idx) => {
       return scorePileArray.filter(i => arrayOfValues[idx].includes(i)).length
@@ -474,6 +474,43 @@ function renderThemeUI() {
         dayNightToggleEl.className = "btn btn-dark w-100"
     }
     renderThemeImages()
+}
+
+function handleGameEnd(){
+    renderEndOfGameDisplay()
+    renderWinningYaku()
+    renderRestartBtn()
+}
+
+function renderWinningYaku(){
+    let winningYaku = yakuSets.filter(yaku => yaku.every(tile => player.scorePile.includes(tile)))
+    winningYaku.forEach(tile => field.push(tile))
+
+    field.forEach((i, idx) => {
+        let fieldTile = document.createElement('div')
+        fieldTile.classList.add('field-tile')
+        fieldTile.innerHTML = `<img src="../assets/tiles/${i}.jpeg">`
+        fieldEl.appendChild(fieldTile);
+    })
+}
+
+function renderRestartBtn(){
+        let restartBtn = document.createElement('button')
+        restartBtn.classList.add('btn', 'btn-danger', 'reset-btn')
+        restartBtn.innerText = `Play Again`
+        fieldEl.appendChild(restartBtn)
+}
+
+function renderEndOfGameDisplay(){
+        let scoreMsg = document.createElement('div')
+        scoreMsg.classList.add('score-message')
+
+        if(isWinner === 1) {
+            scoreMsg.innerHTML =`<h1>You win! You scored ${player.score} and the computer scored ${computer.score}<h1>`
+        } 
+        if(isWinner === -1)
+            scoreMsg.innerHTML = `<h1>You lost! You scored ${player.score} and the computer scored ${computer.score}<h1>`
+        fieldEl.appendChild(scoreMsg);
 }
 
 function renderThemeImages(){
