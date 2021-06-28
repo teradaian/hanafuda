@@ -42,7 +42,7 @@ const marioToggleEl     = document.querySelector('#mario-toggle')
 
 /*----- event listeners -----*/ 
 
-dayNightToggleEl.addEventListener('click', toggleTheme)
+dayNightToggleEl.addEventListener('click', toggleDayNight)
 deckEl.addEventListener('click', deckClickHandler)
 fieldEl.addEventListener('click', fieldTileClickHandler)
 playerHandEl.addEventListener('click', selectCardHandler)
@@ -456,7 +456,12 @@ function setTheme(theme) {
     document.documentElement.className = theme;
 }
 
-function toggleTheme() {
+function toggleDayNight() {
+    localStorage.getItem('theme') === 'theme-mario-day' ?
+        setTheme('theme-mario-night')
+    :
+        setTheme('theme-mario-day')
+
     localStorage.getItem('theme') === 'theme-day' ? 
         setTheme('theme-night') 
     : 
@@ -464,13 +469,24 @@ function toggleTheme() {
     renderThemeUI();
 }
 
+function toggleMario(){
+    if (localStorage.getItem('theme') === 'theme-mario-day') return setTheme('theme-day')
+    if (localStorage.getItem('theme') === 'theme-mario-night') return setTheme('theme-night')
+    if (localStorage.getItem('theme') === 'theme-day') return setTheme ('theme-mario-day')
+    if (localStorage.getItem('theme') === 'theme-night') return setTheme ('theme-mario-night')
+}
+
 (function () {
+    if (localStorage.getItem('theme') === 'theme-mario') return setTheme('theme-mario')
+
     localStorage.getItem('theme') === 'theme-day' ? 
         setTheme('theme-day') 
     : 
         setTheme('theme-night');
     renderThemeUI();
 })();
+
+
 
 function renderThemeUI() {
     if (localStorage.getItem('theme') === 'theme-day') {

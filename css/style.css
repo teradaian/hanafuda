@@ -3,7 +3,7 @@
   }
 
 html {
-    box-sizing: border-box
+    box-sizing: border-box;
 }
   
 *, 
@@ -40,12 +40,16 @@ html {
     --background-image-canvas: url('../assets/sets-and-scoring/sets-dark.jpg');
 }
 
-.theme-mario {
+.theme-mario-day {
     --background-image: url('../assets/mario-bg.jpg')
     --background: #43B047;
     --color: black;
     --font-family: 'Bangers', cursive;
     --selected-border: #E52521;
+}
+
+.theme-mario-night {
+    --background: black;
 }
 
 /* /theme repository */
