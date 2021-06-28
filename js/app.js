@@ -78,8 +78,6 @@ function render(){
 function fieldTileClickHandler(){
     let idAsInt = extractIndexFromId(event.target.id);
 
-    disableHandSelection()
-
     if (isNaN(idAsInt)) return emptyFieldPlayHandler()
     if (player.selectedCard === null) return
 
@@ -88,19 +86,21 @@ function fieldTileClickHandler(){
     
     if(playerSelection === fieldSelection){
         capturePair(idAsInt)
+        disableHandSelection()
         setTimeout(()=> playTopTileFromDeck(), 1000)
     }
 }
 
 function emptyFieldPlayHandler(){
     if (player.selectedCard === null) return
-
     disableHandSelection()
 
+    console.log('hand Selection Disabled')
     if (!field.filter(tile => checkSuit(player.selectedCard) === checkSuit(tile)).length){
         field.push(player.hand.splice(player.selectedCardIdx, 1).join(''))
         player.selectedCard = null;
         render()
+        
     } else {
         matchHighestValueTile()
     }
