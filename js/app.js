@@ -69,12 +69,6 @@ function init(){
     renderScorePile()
 }
 
-function render(){
-    renderField();
-    renderPlayerHand();
-    renderComputerHand();
-}
-
 function fieldTileClickHandler(){
     let idAsInt = extractIndexFromId(event.target.id);
 
@@ -159,8 +153,7 @@ function testDeckTile(){
             renderField()
             resetSelections()
             incrementTurn()
-        }, 1000)
-        
+        }, 1000)  
     } else {
         field.push(topDeckTile)
         renderTopDeckTileAnimation()
@@ -374,6 +367,14 @@ function scoreYakus(scorePileArray, yakuArr, owner){
     return numOfYakuScored > 0 ? owner.score += numOfYakuScored * 50 : 0
 }
 
+// ***** RENDER FUNCTIONS ***** //
+
+function render(){
+    renderField();
+    renderPlayerHand();
+    renderComputerHand();
+}
+
 function renderTopDeckTileAnimation(){
     renderField()
     fieldEl.children[field.length - 1].className = "animate__animated animate__fadeInLeftBig"
@@ -385,7 +386,6 @@ function renderMatchingPairAnimation(fieldTileId){
         playerHandEl.children[player.selectedCardIdx].className = "animate__animated animate__backOutDown"    
     } else {
         fieldEl.children[fieldTileId].className = "animate__animated animate__backOutUp"
-        console.log(computer.selectedCardIdx, 'selectedid')
         computerHandEl.children[computer.selectedCardIdx].className = "animate__animated animate__backOutUp"
     }
 }
@@ -448,7 +448,8 @@ function renderSelectedCard(){
 const renderEmptyDeck = () => deckEl.src = ""
 
 
-// night mode toggle
+// ***** Night Theme Handlers ***** //
+
 function setTheme(theme) {
     localStorage.setItem('theme', theme);
     document.documentElement.className = theme;
@@ -481,8 +482,6 @@ function renderThemeUI() {
     renderThemeImages()
 }
 
-
-
 function renderWinningYaku(){
     let winningYaku = yakuSets.filter(yaku => yaku.every(tile => player.scorePile.includes(tile)))
     console.log(winningYaku)
@@ -496,7 +495,7 @@ function renderWinningYaku(){
             fieldTile.innerHTML = `<img src="../assets/tiles/${tile}.jpeg">`
             fieldEl.appendChild(fieldTile);
         })
-})
+    })
 }
 
 function renderEndOfGameDisplay(){

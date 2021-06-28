@@ -1,5 +1,7 @@
 # Hanafuda
 
+![hanafuda game board](/assets/tiles/readme/game-board.png)
+
 Hanafuda, known colloquially as Koi Koi or Sakura among a variety of other names, is a traditional Japanese matching card game. The deck consists of 48 cards divided into 12 months, which each month being represented by a symbol of Japanese nature. Each tile corresponds to a certain point value, although how these values are given varies greatly across region and even individual household. For this reason, I decided to build this game based on the house rules my grandmother taught me growing up-- an easy to pick-up-and-play varient somewhere in the middle of Koi Koi and the Hawaiian varient of Sakura. 
 
 ## **RULES**
