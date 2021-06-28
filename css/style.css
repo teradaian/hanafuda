@@ -65,11 +65,11 @@ nav {
 }
 
 img {
-    width: 80px;
-    height: auto;
     border: 1px solid lightgrey;
+    height: auto;
     margin: 5px;
     object-fit: contain;
+    width: 60px;
 }
 
 .selected {
@@ -133,8 +133,7 @@ img {
 }
 
 .player-hand-container img:hover {
-    width:80px;
-
+    width: 80px;
 }
 
 .field {
@@ -145,6 +144,10 @@ img {
     justify-content: space-around;
     justify-items: center;
     padding: 2rem;
+}
+
+.field img {
+    object-fit: cover;
 }
 
 .field img:hover {
@@ -227,6 +230,13 @@ img {
     display: none;
 }
 
+@media only screen and (min-width: 650px) {
+
+    .field img {
+        width: 80px;
+    }
+}
+
 
 @media only screen and (min-width: 768px) {
     
@@ -244,8 +254,7 @@ img {
         padding: 4rem;
     }
 
-    .player-hand-container img,
-    .computer-hand-container img {
+    .player-hand-container img {
     width: 80px;
 }
   }
@@ -279,106 +288,12 @@ img {
         filter:brightness(70%);
     }
 
+    .computer-hand-container {
+        margin-top: 0px;
+    }
+
+    header {
+        margin-bottom: 5px;
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-    /* main {
-        height: 100vh;
-        display: grid;
-        grid-template-rows: 1fr 2fr 1fr;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        grid-template-areas:
-        "comp comp comp comp toggle"
-        "deck field field field field"
-        "drawer player player player player"
-    }
-
-    body {
-        background: var(--background);
-        background-image: var(--background-image);
-        color: var(--color);
-        flex-direction: column;
-        font-family: var(--font-family);
-        margin: 0;
-        min-height: 100vh;
-    }
-
-    img { 
-        max-width: 100%; 
-        height: auto;
-        border: 1px solid lightgrey;
-        margin: 5px;
-    }
-    
-    .computer-hand {
-        display: flex;
-        grid-area: comp;
-    }
-    
-    #deck {
-        height: 16rem;
-        width:10rem;
-        margin: 10rem 0 1rem 6rem;
-        text-align: center;
-        grid-area: deck;
-    }
-    
-    .drawer {
-        grid-area: drawer;
-    }
-    
-    .player-hand {
-        display: flex;
-        grid-area: player;
-    }
-    
-    section.field {
-        border-radius: var(--field-radius);
-        background: var(--field-bg);
-        box-shadow: var(--field-box-shadow);
-        flex-basis: auto;
-        width:80%;
-        align-items: center;
-        display: flex;
-        flex-wrap: wrap;
-        grid-area: field;
-        justify-items: center;
-    }
-
-    .player-hand {
-        border-radius: var(--player-hand-radius);
-    }
-    
-    .player-hand > div:hover {
-        cursor: pointer;
-    }
-    
-    .feild > div:hover {
-        cursor: pointer;
-    }
-    
-    #deck:hover {
-        cursor: pointer;
-    }
-    
-    .computer-hand {
-        border-radius: var(--computer-hand-radius);
-    }
-    
-    .row-2 {
-        width: 100%;
-        height: 100%;
-        justify-content: space-around;
-    }
-
-
-  } */
