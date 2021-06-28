@@ -134,8 +134,6 @@ function matchHighestValueTile(){
     } else if ( turn === -1) {
         testComputerTile()
     } else {
-        console.log(player.selectedCard)
-        console.log(computer.selectedCard)
         console.log('err!')
     }
 }
@@ -159,7 +157,6 @@ function testDeckTile(){
         renderTopDeckTileAnimation()
         setTimeout(() => {
             renderField()
-            console.log('incrementTurn')
             resetSelections()
             incrementTurn()
         }, 1000)
@@ -244,7 +241,6 @@ function capturePair(idAsInt){
 }
 
 function selectCardHandler(){
-    console.log(turn, 'turn handler')
     if (turn !== 1) return;
 
     let idAsInt = extractIndexFromId(event.target.id);
@@ -253,6 +249,129 @@ function selectCardHandler(){
     player.selectedCard = player.hand[idAsInt]
     renderPlayerHand();
     renderSelectedCard()
+}
+
+function computerTurn(){
+    if(!computer.hand.length) return setTimeout(() =>playTopTileFromDeck(), 1000)
+
+    computerSelectRandom()
+    computerPlayHandler()
+    setTimeout(()=> playTopTileFromDeck(), 2000)
+    return
+}
+
+function computerSelectRandom(){
+    let tileId = generateRandomHandId()
+    computer.selectedCard = computer.hand[tileId]
+    computer.selectedCardIdx = tileId
+}
+
+function generateRandomHandId(){
+    return computer.hand.length > 1 ? 
+    Math.floor(Math.random() * computer.hand.length)
+    :
+    0
+}
+
+function computerPlayHandler(){
+    if (!field.filter(tile => checkSuit(computer.selectedCard) === checkSuit(tile)).length){
+        field.push(computer.hand.splice(computer.selectedCardIdx, 1).join(''))
+        computer.selectedCard = null;
+        render()
+    } else {
+        matchHighestValueTile()
+    }
+}
+
+const incrementTurn = () => {
+    resetSelections()
+    if (!deck.deck.length) {
+        renderEmptyDeck()
+        calculateScore()
+    }
+
+    turn *= -1
+    console.log(turn, 'startofturn')
+    if (turn === 1) {
+        playerHandEl.addEventListener('click', selectCardHandler)
+        deckEl.addEventListener('click', deckClickHandler)
+        console.log("select handler fired")
+    }
+    if (turn === -1) {
+        setTimeout(()=>{
+        computerTurn()
+        }, 1000)
+    }
+}
+
+function reset(){
+    resetPlayers()
+    init()
+}
+
+function resetPlayers(){
+    player.hand = []
+    player.selectedCards = null
+    player.selectedCardIdx = null
+    player.score = 0
+    player.scorePile=[]
+
+    computer.hand = []
+    computer.selectedCard = null
+    computer.selectedCardIdx = null
+    computer.score = 0
+    computer.scorePile = []
+}
+
+function handleGameEnd(){
+    renderEndOfGameDisplay()
+    renderWinningYaku()
+    playAgainBtn.className = "btn btn-danger play-again-btn"
+}
+
+// scoring
+
+function calculateScore(){
+    scoreTiles(player.scorePile, tilesValues, player)
+    scoreYakus(player.scorePile, yakuSets, player)
+
+    filterScoringTiles(computer.scorePile, tilesValues)
+    scoreTiles(computer.scorePile, tilesValues, computer)
+    scoreYakus(computer.scorePile, yakuSets, computer)
+
+    if(player.score === computer.score) return console.log('TIEGAME')
+
+    player.score > computer.score ? isWinner = 1 : isWinner = -1
+
+    handleGameEnd()
+}
+
+function scoreTiles(scorePileArray, arrayOfValues, owner){
+    let total = 0;
+    let scoredPoints = arrayOfValues.map((i, idx) => {
+      return scorePileArray.filter(i => arrayOfValues[idx].includes(i)).length
+    })
+    if(scoredPoints.every(val => val > 0)) {
+        total += scoredPoints[0] * 20
+        total += scoredPoints[1] * 10
+        total += scoredPoints[2] * 5
+        return owner.score += total
+    } else {
+        scoredPoints[0] === 0 ? total : total += scoredPoints[0] * 20
+        scoredPoints[1] === 0 ? total : total += scoredPoints[1] * 10
+        scoredPoints[2] === 0 ? total : total += scoredPoints[2] * 5
+        return owner.score += total
+    }
+}
+
+function filterScoringTiles(scorePileArray, arrayOfValues){
+    let allScoreTiles = arrayOfValues.flat();
+    return scorePileArray.filter(i => allScoreTiles.includes(i))   
+}
+
+function scoreYakus(scorePileArray, yakuArr, owner){
+    let numOfYakuScored = yakuArr.filter(yaku => yaku.every(tile => scorePileArray.includes(tile))).length;
+    return numOfYakuScored > 0 ? owner.score += numOfYakuScored * 50 : 0
 }
 
 function renderTopDeckTileAnimation(){
@@ -328,122 +447,6 @@ function renderSelectedCard(){
 
 const renderEmptyDeck = () => deckEl.src = ""
 
-const incrementTurn = () => {
-    resetSelections()
-    if (!deck.deck.length) {
-        renderEmptyDeck()
-        calculateScore()
-    }
-
-    turn *= -1
-    console.log(turn, 'startofturn')
-    if (turn === 1) {
-        playerHandEl.addEventListener('click', selectCardHandler)
-        deckEl.addEventListener('click', deckClickHandler)
-        console.log("select handler fired")
-    }
-    if (turn === -1) {
-        setTimeout(()=>{
-        computerTurn()
-        }, 1000)
-    }
-}
-
-function computerTurn(){
-    if(!computer.hand.length) return setTimeout(() =>playTopTileFromDeck(), 1000)
-
-    computerSelectRandom()
-    computerPlayHandler()
-    setTimeout(()=> playTopTileFromDeck(), 2000)
-    return
-}
-
-function computerSelectRandom(){
-    let tileId = generateRandomHandId()
-    computer.selectedCard = computer.hand[tileId]
-    computer.selectedCardIdx = tileId
-}
-
-function generateRandomHandId(){
-    return computer.hand.length > 1 ? 
-    Math.floor(Math.random() * computer.hand.length)
-    :
-    0
-}
-
-function computerPlayHandler(){
-    if (!field.filter(tile => checkSuit(computer.selectedCard) === checkSuit(tile)).length){
-        field.push(computer.hand.splice(computer.selectedCardIdx, 1).join(''))
-        computer.selectedCard = null;
-        render()
-    } else {
-        matchHighestValueTile()
-    }
-}
-
-function reset(){
-    resetPlayers()
-    init()
-}
-
-function resetPlayers(){
-    player.hand = []
-    player.selectedCards = null
-    player.selectedCardIdx = null
-    player.score = 0
-    player.scorePile=[]
-
-    computer.hand = []
-    computer.selectedCard = null
-    computer.selectedCardIdx = null
-    computer.score = 0
-    computer.scorePile = []
-}
-
-// scoring
-
-function calculateScore(){
-    scoreTiles(player.scorePile, tilesValues, player)
-    scoreYakus(player.scorePile, yakuSets, player)
-
-    filterScoringTiles(computer.scorePile, tilesValues)
-    scoreTiles(computer.scorePile, tilesValues, computer)
-    scoreYakus(computer.scorePile, yakuSets, computer)
-
-    if(player.score === computer.score) return console.log('TIEGAME')
-
-    player.score > computer.score ? isWinner = 1 : isWinner = -1
-
-    handleGameEnd()
-}
-
-function scoreTiles(scorePileArray, arrayOfValues, owner){
-    let total = 0;
-    let scoredPoints = arrayOfValues.map((i, idx) => {
-      return scorePileArray.filter(i => arrayOfValues[idx].includes(i)).length
-    })
-    if(scoredPoints.every(val => val > 0)) {
-        total += scoredPoints[0] * 20
-        total += scoredPoints[1] * 10
-        total += scoredPoints[2] * 5
-        return owner.score += total
-    } else {
-        scoredPoints[0] === 0 ? total : total += scoredPoints[0] * 20
-        scoredPoints[1] === 0 ? total : total += scoredPoints[1] * 10
-        scoredPoints[2] === 0 ? total : total += scoredPoints[2] * 5
-        return owner.score += total
-    }
-}
-
-function filterScoringTiles(scorePileArray, arrayOfValues){
-    let allScoreTiles = arrayOfValues.flat();
-    return scorePileArray.filter(i => allScoreTiles.includes(i))   
-}
-
-function scoreYakus(scorePileArray, yakuArr, owner){
-    let numOfYakuScored = yakuArr.filter(yaku => yaku.every(tile => scorePileArray.includes(tile))).length;
-    return numOfYakuScored > 0 ? owner.score += numOfYakuScored * 50 : 0
-}
 
 // night mode toggle
 function setTheme(theme) {
@@ -478,11 +481,7 @@ function renderThemeUI() {
     renderThemeImages()
 }
 
-function handleGameEnd(){
-    renderEndOfGameDisplay()
-    renderWinningYaku()
-    playAgainBtn.className = "btn btn-danger play-again-btn"
-}
+
 
 function renderWinningYaku(){
     let winningYaku = yakuSets.filter(yaku => yaku.every(tile => player.scorePile.includes(tile)))
@@ -527,9 +526,3 @@ function renderThemeImages(){
   </div>`
   carousel.appendChild(carouselCards)
 }
-
-
-
-   
-
-
