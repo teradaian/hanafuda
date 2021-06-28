@@ -8,6 +8,7 @@ let turn
 let field
 let deck
 let topDeckTile
+let marioTheme
 
 const player = {
         name: 'player',
@@ -466,10 +467,23 @@ function toggleDayNight() {
 }
 
 function toggleMario(){
-    if (localStorage.getItem('theme') === 'theme-mario-day') return setTheme('theme-day')
-    if (localStorage.getItem('theme') === 'theme-mario-night') return setTheme('theme-night')
-    if (localStorage.getItem('theme') === 'theme-day') return setTheme ('theme-mario-day')
-    if (localStorage.getItem('theme') === 'theme-night') return setTheme ('theme-mario-night')
+    if (localStorage.getItem('theme') === 'theme-mario-day') {
+        marioTheme = false
+        setTheme('theme-day') 
+    }
+    if (localStorage.getItem('theme') === 'theme-mario-night') {
+        marioTheme = false
+        setTheme('theme-night')
+    }
+    if (localStorage.getItem('theme') === 'theme-day') {
+        marioTheme = true
+        setTheme ('theme-mario-day')
+    } 
+    if (localStorage.getItem('theme') === 'theme-night') {
+        marioTheme = true
+        setTheme ('theme-mario-night')
+    }
+    render()
 }
 
 (function () {
@@ -481,8 +495,6 @@ function toggleMario(){
         setTheme('theme-night');
     renderThemeUI();
 })();
-
-
 
 function renderThemeUI() {
     if (localStorage.getItem('theme') === 'theme-day') {

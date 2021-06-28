@@ -46,6 +46,7 @@ html {
     --color: black;
     --font-family: 'Bangers', cursive;
     --selected-border: #E52521;
+    --field-bg: rgba(255, 255, 255, 0.8)
 }
 
 .theme-mario-night {
