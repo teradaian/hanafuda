@@ -248,7 +248,7 @@ function selectCardHandler(){
 
     let idAsInt = extractIndexFromId(event.target.id);
     if (isNaN(idAsInt)) return;
-    
+    console.log(idAsInt, 'card handler')
     player.selectedCardIdx= idAsInt
     player.selectedCard = player.hand[idAsInt]
     renderPlayerHand();
@@ -490,14 +490,18 @@ function handleGameEnd(){
 
 function renderWinningYaku(){
     let winningYaku = yakuSets.filter(yaku => yaku.every(tile => player.scorePile.includes(tile)))
+    console.log(winningYaku)
+    
+    if (!winningYaku.length) return;
     winningYaku.forEach(tile => field.push(tile))
-
-    field.forEach((i, idx) => {
-        let fieldTile = document.createElement('div')
-        fieldTile.classList.add('field-tile')
-        fieldTile.innerHTML = `<img src="../assets/tiles/${i}.jpeg">`
-        fieldEl.appendChild(fieldTile);
-    })
+    field.forEach(yakuArr => {
+        yakuArr.forEach(tile => {
+            let fieldTile = document.createElement('div')
+            fieldTile.classList.add('field-tile')
+            fieldTile.innerHTML = `<img src="../assets/tiles/${tile}.jpeg">`
+            fieldEl.appendChild(fieldTile);
+        })
+})
 }
 
 function renderEndOfGameDisplay(){
