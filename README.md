@@ -24,7 +24,7 @@ One final rule:
 
 ## Getting Started
 
-The game is deployed on ____ at ______. The game will always start by dealing 8 tiles to both players and 8 tiles 
+The game is deployed on netlify at https://hanafuda-sakura.netlify.app/. The game will always start by dealing 8 tiles to both players and 8 tiles 
 into the field, with the human player taking the first turn. Rules and information on the tile suits and different sets
 are available from the ingame menu. The game will offer an option to play again upon ending, but you may also reset at 
 any time from the menu as well. 
