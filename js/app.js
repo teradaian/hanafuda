@@ -498,18 +498,20 @@ function toggleMario(){
         setTheme ('theme-mario-night')
         return render()
     }
-
 }
 
 (function () {
     if (localStorage.getItem('theme') === 'theme-mario-day') return setTheme('theme-mario-day')
     if (localStorage.getItem('theme') === 'theme-mario-night') return setTheme('theme-mario-night')
 
-    localStorage.getItem('theme') === 'theme-day' ? 
+    localStorage.getItem('theme') === 'theme-day' ?
         setTheme('theme-day') 
     : 
-        setTheme('theme-night');
+        setTheme('theme-night')
+        
+    marioTheme = false;
     renderThemeUI();
+    render()
 })();
 
 function renderThemeUI() {
@@ -525,7 +527,6 @@ function renderThemeUI() {
 
 function renderWinningYaku(){
     let winningYaku = yakuSets.filter(yaku => yaku.every(tile => player.scorePile.includes(tile)))
-    console.log(winningYaku)
 
     if (!winningYaku.length) return;
     winningYaku.forEach(tile => field.push(tile))

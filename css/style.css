@@ -46,15 +46,18 @@ html {
     --background-image: url('../assets/mario-bg/mario-day-bg.jpg');
     --background: #43B047;
     --color: black;
-    --font-family: 'Bangers', cursive;
+    --font-family: 'Bangers', cursive, sans-serif;
     --selected-border: #E52521;
-    --field-bg: rgba(255, 255, 255, 0.8)
+    --field-bg: rgba(255, 255, 255, 0.8);
     --background-image-deck: url('../assets/mario-tiles/mario-deck-back.jpg')
 }
 
 .theme-mario-night {
     --background-image: url('../assets/mario-bg/mario-night-bg.jpg');
     --background: black;
+    --font-family: 'Bangers', cursive, sans-serif;
+    --selected-border: #E52521;
+    --field-bg: rgba(255, 255, 255, 0.4);
     --background-image-deck: url('../assets/mario-tiles/mario-deck-back.jpg')
 }
 
@@ -315,7 +318,7 @@ img {
     }
 
     header {
-        margin-bottom: 5px;
+        margin-bottom: 20px;
     }
 
 }
