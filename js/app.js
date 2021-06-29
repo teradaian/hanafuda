@@ -38,7 +38,7 @@ const playAgainBtn      = document.querySelector('.play-again-btn')
 const playerHandEl      = document.querySelector('.player-hand')
 const resetBtnEl        = document.querySelector('.reset-btn')
 const scorePileEl       = document.querySelector('.drawer')
-const setsCanvasEl      = document.querySelector('#sets-overlay')
+// const setsCanvasEl      = document.querySelector('#sets-overlay')
 
 dayNightToggleEl.addEventListener('click', toggleDayNight)
 deckEl.addEventListener('click', deckClickHandler)
@@ -59,6 +59,7 @@ function init(){
     player.hand = deck.dealPlayerHand()
     computer.hand = deck.dealComputerHand()
     field = deck.dealField()
+    checkForFour()
     deckEl.className = ""
     playAgainBtn.className = "hidden"
     playerHandEl.addEventListener('click', selectCardHandler)
@@ -68,11 +69,17 @@ function init(){
 }
 
 function checkForFour(){
-    if(field.forEach(i => {
-        field.filter(tileName => checkSuit(tileName).includes(checkSuit(i))).length === 4
-    })) {
+    let numSuitInField = field.reduce((acc, tile) => {
+        if (checkSuit(tile) in acc) {
+            acc[checkSuit(tile)] ++
+        } else {
+            acc[checkSuit(tile)] = 1
+        }
+        return acc;
+    }, {})
+    if(Object.values(numSuitInField).includes(4)){
         console.log('reshuffling')
-        deck.shuffle()
+        reset()
     }
 }
 
@@ -598,4 +605,3 @@ function renderThemeImages(){
   </div>`
   carousel.appendChild(carouselCards)
 }
-
