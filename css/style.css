@@ -47,7 +47,7 @@ html {
     --background: #43B047;
     --color: black;
     --font-family: 'Bangers', cursive, sans-serif;
-    --selected-border: #E52521;
+    --selected-border: 2px solid yellow;
     --field-bg: rgba(255, 255, 255, 0.8);
     --background-image-deck: url('../assets/mario-tiles/mario-deck-back.jpg')
 }
@@ -57,7 +57,7 @@ html {
     --background: black;
     --color: white;
     --font-family: 'Bangers', cursive, sans-serif;
-    --selected-border: #E52521;
+    --selected-border: 2px solid #E52521;
     --field-bg: rgba(255, 255, 255, 0.4);
     --background-image-deck: url('../assets/mario-tiles/mario-deck-back.jpg')
 }
@@ -275,7 +275,6 @@ img {
         width: 80px;
     }
 }
-
 
 @media only screen and (min-width: 768px) {
     

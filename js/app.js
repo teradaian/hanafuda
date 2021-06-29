@@ -1,8 +1,6 @@
 import Deck from './deck.js'
 import { yakuSets, tilesValues } from './scoring.js'
 
-/*----- app's state (variables) -----*/ 
-
 let isWinner
 let turn
 let field
@@ -28,32 +26,26 @@ const computer = {
         scorePile: []
 }
 
-/*----- cached element references -----*/ 
-
 const computerHandEl    = document.querySelector('.computer-hand')
 const dayNightToggleEl  = document.querySelector("#day-toggle")
 const deckEl            = document.querySelector('#deck')
-const fieldEl           = document.querySelector('.field')
-const playerHandEl      = document.querySelector('.player-hand')
-const scorePileEl       = document.querySelector('.drawer')
-const navbarEl          = document.querySelector('.navbar')
-const resetBtnEl        = document.querySelector('.reset-btn')
-const playAgainBtn      = document.querySelector('.play-again-btn')
-const marioToggleEl     = document.querySelector('#mario-toggle')
-const dropdownBtnEl     = document.querySelector('#dropdownMenuButton1')
 const dropdownBgEl      = document.querySelector('#dropdown')
-
-/*----- event listeners -----*/ 
+const dropdownBtnEl     = document.querySelector('#dropdownMenuButton1')
+const fieldEl           = document.querySelector('.field')
+const marioToggleEl     = document.querySelector('#mario-toggle')
+const navbarEl          = document.querySelector('.navbar')
+const playAgainBtn      = document.querySelector('.play-again-btn')
+const playerHandEl      = document.querySelector('.player-hand')
+const resetBtnEl        = document.querySelector('.reset-btn')
+const scorePileEl       = document.querySelector('.drawer')
 
 dayNightToggleEl.addEventListener('click', toggleDayNight)
 deckEl.addEventListener('click', deckClickHandler)
 fieldEl.addEventListener('click', fieldTileClickHandler)
+marioToggleEl.addEventListener('click', toggleMario)
+playAgainBtn.addEventListener('click', reset)
 playerHandEl.addEventListener('click', selectCardHandler)
 resetBtnEl.addEventListener('click', reset)
-playAgainBtn.addEventListener('click', reset)
-marioToggleEl.addEventListener('click', toggleMario)
-
-/*----- functions -----*/
 
 init()
 
@@ -67,7 +59,7 @@ function init(){
     turn = 1
     isWinner = null
     playerHandEl.addEventListener('click', selectCardHandler)
-    deckEl.src = "../assets/tiles/back.jpeg"
+    deckEl.className = ""
     playAgainBtn.className = "btn btn-danger play-again-btn hidden"
 
     render()
@@ -293,7 +285,6 @@ const incrementTurn = () => {
     if (turn === 1) {
         playerHandEl.addEventListener('click', selectCardHandler)
         deckEl.addEventListener('click', deckClickHandler)
-        console.log("select handler fired")
     }
     if (turn === -1) {
         setTimeout(()=>{
@@ -328,7 +319,6 @@ function handleGameEnd(){
 }
 
 // scoring
-
 function calculateScore(){
     scoreTiles(player.scorePile, tilesValues, player)
     scoreYakus(player.scorePile, yakuSets, player)
@@ -371,8 +361,6 @@ function scoreYakus(scorePileArray, yakuArr, owner){
     let numOfYakuScored = yakuArr.filter(yaku => yaku.every(tile => scorePileArray.includes(tile))).length;
     return numOfYakuScored > 0 ? owner.score += numOfYakuScored * 50 : 0
 }
-
-// ***** RENDER FUNCTIONS ***** //
 
 function render(){
     renderField();
@@ -462,9 +450,7 @@ function renderSelectedCard(){
     playerHandEl.children[player.selectedCardIdx].className = "selected hand-tile"
 }
 
-const renderEmptyDeck = () => deckEl.src = ""
-
-// ***** Night Theme Handlers ***** //
+const renderEmptyDeck = () => deckEl.className="hidden"
 
 function setTheme(theme) {
     localStorage.setItem('theme', theme);
