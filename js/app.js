@@ -68,7 +68,7 @@ function init(){
 }
 
 function fieldTileClickHandler(){
-    let idAsInt = extractIndexFromId(event.target.id);
+    let idAsInt = extractIndexFromId(event.target.id)
 
     if (isNaN(idAsInt)) return emptyFieldPlayHandler()
     if (player.selectedCard === null) return
@@ -85,14 +85,12 @@ function fieldTileClickHandler(){
 
 function emptyFieldPlayHandler(){
     if (player.selectedCard === null) return
+    
     disableHandSelection()
-
-    console.log('hand Selection Disabled')
     if (!field.filter(tile => checkSuit(player.selectedCard) === checkSuit(tile)).length){
         field.push(player.hand.splice(player.selectedCardIdx, 1).join(''))
         player.selectedCard = null;
         render()
-        
     } else {
         matchHighestValueTile()
     }
@@ -121,13 +119,7 @@ function resetSelections(){
 }
 
 function matchHighestValueTile(){
-    if ( turn === 1 ) {
-        testPlayerTile()
-    } else if ( turn === -1) {
-        testComputerTile()
-    } else {
-        console.log('err!')
-    }
+    turn === 1 ? testPlayerTile() : testComputerTile()
 }
 
 function testPlayerTile(){
