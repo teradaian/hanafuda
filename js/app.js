@@ -519,6 +519,7 @@ function renderThemeUI() {
     if (localStorage.getItem('theme') === 'theme-day' || localStorage.getItem('theme') === 'theme-mario-day') {
         navbarEl.className = "navbar w-100 navbar-light bg-light"
         dayNightToggleEl.className = "btn w-100 btn-lg btn-outline-dark"
+        dayNightToggleEl.innerHTML = `Night Mode <i class="bi bi-moon-stars-fill"></i>`
         dropdownBgEl.className = "dropdown-menu"
         dropdownBtnEl.className = "btn btn-light dropdown-toggle btn-lg"
         return renderThemeImages()
@@ -526,6 +527,7 @@ function renderThemeUI() {
     if (localStorage.getItem('theme') === 'theme-night' || localStorage.getItem('theme') === 'theme-mario-night') {
         navbarEl.className = "navbar w-100 navbar-dark bg-dark"
         dayNightToggleEl.className = "btn w-100 btn-lg btn-outline-light"
+        dayNightToggleEl.innerHTML = `Day Mode <i class="bi bi-brightness-high"></i>`
         dropdownBgEl.className = "dropdown-menu dropdown-menu-dark"
         dropdownBtnEl.className = "btn btn-dark dropdown-toggle btn-lg"
         return renderThemeImages();

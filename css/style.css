@@ -83,6 +83,10 @@ header {
     margin-bottom: 3rem;
 }
 
+navbar button {
+    margin: 5px auto;
+}
+
 nav {
     background: var(--background)
 }
@@ -95,8 +99,13 @@ img {
     width: 60px;
 }
 
-button {
-    font-size: 2rem;
+.btn-text {
+    color: var(--color)
+}
+
+#mario-toggle img {
+    width: 24px;
+    border: none;
 }
 
 .selected {
