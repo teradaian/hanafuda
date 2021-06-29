@@ -259,6 +259,7 @@ img {
 
 .drawer {
     display: flex;
+    flex-direction: row;
     overflow-y: hidden;
     overflow-x: auto;
 }

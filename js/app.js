@@ -67,6 +67,15 @@ function init(){
     renderScorePile()
 }
 
+function checkForFour(){
+    if(field.forEach(i => {
+        field.filter(tileName => checkSuit(tileName).includes(checkSuit(i))).length === 4
+    })) {
+        console.log('reshuffling')
+        deck.shuffle()
+    }
+}
+
 function fieldTileClickHandler(){
     let idAsInt = extractIndexFromId(event.target.id)
 
@@ -119,14 +128,31 @@ function resetSelections(){
 }
 
 function matchHighestValueTile(){
-    turn === 1 ?
-    capturePair(findIndexOfHighestMatch(player.selectCard)) 
-    : 
-    capturePair(findIndexOfHighestMatch(computer.selectedCard))
+    if ( turn === 1 ) {
+        testPlayerTile()
+    } else if ( turn === -1) {
+        testComputerTile()
+    } else {
+        console.log('err!')
+    }
+}
+
+function testPlayerTile(){
+    let tileID = findIndexOfHighestMatch(player.selectedCard)
+    if (typeof tileID === undefined) return
+    capturePair(tileID)
+}
+
+function testComputerTile(){
+    let tileID = findIndexOfHighestMatch(computer.selectedCard)
+    if (typeof tileID === undefined) return
+    capturePair(tileID)
 }
 
 function testDeckTile(){
     let tileID = findIndexOfHighestMatch(topDeckTile)
+    console.log(tileID, 'tileID')
+    if (typeof tileID === undefined) return
 
     if (tileID === -1) {
         field.push(topDeckTile)
@@ -145,11 +171,46 @@ function testDeckTile(){
 }
 
 function findIndexOfHighestMatch(tile){
+    console.log(tile)
     let tileSuit = checkSuit(tile)
     let arrOfMatchesByValue = field.filter(tileName => tileName.toLowerCase().includes(tileSuit.toLowerCase())).sort()
+    console.log(arrOfMatchesByValue)
+    if (arrOfMatchesByValue.length === 3) return captureAllFour(tileSuit)
 
     let indexOfHighestMatch = field.findIndex(name => name === arrOfMatchesByValue[0])
     return indexOfHighestMatch;
+}
+
+function captureAllFour(suit){
+    if (turn === 1) {
+        let playerTile = player.hand.splice(player.selectedCardIdx, 1).join('')
+        setTimeout(() =>{
+            player.scorePile.push(playerTile)
+            field.forEach((i, idx) => {
+                if (checkSuit(i) === suit){
+                    player.scorePile.push(field[idx], 1)
+                    field.splice(idx, 1)
+                }
+            })
+            player.scorePile = filterScoringTiles(player.scorePile, tilesValues).sort()
+            resetSelections()
+            renderScorePile()
+            render()
+        }, 800)
+    } else {
+        let computerTile = computer.hand.splice(computer.selectedCardIdx, 1).join('')
+        setTimeout(() =>{
+            computer.scorePile.push(computerTile)
+            field.forEach((i, idx) => {
+                if (checkSuit(i) === suit){
+                    computer.scorePile.push(field[idx], 1)
+                    field.splice(idx, 1)
+                }
+            })
+            resetSelections()
+            render()
+        }, 800)
+    }
 }
 
 function extractIndexFromId(evtId){
@@ -164,7 +225,7 @@ function checkSuit(string){
 function captureMatchInField(id){
     let fieldTileMatch = field.splice(id, 1).join('')
     let playedFieldTile = field.pop()
-    renderMatchOnDrawAnimation(id)
+    if (id !== undefined) renderMatchOnDrawAnimation(id)
 
     setTimeout(() =>{
         if (turn === 1) {
