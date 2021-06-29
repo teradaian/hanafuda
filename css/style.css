@@ -113,14 +113,11 @@ img {
     color: var(--color)
 }
 
-
 .core-display {
     display: flex;
     padding: 1vh;
     align-items: center;
 }
-
-
 
 #dropdownMenuButton1 {
     margin-right:1.5rem;
@@ -260,19 +257,6 @@ img {
     background:var(--accent)
 }
 
-#sets-overlay {
-    width: auto;
-    height: 100%;
-    border: none;
-}
-
-#score-pile-btn{
-    bottom: 0;
-    position: fixed;
-    right: 0;
-    width: 100%;
-}
-
 .drawer {
     display: flex;
     overflow-y: hidden;
@@ -287,91 +271,103 @@ img {
     cursor: pointer;
 }
 
-#deck:hover {
-    cursor: pointer;
-}
-
 .hidden {
     display: none;
 }
 
+#deck:hover {
+    cursor: pointer;
+}
+
+#sets-overlay {
+    width: auto;
+    height: 100%;
+    border: none;
+}
+
+#score-pile-btn{
+    bottom: 0;
+    position: fixed;
+    right: 0;
+    width: 100%;
+}
+
 @media only screen and (min-width: 650px) {
 
-    #deck {
-        width: 80px;
-    }
+#deck {
+    width: 80px;
+}
 
-    .field img {
-        width: 80px;
-    }
+.field img {
+    width: 80px;
+}
 
-    #carouselIndicators,
-    .carousel-item img{
+#carouselIndicators,
+.carousel-item img{
     width: 60%
 }
 }
 
 @media only screen and (min-width: 768px) {
     
-    .core-display {
-        width: 100%;
-        justify-content: center;
-    }
+.core-display {
+    width: 100%;
+    justify-content: center;
+}
 
-    .field-container{
-        width: 70%;
-        margin-left: 4rem;
-    }
+.field-container{
+    width: 70%;
+    margin-left: 4rem;
+}
 
-    .field {
-        padding: 4rem;
-    }
+.field {
+    padding: 4rem;
+}
 
-    .player-hand-container img {
+.player-hand-container img {
     width: 80px;
 }
-  }
+}
 
-  @media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) {
+
+header {
+    margin-bottom: 20px;
+}
+
+img {
+    width: 90px;
+}
     
-    .core-display {
-        width: 100%;
-        justify-content: center;
-    }
+.core-display {
+    width: 100%;
+    justify-content: center;
+}
 
-    .field-container{
-        width: 60%;
-        margin-left: 4rem;
-    }
+.field-container{
+    width: 60%;
+    margin-left: 4rem;
+}
 
-    .field {
-        width: 100%;
-        padding: 4rem;
-    }
+.field {
+    width: 100%;
+    padding: 4rem;
+}
 
-    img {
-        width: 90px;
-    }
-
-    #carouselIndicators,
-    .carousel-item img{
+#carouselIndicators,
+.carousel-item img{
     width: 35%
 }
 
-    .player-hand-container img:hover{
-        filter: brightness(70%);
-    }
+.player-hand-container img:hover{
+    filter: brightness(70%);
+}
 
-    .field img:hover {
-        filter:brightness(70%);
-    }
+.field img:hover {
+    filter:brightness(70%);
+}
 
-    .computer-hand-container {
-        margin-top: 0px;
-    }
-
-    header {
-        margin-bottom: 20px;
-    }
-
+.computer-hand-container {
+    margin-top: 0px;
+}
 }
