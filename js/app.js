@@ -162,9 +162,9 @@ function testDeckTile(){
 
 function findIndexOfHighestMatch(tile){
     let tileSuit = checkSuit(tile)
-    let i = field.filter(tileName => tileName.toLowerCase().includes(tileSuit.toLowerCase())).sort()
+    let idx = field.filter(tileName => tileName.toLowerCase().includes(tileSuit.toLowerCase())).sort()
 
-    let indexOfHighestMatch = field.findIndex(name => name === i[0])
+    let indexOfHighestMatch = field.findIndex(name => name === idx[0])
     return indexOfHighestMatch;
 }
 
