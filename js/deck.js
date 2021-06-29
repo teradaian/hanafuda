@@ -47,14 +47,7 @@ class Deck {
         let computerHand = this.deck.splice(this.deck.length -8, 8)
         return computerHand;
     }
-
-    deal(){
-        this.reset()
-        this.shuffle()
-    }
 }
-
-const deck1 = new Deck();
 
 export default Deck;
 
