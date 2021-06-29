@@ -38,6 +38,7 @@ const playAgainBtn      = document.querySelector('.play-again-btn')
 const playerHandEl      = document.querySelector('.player-hand')
 const resetBtnEl        = document.querySelector('.reset-btn')
 const scorePileEl       = document.querySelector('.drawer')
+const setsCanvasEl      = document.querySelector('#sets-overlay')
 
 dayNightToggleEl.addEventListener('click', toggleDayNight)
 deckEl.addEventListener('click', deckClickHandler)

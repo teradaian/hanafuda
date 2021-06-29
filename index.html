@@ -30,12 +30,15 @@
                   <button id="mario-toggle" class="btn btn-text btn-lg w-100">
                       Nintendo Mode <img src="../assets/icons/one-up.png" />
                   </button> 
-                  <button class="btn btn-text w-100 btn-text btn-lg" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                      Sets
-                  </button>
                   <button class="btn btn-text w-100 btn-text btn-lg" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas" aria-controls="offcanvasExample">
                       How to Play
                   </button>
+                  <button class="btn btn-text w-100 btn-text btn-lg" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    Yaku (tile sets)
+                </button>
+                <button class="btn btn-text w-100 btn-text btn-lg" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightSuits" aria-controls="offcanvasRight">
+                    Suits
+              </button>
                   <button class="btn btn-danger w-100 btn-lg reset-btn" type="button">
                       Restart Game
                   </button>
@@ -89,7 +92,7 @@
               <span class="visually-hidden">Next</span>
             </button>
           </div>
-          <button type='button' class="btn btn-danger btn-lg mt-5" data-bs-dismiss="offcanvas" aria-label="Close">Got it!</button>
+          <button type='button' class="btn btn-danger btn-lg mt-4" data-bs-dismiss="offcanvas" aria-label="Close">Got it!</button>
         </div>
     </div>
 
@@ -100,13 +103,13 @@
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-body" data-bs-dismiss="offcanvas" aria-label="Close">
-        <img id="sets-overlay" src="assets/sets-and-scoring/sets-overlay-light.png">
+        <img id="sets-overlay" src="assets/sets-and-scoring/sets-overlay.png">
     </div>
     </div>
 
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight2" aria-labelledby="offcanvasRightLabel">
-      <div class="offcanvas-body" data-bs-dismiss="offcanvas" aria-label="Close">
-          <img id="sets-overlay" src="assets/sets-and-scoring/suit-light.jpg">
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRightSuits" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-body" id="sets-overlay" data-bs-dismiss="offcanvas" aria-label="Close">
+        <img src="assets/sets-and-scoring/suit-overlay.png">
       </div>
       </div>
 

@@ -40,7 +40,9 @@ any time from the menu as well.
 ## Built With
 
 * Bootstrap(https://getbootstrap.com/) - Components and light styling
+* Bootstrap Icons (https://icons.getbootstrap.com/) - Light/Dark mode icons
 * Animate.css(https://animate.style/) - Animations
+* Hanafuda and Hanafuda Nintendo Tile sets courtesy of Wikipedia
 
 ## Authors
 

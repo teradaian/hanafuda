@@ -233,6 +233,16 @@ img {
     background-image: var(--background-image-canvas)
 }
 
+#sets-overlay {
+    overflow-y: scroll;
+    justify-content: start;
+}
+
+#sets-overlay img {
+    border: 0;
+    width: 400px;
+}
+
 #nav-title {
     margin-left: 2rem;
     margin-top:.4rem;
