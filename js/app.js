@@ -51,17 +51,17 @@ resetBtnEl.addEventListener('click', reset)
 init()
 
 function init(){
+    turn = 1
+    isWinner = null
     deck = new Deck()
     deck.reset()
     deck.shuffle()
     player.hand = deck.dealPlayerHand()
     computer.hand = deck.dealComputerHand()
     field = deck.dealField()
-    turn = 1
-    isWinner = null
-    playerHandEl.addEventListener('click', selectCardHandler)
     deckEl.className = ""
-    playAgainBtn.className = "btn btn-danger play-again-btn hidden"
+    playAgainBtn.className = "hidden"
+    playerHandEl.addEventListener('click', selectCardHandler)
 
     render()
     renderScorePile()
