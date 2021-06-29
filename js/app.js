@@ -119,18 +119,10 @@ function resetSelections(){
 }
 
 function matchHighestValueTile(){
-    turn === 1 ? testPlayerTile() : testComputerTile()
-}
-
-function testPlayerTile(){
-    let tileID = findIndexOfHighestMatch(player.selectedCard)
-    capturePair(tileID)
-}
-
-function testComputerTile(){
-    let tileID = findIndexOfHighestMatch(computer.selectedCard)
-    console.log(computer.selectedCardIdx, 'testcomputertile')
-    capturePair(tileID)
+    turn === 1 ?
+    capturePair(findIndexOfHighestMatch(player.selectCard)) 
+    : 
+    capturePair(findIndexOfHighestMatch(computer.selectedCard))
 }
 
 function testDeckTile(){
