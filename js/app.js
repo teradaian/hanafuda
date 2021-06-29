@@ -146,35 +146,34 @@ function testDeckTile(){
 
 function findIndexOfHighestMatch(tile){
     let tileSuit = checkSuit(tile)
-    let idx = field.filter(tileName => tileName.toLowerCase().includes(tileSuit.toLowerCase())).sort()
+    let arrOfMatchesByValue = field.filter(tileName => tileName.toLowerCase().includes(tileSuit.toLowerCase())).sort()
 
-    let indexOfHighestMatch = field.findIndex(name => name === idx[0])
+    let indexOfHighestMatch = field.findIndex(name => name === arrOfMatchesByValue[0])
     return indexOfHighestMatch;
 }
 
 function extractIndexFromId(evtId){
-    let indexNum = evtId.split('').filter(i => /\d/.test(i)).join('')
-    return parseInt(indexNum);
+    let idx = evtId.split('').filter(i => /\d/.test(i)).join('')
+    return parseInt(idx);
 }
 
 function checkSuit(string){
     return string.slice(0, string.length -1);
 }
 
-function captureMatchInField(idAsInt){
-    let fieldTileMatch = field.splice(idAsInt, 1)
+function captureMatchInField(id){
+    let fieldTileMatch = field.splice(id, 1).join('')
     let playedFieldTile = field.pop()
-
-    renderMatchOnDrawAnimation(idAsInt)
+    renderMatchOnDrawAnimation(id)
 
     setTimeout(() =>{
         if (turn === 1) {
-            player.scorePile.push(fieldTileMatch.join(''))
+            player.scorePile.push(fieldTileMatch)
             player.scorePile.push(playedFieldTile)
             renderScorePile()
         } 
         if (turn === -1) {
-            computer.scorePile.push(fieldTileMatch.join(''))
+            computer.scorePile.push(fieldTileMatch)
             computer.scorePile.push(playedFieldTile)
         }
         resetSelections()
@@ -183,32 +182,27 @@ function captureMatchInField(idAsInt){
     }, 800)
 }
            
-function capturePair(idAsInt){
+function capturePair(id){
+    let fieldTile = field.splice(id, 1).join('')
     if (turn === 1) {
+        let playerTile = player.hand.splice(player.selectedCardIdx, 1).join('')
 
-        let fieldTile = field.splice(idAsInt, 1)
-        let playerTile = player.hand.splice(player.selectedCardIdx, 1)
-
-        renderMatchingPairAnimation(idAsInt)
-   
+        renderMatchingPairAnimation(id)
         setTimeout(() =>{
-            player.scorePile.push(fieldTile.join(''))
-            player.scorePile.push(playerTile.join(''))
+            player.scorePile.push(fieldTile)
+            player.scorePile.push(playerTile)
             player.scorePile = filterScoringTiles(player.scorePile, tilesValues).sort()
             resetSelections()
             renderScorePile()
             render()
         }, 800)
-    }
-    if (turn === -1) {
-        let fieldTile = field.splice(idAsInt, 1)
-        let computerTile = computer.hand.splice(computer.selectedCardIdx, 1)
+    } else {
+        let computerTile = computer.hand.splice(computer.selectedCardIdx, 1).join('')
 
-        renderMatchingPairAnimation(idAsInt)
-
+        renderMatchingPairAnimation(id)
         setTimeout(() =>{
-            computer.scorePile.push(fieldTile.join(''))
-            computer.scorePile.push(computerTile.join(''))
+            computer.scorePile.push(fieldTile)
+            computer.scorePile.push(computerTile)
             resetSelections()
             render()
         }, 800)
@@ -242,10 +236,7 @@ function computerSelectRandom(){
 }
 
 function generateRandomHandId(){
-    return computer.hand.length > 1 ? 
-    Math.floor(Math.random() * computer.hand.length)
-    :
-    0
+    return computer.hand.length > 1 ? Math.floor(Math.random() * computer.hand.length) : 0
 }
 
 function computerPlayHandler(){
@@ -264,17 +255,13 @@ const incrementTurn = () => {
         renderEmptyDeck()
         calculateScore()
     }
-
     turn *= -1
-    console.log(turn, 'startofturn')
+
     if (turn === 1) {
         playerHandEl.addEventListener('click', selectCardHandler)
         deckEl.addEventListener('click', deckClickHandler)
-    }
-    if (turn === -1) {
-        setTimeout(()=>{
-        computerTurn()
-        }, 1000)
+    } else {
+        setTimeout(() => { computerTurn() }, 1000)
     }
 }
 
@@ -297,26 +284,22 @@ function resetPlayers(){
     computer.scorePile = []
 }
 
-function handleGameEnd(){
+function endGame(){
     renderEndOfGameDisplay()
     renderWinningYaku()
     playAgainBtn.className = "btn btn-danger play-again-btn"
 }
 
-// scoring
 function calculateScore(){
     scoreTiles(player.scorePile, tilesValues, player)
     scoreYakus(player.scorePile, yakuSets, player)
-
-    filterScoringTiles(computer.scorePile, tilesValues)
     scoreTiles(computer.scorePile, tilesValues, computer)
     scoreYakus(computer.scorePile, yakuSets, computer)
 
-    if(player.score === computer.score) return console.log('TIEGAME')
-
+    if(player.score === computer.score) return renderTieGame()
     player.score > computer.score ? isWinner = 1 : isWinner = -1
 
-    handleGameEnd()
+    endGame()
 }
 
 function scoreTiles(scorePileArray, arrayOfValues, owner){
@@ -530,6 +513,13 @@ function renderEndOfGameDisplay(){
         if(isWinner === -1)
             scoreMsg.innerHTML = `<h1>You lost! You scored ${player.score} and the computer scored ${computer.score}<h1>`
         fieldEl.appendChild(scoreMsg);
+}
+
+function renderTieGame(){
+    let scoreMsg = document.createElement('div')
+    scoreMsg.classList.add('score-message')
+    scoreMsg.innerHTML =`<h1>Tie Game! You both scored ${player.score}!<h1>`
+    fieldEl.appendChild(scoreMsg);
 }
 
 function renderThemeImages(){
