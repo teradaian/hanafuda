@@ -162,6 +162,7 @@ img {
     min-width: 400px;
     padding: 2rem;
     width: 70%;
+    z-index: 1
 }
 
 .player-hand-container {
@@ -182,17 +183,18 @@ img {
 }
 
 .field {
-    align-items: center;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    justify-items: center;
-    padding: 2rem;
+    flex-flow: row wrap;
+    justify-content: space-between;
 }
 
-.field img {
-    object-fit: cover;
+.field::after {
+    content: "";
+    flex: auto;
+}
+
+.field div {
+    width: 25%;
 }
 
 .field img:hover {
