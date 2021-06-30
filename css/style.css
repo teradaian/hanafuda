@@ -88,6 +88,13 @@ body {
     overflow-x: hidden;
 }
 
+main{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
 header {
     display: flex;
     margin-bottom: 3rem;
@@ -375,7 +382,7 @@ img {
     }
 
     .field-container{
-        width: 60%;
+        width: 70rem;
         margin-left: 4rem;
     }
 

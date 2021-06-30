@@ -42,7 +42,6 @@ const scorePileEl       = document.querySelector('.drawer')
 
 dayNightToggleEl.addEventListener('click', toggleDayNight)
 deckEl.addEventListener('click', deckClickHandler)
-fieldEl.addEventListener('click', fieldTileClickHandler)
 fieldContEl.addEventListener('click', fieldTileClickHandler)
 marioToggleEl.addEventListener('click', toggleMario)
 playAgainBtn.addEventListener('click', reset)
@@ -223,6 +222,7 @@ function extractIndexFromId(evtId){
 }
 
 function checkSuit(string){
+    console.log(string)
     return string.slice(0, string.length -1);
 }
 
