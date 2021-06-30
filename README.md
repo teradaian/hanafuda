@@ -42,7 +42,7 @@ Nintendo started out as a manufacturer of Hanafuda cards long before it became t
 
 Mario Theme - Day         |  Mario Theme - Night
 :-------------------------:|:-------------------------:
-<img src="assets/readme/mario-night.png" width=90% height=auto>  |  <img src="assets/readme/mario-day.png" width= 90% height=auto>
+<img src="assets/readme/mario-day.png" width=90% height=auto>  |  <img src="assets/readme/mario-night.png" width= 90% height=auto>
 
 ## Languages
 
