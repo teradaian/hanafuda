@@ -59,7 +59,7 @@ function init(){
     player.hand = deck.dealPlayerHand()
     computer.hand = deck.dealComputerHand()
     field = deck.dealField()
-    checkForFour()
+    preventFourOfAKind()
     deckEl.className = ""
     playAgainBtn.className = "hidden"
     playerHandEl.addEventListener('click', selectCardHandler)
@@ -68,7 +68,7 @@ function init(){
     renderScorePile()
 }
 
-function checkForFour(){
+function preventFourOfAKind(){
     let numSuitInField = field.reduce((acc, tile) => {
         if (checkSuit(tile) in acc) {
             acc[checkSuit(tile)] ++
@@ -487,6 +487,40 @@ function renderSelectedCard(){
 
 const renderEmptyDeck = () => deckEl.className="hidden"
 
+function renderWinningYaku(){
+    let winningYaku = yakuSets.filter(yaku => yaku.every(tile => player.scorePile.includes(tile)))
+
+    if (!winningYaku.length) return;
+    winningYaku.forEach(tile => field.push(tile))
+    field.forEach(yakuArr => {
+        yakuArr.forEach(tile => {
+            let fieldTile = document.createElement('div')
+            fieldTile.classList.add('field-tile')
+            fieldTile.innerHTML = `<img src="../assets/tiles/${tile}.jpeg">`
+            fieldEl.appendChild(fieldTile);
+        })
+    })
+}
+
+function renderEndOfGameDisplay(){
+        let scoreMsg = document.createElement('div')
+        scoreMsg.classList.add('score-message')
+
+        if(isWinner === 1) {
+            scoreMsg.innerHTML =`<h1>You win! You scored ${player.score} and the computer scored ${computer.score}<h1>`
+        } 
+        if(isWinner === -1)
+            scoreMsg.innerHTML = `<h1>You lost! You scored ${player.score} and the computer scored ${computer.score}<h1>`
+        fieldEl.appendChild(scoreMsg);
+}
+
+function renderTieGame(){
+    let scoreMsg = document.createElement('div')
+    scoreMsg.classList.add('score-message')
+    scoreMsg.innerHTML =`<h1>Tie Game! You both scored ${player.score}!<h1>`
+    fieldEl.appendChild(scoreMsg);
+}
+
 function setTheme(theme) {
     localStorage.setItem('theme', theme);
     document.documentElement.className = theme;
@@ -531,25 +565,35 @@ function renderSetTheme(){
     if(marioTheme === true){
         document.querySelector('#set-overlay').className = "hidden"
         document.querySelector('#mario-set-overlay').className = ""
-        console.log(marioTheme, 'firing')
     } 
     if(marioTheme === false){
         document.querySelector('#mario-set-overlay').className = "hidden"
         document.querySelector('#set-overlay').className = ""
-        console.log(marioTheme, 'firing')
     }
 }
 
 (function () {
-    if (localStorage.getItem('theme') === 'theme-mario-day') return setTheme('theme-mario-day')
-    if (localStorage.getItem('theme') === 'theme-mario-night') return setTheme('theme-mario-night')
+    if (localStorage.getItem('theme') === 'theme-mario-day') {
+        marioTheme = true
+        setTheme('theme-mario-day')
+        renderSetTheme()
+    }
+    if (localStorage.getItem('theme') === 'theme-mario-night') {
+        marioTheme = true
+        setTheme('theme-mario-night')
+        renderSetTheme()
+    }
 
-    localStorage.getItem('theme') === 'theme-day' ?
+    if (localStorage.getItem('theme') === 'theme-day'){
+        marioTheme = false
         setTheme('theme-day') 
-    : 
+        renderSetTheme()
+    }
+    if (localStorage.getItem('theme') === 'theme-night'){
+        marioTheme = true
         setTheme('theme-night')
-
-    marioTheme = false;
+        renderSetTheme()
+    }
     return render()
 })()
 
@@ -572,55 +616,18 @@ function renderThemeUI() {
     }    
 }
 
-function renderWinningYaku(){
-    let winningYaku = yakuSets.filter(yaku => yaku.every(tile => player.scorePile.includes(tile)))
-
-    if (!winningYaku.length) return;
-    winningYaku.forEach(tile => field.push(tile))
-    field.forEach(yakuArr => {
-        yakuArr.forEach(tile => {
-            let fieldTile = document.createElement('div')
-            fieldTile.classList.add('field-tile')
-            fieldTile.innerHTML = `<img src="../assets/tiles/${tile}.jpeg">`
-            fieldEl.appendChild(fieldTile);
-        })
-    })
-}
-
-function renderEndOfGameDisplay(){
-        let scoreMsg = document.createElement('div')
-        scoreMsg.classList.add('score-message')
-
-        if(isWinner === 1) {
-            scoreMsg.innerHTML =`<h1>You win! You scored ${player.score} and the computer scored ${computer.score}<h1>`
-        } 
-        if(isWinner === -1)
-            scoreMsg.innerHTML = `<h1>You lost! You scored ${player.score} and the computer scored ${computer.score}<h1>`
-        fieldEl.appendChild(scoreMsg);
-}
-
-function renderTieGame(){
-    let scoreMsg = document.createElement('div')
-    scoreMsg.classList.add('score-message')
-    scoreMsg.innerHTML =`<h1>Tie Game! You both scored ${player.score}!<h1>`
-    fieldEl.appendChild(scoreMsg);
-}
-
 function renderThemeImages(){
     let carousel = document.querySelector(".carousel-inner")
     carousel.innerHTML = ""
     let carouselCards = document.createElement('div')
-    carouselCards.innerHTML =  `<div class="carousel-item active">
-    <img src="./assets/rules/rule1-${localStorage.getItem('theme')}.jpg" id="rule1" class="d-block w-100" alt="ruleset one">
-  </div>
-  <div class="carousel-item">
-    <img src="./assets/rules/rule2-${localStorage.getItem('theme')}.jpg" id='rule2' class="d-block w-100" alt="ruleset two">
-  </div>
-  <div class="carousel-item">
-    <img src="./assets/rules/rule3-${localStorage.getItem('theme')}.jpg" id='rule3' class="d-block w-100" alt="ruleset three">
-  </div>
-  <div class="carousel-item">
-  <img src="./assets/rules/rule4-${localStorage.getItem('theme')}.jpg" id='rule4' class="d-block w-100" alt="ruleset four">
-    </div>`
+    carouselCards.innerHTML =  
+    `<div class="carousel-item active">
+    <img src="./assets/rules/rule1-${localStorage.getItem('theme')}.jpg" id="rule1" class="d-block w-100" alt="ruleset one"> </div>
+    <div class="carousel-item">
+    <img src="./assets/rules/rule2-${localStorage.getItem('theme')}.jpg" id='rule2' class="d-block w-100" alt="ruleset two"></div>
+    <div class="carousel-item">
+    <img src="./assets/rules/rule3-${localStorage.getItem('theme')}.jpg" id='rule3' class="d-block w-100" alt="ruleset three"></div>
+     <div class="carousel-item">
+    <img src="./assets/rules/rule4-${localStorage.getItem('theme')}.jpg" id='rule4' class="d-block w-100" alt="ruleset four"></div>`
   carousel.appendChild(carouselCards)
 }

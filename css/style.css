@@ -245,11 +245,19 @@ img {
 
 #set-overlay,
 #mario-set-overlay {
-    overflow-y: scroll;
-    justify-content: start;
     width: auto;
     height: 100%;
     border: none;
+}
+
+#suit-overlay {
+    border: 0;
+    overflow-y: scroll;
+    justify-content: start;
+}
+
+#suit-overlay img {
+    width: 45rem;
 }
 
 #nav-title {
