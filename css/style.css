@@ -243,14 +243,13 @@ img {
     background-image: var(--background-image-canvas)
 }
 
-#sets-overlay {
+#set-overlay,
+#mario-set-overlay {
     overflow-y: scroll;
     justify-content: start;
-}
-
-#sets-overlay img {
-    border: 0;
-    width: 400px;
+    width: auto;
+    height: 100%;
+    border: none;
 }
 
 #nav-title {
@@ -288,12 +287,6 @@ img {
 
 #deck:hover {
     cursor: pointer;
-}
-
-#sets-overlay {
-    width: auto;
-    height: 100%;
-    border: none;
 }
 
 #score-pile-btn{

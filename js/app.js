@@ -78,7 +78,6 @@ function checkForFour(){
         return acc;
     }, {})
     if(Object.values(numSuitInField).includes(4)){
-        console.log('reshuffling')
         reset()
     }
 }
@@ -505,22 +504,39 @@ function toggleMario(){
     if (localStorage.getItem('theme') === 'theme-mario-day') {
         marioTheme = false
         setTheme('theme-day') 
+        renderSetTheme()
         return render()
     }
     if (localStorage.getItem('theme') === 'theme-mario-night') {
         marioTheme = false
         setTheme('theme-night')
+        renderSetTheme()
         return render()
     }
     if (localStorage.getItem('theme') === 'theme-day') {
         marioTheme = true
         setTheme ('theme-mario-day')
+        renderSetTheme()
         return render()
     } 
     if (localStorage.getItem('theme') === 'theme-night') {
         marioTheme = true
         setTheme ('theme-mario-night')
+        renderSetTheme()
         return render()
+    }
+}
+
+function renderSetTheme(){
+    if(marioTheme === true){
+        document.querySelector('#set-overlay').className = "hidden"
+        document.querySelector('#mario-set-overlay').className = ""
+        console.log(marioTheme, 'firing')
+    } 
+    if(marioTheme === false){
+        document.querySelector('#mario-set-overlay').className = "hidden"
+        document.querySelector('#set-overlay').className = ""
+        console.log(marioTheme, 'firing')
     }
 }
 
