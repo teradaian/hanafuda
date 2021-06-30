@@ -1,6 +1,6 @@
 # Hanafuda
 
-<img src="assets/readme/hana-banner.jpg" width=100% height=auto>
+<img src="assets/readme/hana-banner.png" width=100% height=auto>
 
 Hanafuda, known colloquially as Koi Koi or Sakura among a variety of other names, is a traditional Japanese matching card game. The deck consists of 48 cards divided into 12 months, with each month represented by a symbol of Japanese nature. Each tile corresponds to a certain point value, although how these values are given varies greatly across region and individual household. For this reason, I decided to build this game based on the house rules my grandmother taught me growing up-- an easy to pick-up-and-play varient somewhere in the middle of Koi Koi and the Hawaiian varient of Sakura. 
 
@@ -9,9 +9,10 @@ Hanafuda, known colloquially as Koi Koi or Sakura among a variety of other names
 
 At the start of the game, the deck is shuffled and 8 tiles are dealt to both players. Then, 8 cards are dealt into the "field", which is the center of play. 
 
-
-<img align="right" src="assets/readme/hanafuda-main.jpg" width=70% height=auto>
-
+<p align="center">
+  <img src="assets/readme/rules.png" width=auto height=331px;>
+  <img src="assets/readme/hanafuda-main.png" width=auto height=331px;> 
+</p>
 
 The first player will select a tile from their hand and may either: 
 
@@ -26,7 +27,7 @@ The game ends when no player has tiles in their hands, and the deck is empty. Pl
 
 The combinations for these sets (also called Yaku), as well as a visual guide to the suits, is available within the game menu:
 
-<img align ="left" src="assets/readme/sets.jpg" width=30%% height=auto>
+<img align ="left" src="assets/readme/sets.png" width=30%% height=auto>
 
 One final rule: 
 
@@ -34,9 +35,7 @@ One final rule:
 
 ## Getting Started
 
-The game is deployed on netlify at https://hanafuda-sakura.netlify.app/. Rules and information on the tile suits and different sets are available from the ingame menu. The game will offer an option to play again upon ending, but you may also reset at any time from the menu as well. 
-
-<img align ="left" src="assets/readme/rules.jpg" width=30%% height=auto>
+The game is deployed on netlify at https://hanafuda-sakura.netlify.app/. Rules and information on the tile suits and different sets are available from the ingame menu. The game will offer an option to play again upon ending, but you may also reset at any time from the menu as well.
 
 ## Languages
 
