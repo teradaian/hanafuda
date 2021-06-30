@@ -1,6 +1,4 @@
-# Hanafuda
-
-<img src="assets/readme/hana-banner.png" width=100% height=auto>
+<img src="assets/readme/hana-banner.png" width=100% height=auto alt="Hanafuda banner">
 
 Hanafuda, known colloquially as Koi Koi or Sakura among a variety of other names, is a traditional Japanese matching card game. The deck consists of 48 cards divided into 12 months, with each month represented by a symbol of Japanese nature. Each tile corresponds to a certain point value, although how these values are given varies greatly across region and individual household. For this reason, I decided to build this game based on the house rules my grandmother taught me growing up-- an easy to pick-up-and-play varient somewhere in the middle of Koi Koi and the Hawaiian varient of Sakura. 
 
@@ -25,9 +23,9 @@ The turn then passes to player 2, who repeats this process.
 
 The game ends when no player has tiles in their hands, and the deck is empty. Players then tally their scores and the highest score wins. Completed sets of specific cards are worth 50 points each, so it's often worth it to chase them in order to secure a victory! 
 
-The combinations for these sets (also called Yaku), as well as a visual guide to the suits, is available within the game menu:
+<img align="left" src="assets/readme/sets.png" width=30%% height=auto>
 
-<img align ="left" src="assets/readme/sets.png" width=30%% height=auto>
+The combinations for these sets (also called Yaku), as well as a visual guide to the suits, is available within the game menu.
 
 One final rule: 
 
@@ -36,6 +34,15 @@ One final rule:
 ## Getting Started
 
 The game is deployed on netlify at https://hanafuda-sakura.netlify.app/. Rules and information on the tile suits and different sets are available from the ingame menu. The game will offer an option to play again upon ending, but you may also reset at any time from the menu as well.
+
+## Extras
+
+<img align="left" src="assets/readme/side-menu.png" width=30%% height=auto>
+Nintendo started out as a manufacturer of Hanafuda cards long before it became the gaming behemoth it is today. As a result, the company created a special Mario edition of the game, which has been ported over as an additional theme. You can select it from the top-menu, and because it's only a cosmetic theme, you can toggle between the normal and Mario modes to see what was added to the tiles. It even has it's own light and dark theme!
+
+Mario Theme - Day         |  Mario Theme - Night
+:-------------------------:|:-------------------------:
+<img src="assets/readme/mario-night.png" width=90% height=auto>  |  <img src="assets/readme/mario-day.png" width= 90% height=auto>
 
 ## Languages
 
@@ -59,6 +66,6 @@ The game is deployed on netlify at https://hanafuda-sakura.netlify.app/. Rules a
 
 * Improved Computer Logic
 * Koi Koi Ruleset
-* Custom card images
+
 
 
