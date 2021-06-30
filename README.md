@@ -42,6 +42,7 @@ any time from the menu as well.
 * Bootstrap(https://getbootstrap.com/) - Components and light styling
 * Bootstrap Icons (https://icons.getbootstrap.com/) - Light/Dark mode icons
 * Animate.css(https://animate.style/) - Animations
+* Gradient Animator (https://www.gradient-animator.com/) - BG gradients
 * Hanafuda and Hanafuda Nintendo Tile sets courtesy of Wikipedia
 
 ## Authors

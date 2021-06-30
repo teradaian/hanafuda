@@ -602,6 +602,9 @@ function renderThemeImages(){
   </div>
   <div class="carousel-item">
     <img src="./assets/rules/rule3-${localStorage.getItem('theme')}.jpg" id='rule3' class="d-block w-100" alt="ruleset three">
-  </div>`
+  </div>
+  <div class="carousel-item">
+  <img src="./assets/rules/rule4-${localStorage.getItem('theme')}.jpg" id='rule4' class="d-block w-100" alt="ruleset four">
+    </div>`
   carousel.appendChild(carouselCards)
 }
