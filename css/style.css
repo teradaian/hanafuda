@@ -126,6 +126,11 @@ img {
     margin-left: 1.5rem;
 }
 
+#nav-title {
+    margin-left: 2rem;
+    margin-top:.4rem;
+}
+
 .btn-text {
     color: var(--color)
 }
@@ -267,11 +272,6 @@ img {
 
 #suit-overlay img {
     width: 45rem;
-}
-
-#nav-title {
-    margin-left: 2rem;
-    margin-top:.4rem;
 }
 
 .modal button {

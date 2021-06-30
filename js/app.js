@@ -222,7 +222,6 @@ function extractIndexFromId(evtId){
 }
 
 function checkSuit(string){
-    console.log(string)
     return string.slice(0, string.length -1);
 }
 
