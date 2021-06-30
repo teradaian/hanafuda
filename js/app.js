@@ -157,7 +157,6 @@ function testComputerTile(){
 
 function testDeckTile(){
     let tileID = findIndexOfHighestMatch(topDeckTile)
-    console.log(tileID, 'tileID')
     if (typeof tileID === undefined) return
 
     if (tileID === -1) {
@@ -177,10 +176,8 @@ function testDeckTile(){
 }
 
 function findIndexOfHighestMatch(tile){
-    console.log(tile)
     let tileSuit = checkSuit(tile)
     let arrOfMatchesByValue = field.filter(tileName => tileName.toLowerCase().includes(tileSuit.toLowerCase())).sort()
-    console.log(arrOfMatchesByValue)
     if (arrOfMatchesByValue.length === 3) return captureAllFour(tileSuit)
 
     let indexOfHighestMatch = field.findIndex(name => name === arrOfMatchesByValue[0])
@@ -473,7 +470,6 @@ function renderComputerHand(){
     computer.hand.forEach((i, idx) => {
         let compTile = document.createElement('div')
         compTile.classList.add('hand-tile')
-        console.log(marioTheme)
         marioTheme === false ?
         compTile.innerHTML = `<img id='p${idx}' src="../assets/tiles/back.jpeg">`
         :
