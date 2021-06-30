@@ -473,6 +473,7 @@ function renderComputerHand(){
     computer.hand.forEach((i, idx) => {
         let compTile = document.createElement('div')
         compTile.classList.add('hand-tile')
+        console.log(marioTheme)
         marioTheme === false ?
         compTile.innerHTML = `<img id='p${idx}' src="../assets/tiles/back.jpeg">`
         :
@@ -583,14 +584,13 @@ function renderSetTheme(){
         setTheme('theme-mario-night')
         renderSetTheme()
     }
-
     if (localStorage.getItem('theme') === 'theme-day'){
         marioTheme = false
         setTheme('theme-day') 
         renderSetTheme()
     }
     if (localStorage.getItem('theme') === 'theme-night'){
-        marioTheme = true
+        marioTheme = false
         setTheme('theme-night')
         renderSetTheme()
     }
