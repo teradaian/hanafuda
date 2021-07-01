@@ -176,6 +176,7 @@ img {
     justify-content: center;
     padding: 2rem;
     max-width: 100%;
+    height: 133px;
 }
 
 .player-hand-container img,
@@ -281,6 +282,7 @@ img {
     flex-direction: row;
     overflow-y: hidden;
     overflow-x: auto;
+    align-items: flex-start
 }
 
 .player-hand > div:hover {
