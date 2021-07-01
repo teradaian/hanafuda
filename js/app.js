@@ -39,6 +39,7 @@ const playAgainBtn      = document.querySelector('.play-again-btn')
 const playerHandEl      = document.querySelector('.player-hand')
 const resetBtnEl        = document.querySelector('.reset-btn')
 const scorePileEl       = document.querySelector('.drawer')
+const turnMsgEl         = document.querySelector('#turn-msg')
 
 dayNightToggleEl.addEventListener('click', toggleDayNight)
 deckEl.addEventListener('click', deckClickHandler)
@@ -320,12 +321,21 @@ const incrementTurn = () => {
         calculateScore()
     }
     turn *= -1
+    renderTurnMsg()
 
     if (turn === 1) {
         playerHandEl.addEventListener('click', selectCardHandler)
         deckEl.addEventListener('click', deckClickHandler)
     } else {
         setTimeout(() => { computerTurn() }, 1000)
+    }
+}
+
+function renderTurnMsg(){
+    if (turn === 1){
+        turnMsgEl.innerText = "It's your turn"
+    } else {
+        turnMsgEl.innerText = "Computer Turn"
     }
 }
 

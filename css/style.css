@@ -143,6 +143,7 @@ img {
 .deck-container {
     display: flex;
     flex-direction: column;
+    font-size: 1.5rem;
 }
 
 #deck {
@@ -357,6 +358,10 @@ img {
     .core-display {
         width: 100%;
         justify-content: center;
+    }
+
+    .deck-container {
+        font-size: 3rem;
     }
 
     .field-container{
