@@ -19,7 +19,7 @@ html {
 .theme-day {
     --background: #FFE2E2;
     --selected-border: 2px solid #333456;
-    --background-image: linear-gradient(190deg, #f6f6f6, #ffc7c7, #ffe2e2);
+    --background-image: linear-gradient(45deg, #fff, #F4ABC4);
     --background-size: 600% 600%;
     --bg-animation: bg-scroll 15s ease infinite;
     --field-bg: #F6F6F6;
@@ -37,7 +37,7 @@ html {
     --selected-border: 2px solid #F4ABC4;
     --background-image: linear-gradient(190deg, #595b83, #333456, #060930);
     --background-size: 600% 600%;
-    --bg-animation: bg-scroll 40s ease infinite;
+    --bg-animation: bg-scroll 15s ease infinite;
     --field-bg: #595B83;
     --border-radius: 50px;
     --field-box-shadow: inset 40px -40px 72px #55577e, inset -40px 40px 72px #5d5f88;
