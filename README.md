@@ -66,6 +66,7 @@ Mario Theme - Day         |  Mario Theme - Night
 
 * Improved Computer Logic
 * Koi Koi Ruleset
+* Mobile version
 
 
 

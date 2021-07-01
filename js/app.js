@@ -562,10 +562,14 @@ function renderSetTheme(){
     if(marioTheme === true){
         document.querySelector('#set-overlay').className = "hidden"
         document.querySelector('#mario-set-overlay').className = ""
+        document.querySelector('#suits-overlay').className = "hidden"
+        document.querySelector('#mario-suits-overlay').className = ""
     } 
     if(marioTheme === false){
         document.querySelector('#mario-set-overlay').className = "hidden"
         document.querySelector('#set-overlay').className = ""
+        document.querySelector('#mario-suits-overlay').className = "hidden"
+        document.querySelector('#suits-overlay').className = ""
     }
 }
 
