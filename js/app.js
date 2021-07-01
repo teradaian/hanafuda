@@ -6,6 +6,7 @@ let turn
 let field
 let deck
 let topDeckTile
+let isFukeru
 let marioTheme
 
 const player = {
@@ -54,6 +55,7 @@ init()
 function init(){
     turn = 1
     isWinner = null
+    isFukeru = null
     deck = new Deck()
     deck.reset()
     deck.shuffle()
@@ -126,7 +128,21 @@ function playTopTileFromDeck(){
 }
 
 function deckClickHandler() {
+    if (!player.hand.length || isFukeru === null) return testIfFukeru()
+
     !player.hand.length && playTopTileFromDeck();
+}
+
+function testIfFukeru(){
+    scorePlayerTiles()
+    if(player.score < 35){
+        isFukeru = true;
+        endGame()
+    } else {
+        isFukeru = false;
+        player.score = 0
+        playTopTileFromDeck()
+    }
 }
 
 function resetSelections(){
@@ -519,6 +535,7 @@ function renderWinningYaku(){
 }
 
 function renderEndOfGameDisplay(){
+        if (isFukeru === true) return turnMsgEl.innerHTML = 'FUKETA!'
         if(isWinner === 1) {
             turnMsgEl.innerHTML =`You win! You scored ${player.score} and the computer scored ${computer.score}`
         } 

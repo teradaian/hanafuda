@@ -29,7 +29,7 @@ The combinations for these sets (also called Yaku), as well as a visual guide to
 
 One final rule: 
 
-'Fukeru': If either player manages to empty their entire hand with a score of under 20 points, the game immediately ends in their victory. 
+'Fukeru': If either player manages to empty their entire hand with a score of or under 35 points, the game immediately ends in their victory. 
 
 ## Getting Started
 
