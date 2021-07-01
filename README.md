@@ -68,5 +68,31 @@ Mario Theme - Day         |  Mario Theme - Night
 * Koi Koi Ruleset
 * Mobile version
 
+## Wireframe
 
+<img src="assets/readme/wireframe.png>
 
+## Pseudocode
+
+Gameplay: 
+1. Game draws hands (8 cards for each player)
+2. Game deals 8 cards to the center
+3. If four cards of the same suit are dealt into the field at the beginning, dealer captures all four.
+4. Player 1 plays a card from their hand. If the card matches the suit of a card in the center, both cards are sent to that players score pile. 
+5. Flip a card from the deck into the field. If a suit matches, capture both cards. 
+6. If there are three cards of the same suit in the field and a player turns over the fourth matching card from the deck, that player captures all four cards at once.
+7. Play ends with every player runs out of cards in their hand. 
+(If not cards in hand, you flip. If no cards in deck, skip turn)
+
+AAU I expect the game to draw my initial hand for me
+AAU I expect to be able to click on a tile to play it into the game board
+AAU I expect to be able to select either the empty game board to play a non-scoring tile, or select a matching tile to send both to my scoring pile
+(conditional on click)
+AAU I expect to be able to access a visual representation of my draw pile
+
+Split JavaScript code into modules, with a Deck object and imported scoring arrays.
+
+The Deck will need names which can be used to extract both value but also give meaningful distinction to the cards within individual suits, as images and scoring will both be looked up through the tile names, while rendering the field and the player hand can be managed through passing down tileID and splicing/pushing the tile name around. 
+Player objects can be used to store hand and score-pile state, along with which tile is selected. Passing tile index to a separate state will prevent potentially having two sources of concurrent truth. 
+
+The game will need logic to allow for a card to be played into the field and automatically select the highest value pair amongst multiple options. Naming the highest value tile of a set as the suit + 0 index should allow for a simple sort method, once all of the matching suits in the field are filtered. For instance, Grass0 will always sort before Grass1, and no manipulation of the name will be needed to infer value. 
