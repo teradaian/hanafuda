@@ -15,7 +15,7 @@ html {
 :root {
       font-size: 62.5%
 }
-/* theme repository */
+
 .theme-day {
     --background: #FFE2E2;
     --selected-border: 2px solid #333456;
@@ -65,8 +65,6 @@ html {
     --background-image-deck: url('../assets/mario-tiles/mario-deck-back.jpg')
 }
 
-/* /theme repository */
-
 body {
     background: var(--background);
     background-size: cover;
@@ -82,9 +80,9 @@ body {
 }
 
 main{
-    height: 100%;
     display: flex;
     flex-direction: column;
+    height: 100%;
     justify-content: space-evenly;
 }
 
@@ -107,11 +105,6 @@ img {
     margin: 5px;
     object-fit: contain;
     width: 60px;
-}
-
-#mario-toggle img {
-    width: 24px;
-    border: none;
 }
 
 .title-header {
@@ -142,6 +135,11 @@ img {
     border-radius: 5px;
 }
 
+#mario-toggle img {
+    width: 24px;
+    border: none;
+}
+
 .deck-container {
     display: flex;
     flex-direction: column;
@@ -164,7 +162,8 @@ img {
     flex-direction: column;
     height: 100%;
     justify-content: center;
-    min-width: 400px;
+    min-width: 375px;
+    margin-left: 1rem;
     padding: 2rem;
     width: 70%;
     z-index: 1
@@ -177,6 +176,15 @@ img {
     padding: 2rem;
     max-width: 100%;
     height: 133px;
+}
+
+.player-hand,
+.computer-hand {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-flow:row nowrap;
+    justify-content: center;
 }
 
 .player-hand-container img,
@@ -207,13 +215,8 @@ img {
     filter: brightness(70%)
 }
 
-.player-hand,
-.computer-hand {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    flex-flow:row nowrap;
-    justify-content: center;
+.selected {
+    border-top: var(--selected-border);
 }
 
 .offcanvas {
@@ -233,18 +236,9 @@ img {
     width: 100%;
 }
 
-.selected {
-    border-bottom: var(--selected-border)
-}
-
 #carouselIndicators,
 .carousel-item img{
     width: 100%
-}
-
-#offcanvasBottom {
-    width: 100%;
-    height: 30vh;
 }
 
 #score-modal {
@@ -268,13 +262,16 @@ img {
     width: 45rem;
 }
 
-.modal button {
-    background: var(--background);
-    color: var(--color)
+.player-hand > div:hover {
+    cursor: pointer;
 }
 
-.modal-footer {
-    background:var(--accent)
+.field > div:hover {
+    cursor: pointer;
+}
+
+#deck:hover {
+    cursor: pointer;
 }
 
 .drawer {
@@ -285,20 +282,18 @@ img {
     align-items: flex-start
 }
 
-.player-hand > div:hover {
-    cursor: pointer;
+.modal-footer {
+    background:var(--accent)
 }
 
-.feild > div:hover {
-    cursor: pointer;
+.modal button {
+    background: var(--background);
+    color: var(--color)
 }
 
-.hidden {
-    display: none;
-}
-
-#deck:hover {
-    cursor: pointer;
+#offcanvasBottom {
+    width: 100%;
+    height: 30vh;
 }
 
 #score-pile-btn{
@@ -306,6 +301,10 @@ img {
     position: fixed;
     right: 0;
     width: 100%;
+}
+
+.hidden {
+    display: none;
 }
 
 @media only screen and (min-width: 650px) {
