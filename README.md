@@ -70,7 +70,9 @@ Mario Theme - Day         |  Mario Theme - Night
 
 ## Wireframe
 
-<img src="assets/readme/wireframe.png>
+<p align="center">
+<img src="assets/readme/wireframe.png" width=90%>
+</p>
 
 ## Pseudocode
 
@@ -84,11 +86,11 @@ Gameplay:
 7. Play ends with every player runs out of cards in their hand. 
 (If not cards in hand, you flip. If no cards in deck, skip turn)
 
-AAU I expect the game to draw my initial hand for me
-AAU I expect to be able to click on a tile to play it into the game board
-AAU I expect to be able to select either the empty game board to play a non-scoring tile, or select a matching tile to send both to my scoring pile
+* AAU I expect the game to draw my initial hand for me
+* AAU I expect to be able to click on a tile to play it into the game board
+* AAU I expect to be able to select either the empty game board to play a non-scoring tile, or select a matching tile to send both to my scoring pile
 (conditional on click)
-AAU I expect to be able to access a visual representation of my draw pile
+* AAU I expect to be able to access a visual representation of my draw pile
 
 Split JavaScript code into modules, with a Deck object and imported scoring arrays.
 
