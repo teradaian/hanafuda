@@ -154,10 +154,8 @@ function resetSelections(){
 function matchHighestValueTile(){
     if ( turn === 1 ) {
         testPlayerTile()
-    } else if ( turn === -1) {
-        testComputerTile()
     } else {
-        console.log('err!')
+        testComputerTile()
     }
 }
 
