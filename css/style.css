@@ -308,6 +308,12 @@ img {
     width: 100%;
 }
 
+@media only screen and (min-width: 375px) and (orientation: portrait) {
+    .field-container{
+        min-width: 350px;
+    }
+}
+
 @media only screen and (min-width: 650px) {
 
     #deck {
