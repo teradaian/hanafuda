@@ -20,8 +20,6 @@ html {
     --background: #FFE2E2;
     --selected-border: 2px solid #333456;
     --background-image: linear-gradient(45deg, #fff, #F4ABC4);
-    --background-size: 600% 600%;
-    --bg-animation: bg-scroll 15s ease infinite;
     --field-bg: #F6F6F6;
     --border-radius: 50px;
     --field-box-shadow: inset 40px -40px 72px #ececec, inset -40px 40px 72px #ffffff;
@@ -36,8 +34,6 @@ html {
     --accent: #595B83;
     --selected-border: 2px solid #F4ABC4;
     --background-image: linear-gradient(190deg, #595b83, #333456, #060930);
-    --background-size: 600% 600%;
-    --bg-animation: bg-scroll 15s ease infinite;
     --field-bg: #595B83;
     --border-radius: 50px;
     --field-box-shadow: inset 40px -40px 72px #55577e, inset -40px 40px 72px #5d5f88;
@@ -73,11 +69,8 @@ html {
 
 body {
     background: var(--background);
-    background-size: var(--background-size);
+    background-size: cover;
     background-image: var(--background-image);
-    -webkit-animation: var(--bg-animation);
-    -moz-animation: var(--bg-animation);
-    animation: var(--bg-animation);
     background-repeat: no-repeat;
     color: var(--color);
     display: flex;
@@ -311,22 +304,6 @@ img {
     position: fixed;
     right: 0;
     width: 100%;
-}
-
-@-webkit-keyframes bg-scroll {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-@-moz-keyframes bg-scroll {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-@keyframes bg-scroll {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
 }
 
 @media only screen and (min-width: 650px) {
