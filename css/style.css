@@ -280,7 +280,8 @@ img {
     flex-direction: row;
     overflow-y: hidden;
     overflow-x: auto;
-    align-items: flex-start
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .modal-footer {

@@ -63,6 +63,7 @@ function init(){
     preventFourOfAKind()
     deckEl.className = ""
     playAgainBtn.className = "hidden"
+    turnMsgEl.innerText = "It's your turn!"
     playerHandEl.addEventListener('click', selectCardHandler)
 
     render()
@@ -318,7 +319,7 @@ const incrementTurn = () => {
     resetSelections()
     if (!deck.deck.length) {
         renderEmptyDeck()
-        calculateScore()
+        return calculateScore()
     }
     turn *= -1
     renderTurnMsg()
@@ -365,15 +366,23 @@ function endGame(){
 }
 
 function calculateScore(){
-    scoreTiles(player.scorePile, tilesValues, player)
-    scoreYakus(player.scorePile, yakuSets, player)
-    scoreTiles(computer.scorePile, tilesValues, computer)
-    scoreYakus(computer.scorePile, yakuSets, computer)
+    scorePlayerTiles()
+    scoreComputerTiles()
 
     if(player.score === computer.score) return renderTieGame()
     player.score > computer.score ? isWinner = 1 : isWinner = -1
 
     endGame()
+}
+
+function scorePlayerTiles(){
+    scoreTiles(player.scorePile, tilesValues, player)
+    scoreYakus(player.scorePile, yakuSets, player)
+}
+
+function scoreComputerTiles(){
+    scoreTiles(computer.scorePile, tilesValues, computer)
+    scoreYakus(computer.scorePile, yakuSets, computer)
 }
 
 function scoreTiles(scorePileArray, arrayOfValues, owner){
@@ -510,15 +519,11 @@ function renderWinningYaku(){
 }
 
 function renderEndOfGameDisplay(){
-        let scoreMsg = document.createElement('div')
-        scoreMsg.classList.add('score-message')
-
         if(isWinner === 1) {
-            scoreMsg.innerHTML =`<h1>You win! You scored ${player.score} and the computer scored ${computer.score}<h1>`
+            turnMsgEl.innerHTML =`You win! You scored ${player.score} and the computer scored ${computer.score}`
         } 
         if(isWinner === -1)
-            scoreMsg.innerHTML = `<h1>You lost! You scored ${player.score} and the computer scored ${computer.score}<h1>`
-        fieldEl.appendChild(scoreMsg);
+            turnMsgEl.innerHTML = `You lost! You scored ${player.score} and the computer scored ${computer.score}`
 }
 
 function renderTieGame(){
