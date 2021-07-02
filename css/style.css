@@ -20,6 +20,7 @@ html {
     --background: #FFE2E2;
     --selected-border: 2px solid #333456;
     --background-image: linear-gradient(45deg, #fff, #F4ABC4);
+    --background-size: 200% 200%;
     --field-bg: #F6F6F6;
     --border-radius: 50px;
     --field-box-shadow: inset 40px -40px 72px #ececec, inset -40px 40px 72px #ffffff;
@@ -34,6 +35,7 @@ html {
     --accent: #595B83;
     --selected-border: 2px solid #F4ABC4;
     --background-image: linear-gradient(190deg, #595b83, #333456, #060930);
+    --background-size: 200% 200%;
     --field-bg: #595B83;
     --border-radius: 50px;
     --field-box-shadow: inset 40px -40px 72px #55577e, inset -40px 40px 72px #5d5f88;
@@ -67,7 +69,7 @@ html {
 
 body {
     background: var(--background);
-    background-size: cover;
+    background-size: var(--background-size);
     background-image: var(--background-image);
     background-repeat: no-repeat;
     color: var(--color);

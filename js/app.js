@@ -41,14 +41,16 @@ const playerHandEl      = document.querySelector('.player-hand')
 const resetBtnEl        = document.querySelector('.reset-btn')
 const scorePileEl       = document.querySelector('.drawer')
 const turnMsgEl         = document.querySelector('#turn-msg')
+const winBtnEl          = document.querySelector('.win-btn')
 
 dayNightToggleEl.addEventListener('click', toggleDayNight)
 deckEl.addEventListener('click', deckClickHandler)
 fieldContEl.addEventListener('click', fieldTileClickHandler)
 marioToggleEl.addEventListener('click', toggleMario)
-playAgainBtn.addEventListener('click', reset)
 playerHandEl.addEventListener('click', selectCardHandler)
+playAgainBtn.addEventListener('click', reset)
 resetBtnEl.addEventListener('click', reset)
+winBtnEl.addEventListener('click', win)
 
 init()
 
@@ -70,6 +72,19 @@ function init(){
 
     render()
     renderScorePile()
+}
+
+function win(){
+    player.hand = []
+    computer.hand = []
+    field = []
+    player.scorePile = ["Grass0", "Chrysanthemum0", "Cherry0", "Wisteria0", "Iris0", "Peony0", "Clover0"]
+    computer.scorePile = ["Pawlownia0", "Grass1", "Chrysanthemum0", "Maple0", "Willow1" ]
+    turn = 1
+    isWinner = 1
+    render()
+    renderScorePile()
+    calculateScore()
 }
 
 function preventFourOfAKind(){
